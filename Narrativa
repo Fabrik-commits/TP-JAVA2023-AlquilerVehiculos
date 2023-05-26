@@ -23,7 +23,7 @@ permitirá realizar a cada uno de ellos una serie de acciones una vez que se ide
 -Por último, los administradores podrán acceder a los módulos de vehículos, clientes, y realizar las operaciones de añadir,  
 buscar,editar o eliminar
 Se ha considerado que los clientes pueden tener escasos conocimientos o experiencia con las tecnologías en general, por lo
- que se ha realizado una interfaz lo más intuitiva posible.
+que se ha realizado una interfaz lo más intuitiva posible.
 En cuanto a los empleados y administradores, estos ya estarán familiarizados con la lógica y procedimientos a seguir en el 
 mercado de alquiler de vehículos. 
 Por ello, no debería existir ningún problema en el uso de la aplicación al ser esta bastante sencilla de usar.

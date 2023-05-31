@@ -72,12 +72,6 @@ public class Reserva {
 	
 		
 	public void setAuto() {		
-		//System.out.println("Elegir uno de los vehiculos mostrados");
-		//agencia.mostrarVehiculosPrecios();
-		//s = new Scanner(System.in);
-		//int id = s.nextInt();
-		//devolver el vehiculo buscado de un map
-		//Vehiculo vehiculo = agencia.getVehiculobyId(id);
 		this.setVehiculo(vehiculo);
 	}
 	

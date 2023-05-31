@@ -45,17 +45,16 @@ public class Agencia {
 	public Agencia() {
 		this.vehiculos=new HashMap<>();
 	}
-	//Vehiculo vehiculoToBeAdded = new VehiculoPasajerosCoche();
+	
 	public void addVehiculo(Vehiculo vehiculoToBeAdded) {
 		this.vehiculos.put(vehiculoToBeAdded.getIdVehiculo(), vehiculoToBeAdded);
 	}
 	
-	public void removeRol(Vehiculo vehiculoToBeRemoved) {
+	public void removeVehiculo(Vehiculo vehiculoToBeRemoved) {
 		this.vehiculos.remove(vehiculoToBeRemoved.getIdVehiculo());
 	}
 
-	
-	
+		
 	
 	public Vehiculo getVehiculobyId(int id) {
 		System.out.println("El vehiculo buscado es: " + id + "y su estado es: ");

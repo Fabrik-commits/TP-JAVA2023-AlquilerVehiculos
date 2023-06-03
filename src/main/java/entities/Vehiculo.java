@@ -9,6 +9,7 @@ public class Vehiculo {
 	private boolean estado;
 	private int ano;
 	private String matricula;
+	private TipoVehiculo tipoVehiculo;
 			
 	public int getIdVehiculo() {
 		return idVehiculo;
@@ -53,8 +54,13 @@ public class Vehiculo {
 		this.matricula = matricula;
 	}
 	
-//	public void CalculaPrecio() {
-//		
-//	}
 	
+	public TipoVehiculo getTipoVehiculo() {
+		return tipoVehiculo;
+	}
+	public void setTipoVehiculo(TipoVehiculo tipoVehiculo) {
+		this.tipoVehiculo = tipoVehiculo;
+	}
+	
+		
 }

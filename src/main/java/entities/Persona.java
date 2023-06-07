@@ -65,9 +65,9 @@ public class Persona {
 	public HashMap<Integer, Rol> getRoles() {
 		return roles;
 	}
-	public void setRoles(HashMap<Integer, Rol> roles) {
-		this.roles = roles;
-	}
+//	public void setRoles(HashMap<Integer, Rol> roles) {
+//		this.roles = roles;
+//	}
 	
 	public Persona() {
 		this.roles=new HashMap<>();

@@ -3,13 +3,16 @@ package entities;
 public class Vehiculo {
 
 	private int idVehiculo;
-	private double preciopordia;
-	private String marca;
+	private double precioporKm;
+	private String marcayModelo;
 	private String color;
 	private boolean estado;
-	private int ano;
+	private int anio;
 	private String matricula;
 	private TipoVehiculo tipoVehiculo;
+	
+	private int cantPasajeros;
+	private double capacidadMax;
 			
 	public int getIdVehiculo() {
 		return idVehiculo;
@@ -17,17 +20,17 @@ public class Vehiculo {
 	public void setIdVehiculo(int idVehiculo) {
 		this.idVehiculo = idVehiculo;
 	}
-	public double getPreciopordia() {
-		return preciopordia;
+	public double getPrecioporKm() {
+		return precioporKm;
 	}
-	public void setPreciopordia(double preciopordia) {
-		this.preciopordia = preciopordia;
+	public void setPrecioporKm(double precioporKm) {
+		this.precioporKm = precioporKm;
 	}
-	public String getMarca() {
-		return marca;
+	public String getMarcayModelo() {
+		return marcayModelo;
 	}
-	public void setMarca(String marca) {
-		this.marca = marca;
+	public void setMarcayModelo(String marcayModelo) {
+		this.marcayModelo = marcayModelo;
 	}
 	public String getColor() {
 		return color;
@@ -41,11 +44,11 @@ public class Vehiculo {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
-	public int getAno() {
-		return ano;
+	public int getAnio() {
+		return anio;
 	}
-	public void setAno(int ano) {
-		this.ano = ano;
+	public void setAnio(int anio) {
+		this.anio = anio;
 	}
 	public String getMatricula() {
 		return matricula;
@@ -62,5 +65,34 @@ public class Vehiculo {
 		this.tipoVehiculo = tipoVehiculo;
 	}
 	
-		
+	
+	
+	public int getCantPasajeros() {
+		return cantPasajeros;
+	}
+	public void setCantPasajeros(int cantPasajeros) {
+		this.cantPasajeros = cantPasajeros;
+	}
+	public double getCapacidadMax() {
+		return capacidadMax;
+	}
+	public void setCapacidadMax(double capacidadMax) {
+		this.capacidadMax = capacidadMax;
+	}
+	
+	public double calculaImporte() {
+		// CalculaPrecio(sobrecargado)
+		double importe = 0;
+		if (tipoVehiculo.getDescripcion() == "auto") {
+			importe = tipoVehiculo.calculaPrecio(this);
+		}
+		if (tipoVehiculo.getDescripcion() == "microbus") {
+			importe = tipoVehiculo.calculaPrecio(this, cantPasajeros);
+		}
+		if (tipoVehiculo.getDescripcion() == "camion" || tipoVehiculo.getDescripcion() == "utilitario") {
+			importe = tipoVehiculo.calculaPrecio(this, capacidadMax);
+		}
+		return importe;
+	}
+			
 }

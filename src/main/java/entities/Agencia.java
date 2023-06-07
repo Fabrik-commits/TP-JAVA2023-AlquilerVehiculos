@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Agencia {
 	
 	private int id;
-	private String empresaSucursal;
+	private String nombre;
 	private String direccion;
 	private String telefono;
 	private String email;
@@ -17,11 +17,11 @@ public class Agencia {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getEmpresaSucursal() {
-		return empresaSucursal;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setEmpresaSucursal(String empresaSucursal) {
-		this.empresaSucursal = empresaSucursal;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	public String getDireccion() {
 		return direccion;
@@ -40,21 +40,18 @@ public class Agencia {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
+	}	
 	
-	public Agencia() {
-		this.vehiculos=new HashMap<>();
-	}
 	
-	public void addVehiculo(Vehiculo vehiculoToBeAdded) {
-		this.vehiculos.put(vehiculoToBeAdded.getIdVehiculo(), vehiculoToBeAdded);
-	}
-	
-	public void removeVehiculo(Vehiculo vehiculoToBeRemoved) {
-		this.vehiculos.remove(vehiculoToBeRemoved.getIdVehiculo());
-	}
-
 		
+	public HashMap<Integer, Vehiculo> getVehiculos() {
+		return vehiculos;
+	}
+	public void setVehiculos(HashMap<Integer, Vehiculo> vehiculos) {
+		this.vehiculos = vehiculos;
+	}
+	
+	
 	
 	public Vehiculo getVehiculobyId(int id) {
 		System.out.println("El vehiculo buscado es: " + id + "y su estado es: ");

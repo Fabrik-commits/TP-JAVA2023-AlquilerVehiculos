@@ -11,6 +11,8 @@ public class Persona {
 	private String email;
 	private String password;
 	private String tel;
+	//se usa para habilitar o no a persona en su rol de cliente
+	//esta se registra en tabla rol_persona
 	private boolean habilitado;
 	public HashMap<Integer, Rol> roles;
 	

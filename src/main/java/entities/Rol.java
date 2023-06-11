@@ -3,7 +3,7 @@ package entities;
 public class Rol {
 	private int id;
 	private String descripcion;
-	private boolean habilitado;
+	//private boolean habilitado;
 	
 	public int getId() {
 		return id;
@@ -20,12 +20,12 @@ public class Rol {
 	
 	
 	
-	public boolean isHabilitado() {
-		return habilitado;
-	}
-	public void setHabilitado(boolean habilitado) {
-		this.habilitado = habilitado;
-	}
+//	public boolean isHabilitado() {
+//		return habilitado;
+//	}
+//	public void setHabilitado(boolean habilitado) {
+//		this.habilitado = habilitado;
+//	}
 	
 	
 	@Override

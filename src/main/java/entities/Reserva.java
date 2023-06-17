@@ -22,7 +22,7 @@ public class Reserva {
 	private LocalDateTime Devolucionfechr;
 	private Agencia agencia;
 	private boolean estado;
-
+	private int duracionCantDias;
 
 	public int getId() {
 		return id;
@@ -138,11 +138,20 @@ public class Reserva {
 	}
 
 	public void calculaDuracion() {
-
+		int milisecondsByDay = 86400000;
+		//duracionCantDias = (int) ((fechaFin.getTime()-fechaInic.getTime()) / milisecondsByDay);
+		this.setDuracionCantDias((int) ((fechaFin.getTime()-fechaInic.getTime()) / milisecondsByDay));
+	}
+		
+	
+	public int getDuracionCantDias() {
+		return duracionCantDias;
 	}
 
-	
-	
+	public void setDuracionCantDias(int duracionCantDias) {
+		this.duracionCantDias = duracionCantDias;
+	}
+
 	
 	public void registraImporte() {		
 		importe = this.vehiculo.calculaImporte();

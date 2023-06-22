@@ -1,3 +1,3 @@
 function mostrarPrincipal(){
-    window.location="principal.html";
+    window.location="principal.jsp";
 }

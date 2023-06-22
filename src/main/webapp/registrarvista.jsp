@@ -59,8 +59,9 @@
 
          <input type="button" value="Registrate" class="button" onclick=mostrarPrincipal()>
          <p>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
-         <p>¿Ya tienes una cuenta?<a class="link" href="loginvista.html">Iniciar Sesion</a></p>
+         <p>¿Ya tienes una cuenta?<a class="link" href="loginvista.jsp">Iniciar Sesion</a></p>
      </div>
     </form>
 </body>
+<script src="scripts/script.js"></script>
 </html>

@@ -38,7 +38,7 @@
 					<ul>
 						<li><a href="#">Persona</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
+								<li><a href="altapersona.jsp">Alta</a></li>
 								<li><a href="principalpersonas.jsp">Personas</a></li>
 
 							</ul></li>

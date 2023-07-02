@@ -4,10 +4,11 @@ import java.util.HashMap;
 
 public class Persona {
 	
-	private int id;
-	private String nroDni;
+	private int id;	
 	private String nombre;
 	private String apellido;
+	private String nroDni;
+	private String direccion;
 	private String email;
 	private String password;
 	private String tel;
@@ -26,7 +27,13 @@ public class Persona {
 		return nroDni;
 	}
 	public void setNroDni(String nroDni) {
-		this.nroDni = nroDni;
+		this.nroDni = nroDni;		
+	}
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 	public String getNombre() {
 		return nombre;

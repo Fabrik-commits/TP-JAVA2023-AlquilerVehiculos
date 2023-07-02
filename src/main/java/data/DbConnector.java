@@ -13,7 +13,7 @@ public class DbConnector {
 	private String port = "3306";
 	private String user = "root";
 	private String password = "root";
-	private String db = "alqvehic";
+	private String db = "alqvehiculos";
 	private int conectados = 0;
 	private Connection conn = null;
 	

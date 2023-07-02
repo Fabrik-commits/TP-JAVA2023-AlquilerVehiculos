@@ -29,13 +29,16 @@ public class PersonaData {
 					p.setId(rs.getInt("id"));
 					p.setNombre(rs.getString("nombre"));
 					p.setApellido(rs.getString("apellido"));
-					p.setNroDni(rs.getString("nroDni"));
+					p.setDni(rs.getString("dni"));
+					
+					p.setDireccion(rs.getString("direccion"));
+					
 					//p.getDocumento().setTipo(rs.getString("tipo_doc"));
 					//p.getDocumento().setNro(rs.getString("nro_doc"));
 					p.setEmail(rs.getString("email"));
 					p.setTel(rs.getString("tel"));
 					
-					p.setHabilitado(rs.getBoolean("habilitado"));
+					//p.setHabilitado(rs.getBoolean("habilitado"));
 					
 					dr.setRoles(p);
 					
@@ -68,12 +71,15 @@ public class PersonaData {
 				p.setId(rs.getInt("id"));
 				p.setNombre(rs.getString("nombre"));
 				p.setApellido(rs.getString("apellido"));
-				p.setNroDni(rs.getString("nroDni"));
+				p.setDni(rs.getString("dni"));
+				
+				p.setDireccion(rs.getString("direccion"));
+				
 				//p.getDocumento().setTipo(rs.getString("tipo_doc"));
 				//p.getDocumento().setNro(rs.getString("nro_doc"));
 				p.setEmail(rs.getString("email"));
 				p.setTel(rs.getString("tel"));
-				p.setHabilitado(rs.getBoolean("habilitado"));
+				//p.setHabilitado(rs.getBoolean("habilitado"));
 				//
 				rd.setRoles(p);
 			}
@@ -129,13 +135,13 @@ public class PersonaData {
 					p.setId(rs.getInt("id"));
 					p.setNombre(rs.getString("nombre"));
 					p.setApellido(rs.getString("apellido"));
-					p.setNroDni(rs.getString("nroDni"));
+					p.setDni(rs.getString("dni"));
 					//p.getDocumento().setTipo(rs.getString("tipo_doc"));
 					//p.getDocumento().setNro(rs.getString("nro_doc"));
 					p.setEmail(rs.getString("email"));
 					p.setTel(rs.getString("tel"));
 					
-					p.setHabilitado(rs.getBoolean("habilitado"));
+					//p.setHabilitado(rs.getBoolean("habilitado"));
 					
 					dr.setRoles(p);
 					
@@ -167,18 +173,19 @@ public class PersonaData {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"insert into persona(nombre, apellido, nroDni, email, password, tel, habilitado) values(?,?,?,?,?,?,?)",
+							"insert into persona(nombre, apellido, dni, direccion, email, password, tel) values(?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, p.getNombre());
 			stmt.setString(2, p.getApellido());
-			stmt.setString(3, p.getNroDni());
+			stmt.setString(3, p.getDni());
+			stmt.setString(4, p.getDireccion());
 			//stmt.setString(3, p.getDocumento().getTipo());
 			//stmt.setString(4, p.getDocumento().getNro());
-			stmt.setString(4, p.getEmail());
-			stmt.setString(5, p.getPassword());
-			stmt.setString(6, p.getTel());
-			stmt.setBoolean(7, p.isHabilitado());
+			stmt.setString(5, p.getEmail());
+			stmt.setString(6, p.getPassword());
+			stmt.setString(7, p.getTel());
+			//stmt.setBoolean(7, p.isHabilitado());
 						
 			stmt.executeUpdate();
 			
@@ -209,14 +216,15 @@ public class PersonaData {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"update persona set nombre=?, apellido=?, email=?, password=?, tel=?, habilitado=? where nroDni=?");
+							"update persona set nombre=?, apellido=?, email=?, password=?, tel=?, direccion=? where nroDni=?");
 			stmt.setString(1, p.getNombre());
 			stmt.setString(2, p.getApellido());			
 			stmt.setString(3, p.getEmail());
 			stmt.setString(4, p.getPassword());
 			stmt.setString(5, p.getTel());
-			stmt.setBoolean(6, p.isHabilitado());
-			stmt.setString(7, p.getNroDni());
+			stmt.setString(6, p.getDireccion());
+			//stmt.setBoolean(6, p.isHabilitado());
+			stmt.setString(7, p.getDni());
 			//stmt.setString(7, p.getDocumento().getTipo());
 			//stmt.setString(8, p.getDocumento().getNro());
 			stmt.executeUpdate();
@@ -243,7 +251,7 @@ public class PersonaData {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
 							"delete from rol_persona where nroDni=?");
-			stmt.setString(1, per.getNroDni());
+			stmt.setString(1, per.getDni());
 			//stmt.setString(1, per.getDocumento().getTipo());
 			//stmt.setString(2, per.getDocumento().getNro());
 			stmt.executeUpdate();

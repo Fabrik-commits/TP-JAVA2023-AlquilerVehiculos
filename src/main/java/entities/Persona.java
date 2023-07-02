@@ -7,14 +7,14 @@ public class Persona {
 	private int id;	
 	private String nombre;
 	private String apellido;
-	private String nroDni;
+	private String dni;
 	private String direccion;
 	private String email;
 	private String password;
 	private String tel;
 	//se usa para habilitar o no a persona en su rol de cliente
 	//esta se registra en tabla rol_persona
-	private boolean habilitado;
+	//private boolean habilitado;
 	public HashMap<Integer, Rol> roles;
 	
 	public int getId() {
@@ -23,11 +23,11 @@ public class Persona {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getNroDni() {
-		return nroDni;
+	public String getDni() {
+		return dni;
 	}
-	public void setNroDni(String nroDni) {
-		this.nroDni = nroDni;		
+	public void setDni(String nroDni) {
+		this.dni = nroDni;		
 	}
 	public String getDireccion() {
 		return direccion;
@@ -65,12 +65,12 @@ public class Persona {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public boolean isHabilitado() {
-		return habilitado;
-	}
-	public void setHabilitado(boolean habilitado) {
-		this.habilitado = habilitado;
-	}
+//	public boolean isHabilitado() {
+//		return habilitado;
+//	}
+//	public void setHabilitado(boolean habilitado) {
+//		this.habilitado = habilitado;
+//	}
 	public HashMap<Integer, Rol> getRoles() {
 		return roles;
 	}
@@ -94,10 +94,11 @@ public class Persona {
 		return this.roles.containsKey(rolToCheck.getId());
 	}
 	
+	
 	@Override
 	public String toString() {
-		return "Persona [id=" + id + ", nro de Dni=" + nroDni + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", email=" + email + ", password=" + password + ", tel=" + tel + ", habilitado=" + habilitado
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni
+				+ ", direccion=" + direccion + ", email=" + email + ", password=" + password + ", tel=" + tel
 				+ ", roles=" + roles + "]";
 	}
 	public void removeRolesPer() {

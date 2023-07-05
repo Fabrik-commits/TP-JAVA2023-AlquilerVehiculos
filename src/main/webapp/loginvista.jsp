@@ -28,11 +28,11 @@
          <input type="password" name="password" placeholder="Contraseña">
          
          </div>
-         <input type="submit" value="Login" class="button" onclick=mostrarPrincipal()>
+         <input type="submit" value="Login" class="button">
          <p>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
          <p>¿No tienes una cuenta? <a class="link" href="registrarvista.jsp">Registrate </a></p>
      </div>
     </form>
 </body>
-<script src="scripts/script.js"></script>
+
 </html>

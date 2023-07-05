@@ -60,7 +60,7 @@ public class PersonaData {
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select id,nombre,apellido,nroDni,direccion,email,tel from persona where email=? and password=?"
+					"select id,nombre,apellido,dni,direccion,email,telefono from persona where email=? and password=?"
 					);
 			stmt.setString(1, per.getEmail());
 			stmt.setString(2, per.getPassword());
@@ -78,7 +78,7 @@ public class PersonaData {
 				//p.getDocumento().setTipo(rs.getString("tipo_doc"));
 				//p.getDocumento().setNro(rs.getString("nro_doc"));
 				p.setEmail(rs.getString("email"));
-				p.setTel(rs.getString("tel"));
+				p.setTel(rs.getString("telefono"));
 				//p.setHabilitado(rs.getBoolean("habilitado"));
 				//
 				rd.setRoles(p);

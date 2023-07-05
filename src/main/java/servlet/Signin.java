@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Logic.PersonaLogic;
+import entities.Persona;
+
 /**
  * Servlet implementation class Signin
  */
@@ -35,7 +38,27 @@ public class Signin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
+		Persona per = new Persona();
+		
+		PersonaLogic pl = new PersonaLogic();
+		
+		
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
+		//validar email y password
+		
+		per.setEmail(email);
+		per.setPassword(password);
+		
+		//String var = per.getEmail();
+		
+		per = pl.validate(per);
+		
+		request.getSession().setAttribute("usuario", per);
+		//response.getWriter().append("Bienvenido ").append(per.getNombre()).append(" ").append(per.getApellido());
+		request.getRequestDispatcher("principal.jsp").forward(request, response);
 	}
 
 }

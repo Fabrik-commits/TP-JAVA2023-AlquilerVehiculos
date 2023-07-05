@@ -1,3 +1,4 @@
+<%@page import="entities.Persona"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -10,6 +11,11 @@
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 <link rel="stylesheet" href="estilos/estilos2.css">
+
+<%
+	Persona p = (Persona)session.getAttribute("usuario");
+%>
+
 </head>
 <body>
 

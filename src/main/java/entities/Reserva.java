@@ -153,10 +153,10 @@ public class Reserva {
 	}
 
 	
-	public void registraImporte() {		
-		importe = this.vehiculo.calculaImporte();
-		this.setImporte(importe);
-	}
+//	public void registraImporte() {		
+//		importe = this.vehiculo.calculaImporte();
+//		this.setImporte(importe);
+//	}
 	
 	public double getImporte() {
 		return importe;

@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url(..//imagenes/imagen.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;  
+}
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(1, 1, 1, 0.7);
+    padding: 0px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+}
+.logo {
+    font-size: 25px;
+    text-transform: uppercase;
+    color: #ffffff;
+    font-weight: 700;
+}
+.navigation ul {
+
+    list-style: none;
+
+}
+.header .navigation ul li {
+    float: left;
+    position: relative;
+}
+.header .navigation ul li a {
+    font-size: 18px;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 20px;
+    display: block;
+    transition: all .2s ease;
+}
+.header .navigation ul li a:hover {
+    background-color: #685cfe;
+}
+.header .navigation ul li ul {
+    position: absolute;
+    right: 0;
+    width: 300px;
+    background-color: rgba(1, 1, 1, 0.7);
+    display: none;
+}
+.header .navigation ul li ul li a {
+    font-size: 15px;
+    text-transform: capitalize;
+}
+.header .navigation ul li ul li ul {
+    position: absolute;
+    top: 0;
+    right: 300px;
+}
+.header .navigation ul li ul li {
+    width: 100%;
+}
+.header .navigation ul li:hover > ul {
+    display: initial;
+}
+#toggle,
+.header label{
+    display: none;
+    cursor: pointer;
+}
+.menu {
+    width: 45px;
+    height: 35px;
+}
+@media(max-width:950px) {
+    .header label {
+        display: initial;
+    }
+
+    .header {
+        padding: 20px 10px;
+    }
+
+    .header .navigation {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: rgba(1, 1, 1, 0.7);
+        display: none;
+    }
+
+    .header .navigation ul li {
+        width: 100%;
+    }
+
+    .header .navigation ul li a {
+        padding: 8px 30px 8px 10px;
+    }
+
+    .header .navigation ul li ul {
+        position: relative;
+        width: 100%;
+        left: 0;
+    }
+
+    .header .navigation ul li ul li {
+        background-color: rgba(1, 1, 1, 0.7);
+    }
+
+    .header .navigation ul li ul li ul {
+        position: relative;
+        width: 100%;
+        left: 0;
+    }
+
+    #toggle:checked ~ .navigation {
+        display: block;
+    }
+}
+
+
+
+
+h1{
+    text-align: center;
+    color: #ffffff;
+    font-size: 40px;
+    margin-top: 150px;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+#main-container {
+    margin: 10px auto;
+    max-width: 550px;
+    width: 100%;
+}
+table {
+    background-color: #f8f8f8;
+    text-align: center;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    table-layout: fixed;
+}
+#agregarnuevo {
+    text-align: center;
+    margin: 2px 0px;
+    padding: 5px 0px;
+    border-radius: 5px;
+    width: 150px;
+    background-color: rgba(1, 1, 1, 0.7);
+}
+#agregarnuevo a {
+    color: white;
+}
+#agregarnuevo:hover {
+    background-color: #685cfe;
+}
+
+
+table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #0a0a0a; 
+}
+table th, table td {
+    font-size: 14px;
+    padding: 3px;
+    text-align: center;
+}
+table thead th {
+    text-transform: uppercase;
+    background-color: #ddd;
+}
+table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+#editar {
+    text-align: center;
+    margin: 2px 2px;
+    padding: 5px 0px;
+    border-radius: 5px;
+    width: 50px;
+    background-color: rgb(1, 1, 1);
+}
+#editar a {
+    color: white;
+}
+#editar:hover {
+    background-color: #685cfe;
+}
+
+#eliminar {
+    text-align: center;
+    margin: 2px 2px;
+    padding: 5px 0px;
+    border-radius: 5px;
+    width: 60px;
+    background-color: rgba(1, 1, 1);
+}
+#eliminar a {
+    color: white;
+}
+#eliminar:hover {
+    background-color: #685cfe;
+}
+
+#contenedorlinks {
+    display: inline-flex;
+}

@@ -1,18 +1,19 @@
 package entities;
 
 public class TipoVehiculo {
-	private int idTipoVehiculo;
+	private int id;
 	private String descripcion;
-	private double senia;
-	private double importe;
-	private Reserva reserva;
+	private double costo;
+//	private double senia;
+//	private double importe;
+//	private Reserva reserva;
 
-	public int getIdTipoVehiculo() {
-		return idTipoVehiculo;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdTipoVehiculo(int idTipoVehiculo) {
-		this.idTipoVehiculo = idTipoVehiculo;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getDescripcion() {
@@ -23,37 +24,49 @@ public class TipoVehiculo {
 		this.descripcion = descripcion;
 	}
 	
-	public double calculaSenia(Vehiculo vehiculo) {
-		return senia = vehiculo.getPrecioporKm()*50;
+	
+
+	public double getCosto() {
+		return costo;
 	}
 
-	public double calculaPrecio(Vehiculo vehiculo) {
-		importe = vehiculo.getPrecioporKm()*(reserva.getKmFin()-reserva.getKmInic());
-		if (importe == senia) {
-        	importe = 0;
-		} else {
-			importe = importe - senia;
-		}
-		return importe;
+	public void setCosto(double costo) {
+		this.costo = costo;
 	}
-
-	public double calculaPrecio(Vehiculo vehiculo, int cantPasajeros) {
-		importe = vehiculo.getPrecioporKm()*(reserva.getKmFin()-reserva.getKmInic())*cantPasajeros;
-		if (importe == senia) {
-        	importe = 0;
-		} else {
-			importe = importe - senia;
-		}
-		return importe;
-	}
-
-	public double calculaPrecio(Vehiculo vehiculo, double tonelaje) {
-		importe = vehiculo.getPrecioporKm()*(reserva.getKmFin()-reserva.getKmInic())*tonelaje;
-		if (importe == senia) {
-        	importe = 0;
-		} else {
-			importe = importe - senia;
-		}
-		return importe;
-	}
+	
+	
+	
+//	public double calculaSenia(Vehiculo vehiculo) {
+//		return senia = vehiculo.getPrecioporKm()*50;
+//	}
+//
+//	public double calculaPrecio(Vehiculo vehiculo) {
+//		importe = vehiculo.getPrecioporKm()*(reserva.getKmFin()-reserva.getKmInic());
+//		if (importe == senia) {
+//        	importe = 0;
+//		} else {
+//			importe = importe - senia;
+//		}
+//		return importe;
+//	}
+//
+//	public double calculaPrecio(Vehiculo vehiculo, int cantPasajeros) {
+//		importe = vehiculo.getPrecioporKm()*(reserva.getKmFin()-reserva.getKmInic())*cantPasajeros;
+//		if (importe == senia) {
+//        	importe = 0;
+//		} else {
+//			importe = importe - senia;
+//		}
+//		return importe;
+//	}
+//
+//	public double calculaPrecio(Vehiculo vehiculo, double tonelaje) {
+//		importe = vehiculo.getPrecioporKm()*(reserva.getKmFin()-reserva.getKmInic())*tonelaje;
+//		if (importe == senia) {
+//        	importe = 0;
+//		} else {
+//			importe = importe - senia;
+//		}
+//		return importe;
+//	}
 }

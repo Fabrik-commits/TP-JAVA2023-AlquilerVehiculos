@@ -80,19 +80,19 @@ public class Vehiculo {
 		this.capacidadMax = capacidadMax;
 	}
 	
-	public double calculaImporte() {
-		// CalculaPrecio(sobrecargado)
-		double importe = 0;
-		if (tipoVehiculo.getDescripcion() == "auto") {
-			importe = tipoVehiculo.calculaPrecio(this);
-		}
-		if (tipoVehiculo.getDescripcion() == "microbus") {
-			importe = tipoVehiculo.calculaPrecio(this, cantPasajeros);
-		}
-		if (tipoVehiculo.getDescripcion() == "camion" || tipoVehiculo.getDescripcion() == "utilitario") {
-			importe = tipoVehiculo.calculaPrecio(this, capacidadMax);
-		}
-		return importe;
-	}
+//	public double calculaImporte() {
+//		// CalculaPrecio(sobrecargado)
+//		double importe = 0;
+//		if (tipoVehiculo.getDescripcion() == "auto") {
+//			importe = tipoVehiculo.calculaPrecio(this);
+//		}
+//		if (tipoVehiculo.getDescripcion() == "microbus") {
+//			importe = tipoVehiculo.calculaPrecio(this, cantPasajeros);
+//		}
+//		if (tipoVehiculo.getDescripcion() == "camion" || tipoVehiculo.getDescripcion() == "utilitario") {
+//			importe = tipoVehiculo.calculaPrecio(this, capacidadMax);
+//		}
+//		return importe;
+//	}
 			
 }

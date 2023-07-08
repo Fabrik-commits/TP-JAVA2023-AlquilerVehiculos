@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Logic.PersonaLogic;
 import entities.Persona;
+import logic.PersonaLogic;
 
 /**
  * Servlet implementation class Signin

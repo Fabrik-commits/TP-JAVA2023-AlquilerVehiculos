@@ -74,6 +74,14 @@ public class ServletTiposVehiculo extends HttpServlet {
 			tvl.update(tv);
 			acceso=principaltiposvehic;
 		}
+		else if (action.equalsIgnoreCase("eliminartipovehiculo")) {
+			TipoVehiculo tipov = new TipoVehiculo();
+			TipoVehiculoLogic tvl = new TipoVehiculoLogic();
+			int id = Integer.parseInt(request.getParameter("id"));
+			tipov.setId(id);
+			tvl.remove(id);
+			acceso=principaltiposvehic;
+		}
 		else if (action.equalsIgnoreCase("Cancelar")) {
 			acceso=principaltiposvehic;
 		}

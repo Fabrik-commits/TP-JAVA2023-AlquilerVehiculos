@@ -133,7 +133,7 @@
 							<a href="ServletTiposVehiculo?accion=editartipovehiculo&id=<%=tve.getId()%>">Editar</a>
 						</div>
 						<div id="eliminar">
-							<a href="">Eliminar</a>
+							<a href="ServletTiposVehiculo?accion=eliminartipovehiculo&id=<%=tve.getId()%>">Eliminar</a>
 						</div>
 						</div>
 					</td>

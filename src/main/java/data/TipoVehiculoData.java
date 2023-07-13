@@ -138,5 +138,25 @@ public class TipoVehiculoData {
             }
 		}
     }
+	
+	public void remove(int id) {
+		PreparedStatement stmt= null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().
+					prepareStatement(
+							"delete from tipovehiculo where id=?");
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+            e.printStackTrace();
+		} finally {
+            try {
+                if(stmt!=null)stmt.close();
+                DbConnector.getInstancia().releaseConn();
+            } catch (SQLException e) {
+            	e.printStackTrace();
+            }
+		}
+	}
 
 }

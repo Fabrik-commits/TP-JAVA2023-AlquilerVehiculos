@@ -30,6 +30,10 @@ private TipoVehiculoData tvd;
 		tvd.add(tipov);
 	}
 	
+	public void remove(int id) {
+		tvd.remove(id);
+	}
+	
 	public TipoVehiculo update(TipoVehiculo tv) {
 		return tvd.update(tv);
 	}

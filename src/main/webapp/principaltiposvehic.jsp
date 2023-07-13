@@ -103,7 +103,7 @@
 		
 		<div id="main-container">
 		<div id="agregarnuevo">
-			<a href="altapersona.html">Agregar Nuevo</a>
+			<a href="ServletTiposVehiculo?accion=altatipovehiculo">Agregar Nuevo</a>
 		</div>
 		<table class="table">
 			<thead>

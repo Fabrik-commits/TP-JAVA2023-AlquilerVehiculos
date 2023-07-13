@@ -3,6 +3,7 @@ package logic;
 import java.util.LinkedList;
 
 import data.TipoVehiculoData;
+import entities.Persona;
 import entities.TipoVehiculo;
 
 public class TipoVehiculoLogic {
@@ -23,6 +24,10 @@ private TipoVehiculoData tvd;
 		
 		return tvd.getById(id);
 		
+	}
+	
+	public void add(TipoVehiculo tipov) {
+		tvd.add(tipov);
 	}
 	
 	public TipoVehiculo update(TipoVehiculo tv) {

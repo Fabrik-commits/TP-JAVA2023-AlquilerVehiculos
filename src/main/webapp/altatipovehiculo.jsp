@@ -1,5 +1,3 @@
-<%@page import="entities.TipoVehiculo"%>
-<%@page import="logic.TipoVehiculoLogic"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -14,7 +12,7 @@
 </head>
 <body>
 
-	<header class="header">
+<header class="header">
 
 		<div class="logo">Xtreme</div>
 		<input type="checkbox" id="toggle">
@@ -84,41 +82,32 @@
 
 	</header>
 
-	<div>
-	<%
-		TipoVehiculoLogic tvl = new TipoVehiculoLogic();
-		int id = Integer.parseInt((String)request.getAttribute("idtipovehiculo"));
-		TipoVehiculo tv = tvl.getById(id); //dao.list(id);		
-	%>
 	<form class="formulario" action="ServletTiposVehiculo">
     
-    <h1>Editar Tipo Vehiculo</h1>
+    <h1>Alta Tipo Vehiculo</h1>
      <div class="contenedor">
      
               
          <div class="input-contenedor">
          
-         <input type="text" name="txtdescripcion" value="<%= tv.getDescripcion()%>" placeholder="Descripcion">
+         <input type="text" name="txtdescripcion" placeholder="Descripcion">
          
          </div>
 
 		 <div class="input-contenedor">
          
-			<input type="text" name="txtcosto" value="<%= tv.getCosto()%>" placeholder="Costo">
+			<input type="text" name="txtcosto" placeholder="Costo">
 			
 		 </div>
-         
-         <div><input type="hidden" name="txtid" value="<%= tv.getId()%>"></div>
+        
                   
          <div class="agrupabotones">
-			<input type="submit" name="accion" value="Actualizar" class="button">
+			<input type="submit" name="accion" value="Agregar" class="button">
 			<input type="submit" name="accion" value="Cancelar" class="button">
-			
 		</div>
          
      </div>
     </form>
-	</div>
-</body>
 
+</body>
 </html>

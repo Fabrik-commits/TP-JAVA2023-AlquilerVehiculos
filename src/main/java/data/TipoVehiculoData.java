@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 
+import entities.Persona;
 import entities.Rol;
 import entities.TipoVehiculo;
 
@@ -104,6 +105,38 @@ public class TipoVehiculoData {
 		
 	}
 	
-	
+	public void add(TipoVehiculo tipov) {
+		
+		PreparedStatement stmt= null;
+		ResultSet keyResultSet=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().
+					prepareStatement(
+							"insert into tipovehiculo(descripcion, costo) values(?,?)",
+							PreparedStatement.RETURN_GENERATED_KEYS
+							);
+			stmt.setString(1, tipov.getDescripcion());
+			stmt.setDouble(2, tipov.getCosto());			
+						
+			stmt.executeUpdate();
+			
+			keyResultSet=stmt.getGeneratedKeys();
+            if(keyResultSet!=null && keyResultSet.next()){
+                tipov.setId(keyResultSet.getInt(1));
+            }
+                       
+			
+		}  catch (SQLException e) {
+            e.printStackTrace();
+		} finally {
+            try {
+                if(keyResultSet!=null)keyResultSet.close();
+                if(stmt!=null)stmt.close();
+                DbConnector.getInstancia().releaseConn();
+            } catch (SQLException e) {
+            	e.printStackTrace();
+            }
+		}
+    }
 
 }

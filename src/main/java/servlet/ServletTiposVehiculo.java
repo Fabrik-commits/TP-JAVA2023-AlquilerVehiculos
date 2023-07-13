@@ -29,7 +29,7 @@ public class ServletTiposVehiculo extends HttpServlet {
     }
     
     String principaltiposvehic="principaltiposvehic.jsp";
-    //String add="vistas/add.jsp";
+    String add="altatipovehiculo.jsp";
     String edit="editartipovehiculo.jsp";
 
 	/**
@@ -44,6 +44,19 @@ public class ServletTiposVehiculo extends HttpServlet {
 		
 		if (action.equalsIgnoreCase("principaltiposvehic")) {
 		acceso=principaltiposvehic;
+		}
+		else if (action.equalsIgnoreCase("altatipovehiculo")) {
+			acceso=add;
+		}
+		else if (action.equalsIgnoreCase("Agregar")) {
+			TipoVehiculo tv = new TipoVehiculo();
+			TipoVehiculoLogic tvl = new TipoVehiculoLogic();
+			String descripcion=request.getParameter("txtdescripcion");
+			String costo=request.getParameter("txtcosto");
+			tv.setDescripcion(descripcion);
+			tv.setCosto(Double.parseDouble(costo));
+			tvl.add(tv);
+			acceso=principaltiposvehic;
 		}
 		else if (action.equalsIgnoreCase("editartipovehiculo")) {
 			request.setAttribute("idtipovehiculo", request.getParameter("id"));

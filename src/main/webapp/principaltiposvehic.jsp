@@ -1,3 +1,4 @@
+<%@page import="logic.TipoVehiculoLogic"%>
 <%@page import="entities.TipoVehiculo"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Persona"%>
@@ -115,16 +116,21 @@
 			</thead>
 			
 			<tbody>
-			<% for (TipoVehiculo tv : ltv) { %>
+			<% 
+			TipoVehiculoLogic tvl = new TipoVehiculoLogic();
+			LinkedList<TipoVehiculo> listtv = tvl.getAllTiposVehiculo();
+			//TipoVehiculo tv = null;
+			for (TipoVehiculo tve : listtv) { 
+			%>
 				<tr>
-					<td data-label="ID">tv.getId()</td>
-					<td data-label="DESCRIPCION">tv.getDescripcion()</td>
-					<td data-label="PRECIO">tv.costo</td>
+					<td data-label="ID"><%=tve.getId()%></td>
+					<td data-label="DESCRIPCION"><%=tve.getDescripcion()%></td>
+					<td data-label="PRECIO"><%=tve.getCosto()%></td>
 					
 					<td data-label="ACCIONES">
 						<div id="contenedorlinks">
 						<div id="editar">
-							<a href="">Editar</a>
+							<a href="ServletTiposVehiculo?accion=editartipovehiculo&id=<%=tve.getId()%>">Editar</a>
 						</div>
 						<div id="eliminar">
 							<a href="">Eliminar</a>

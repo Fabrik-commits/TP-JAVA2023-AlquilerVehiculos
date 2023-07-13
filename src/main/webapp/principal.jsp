@@ -63,7 +63,7 @@
 						<li><a href="#">Tipo Vehiculo</a>
 							<ul>
 								<li><a href="#">Alta</a></li>
-								<li><a href="ServletTiposVehiculo.jsp">Tipos Vehiculo</a></li>
+								<li><a href="ServletTiposVehiculo?accion=principaltiposvehic">Tipos Vehiculo</a></li>
 
 							</ul></li>
 					</ul></li>

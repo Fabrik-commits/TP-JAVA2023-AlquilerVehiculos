@@ -1,3 +1,6 @@
+<%@page import="logic.TipoVehiculoLogic"%>
+<%@page import="entities.TipoVehiculo"%>
+<%@page import="java.util.LinkedList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -154,14 +157,25 @@
 				<div class="input-contenedortipov1">
 				<div class="labeltipov"><label for="tipovehiculo">Tipo Vehiculo :</label></div>
 				</div>
+				
 				<div class="input-contenedortipov2">
+				
     			<select name="" id="tipovehiculo">
-        			<option value="">-----------------------------</option>
-        			<option value="">Camion   c/Acomplado</option>
-        			<option value="">Chata</option>
-        			<option value="">Camion   Simple</option>
+        			<option value="">Escoge una opcion</option>
+        			
+        			<% 
+					TipoVehiculoLogic tvl = new TipoVehiculoLogic();
+					LinkedList<TipoVehiculo> listtv = tvl.getAllTiposVehiculo();
+					for (TipoVehiculo tve : listtv) { 
+					%>
+        			
+        			<option value="<%=tve.getId()%>"><%=tve.getDescripcion()%></option>
+        			
+        			<% } %>		
+        			
     			</select>
-				</div>
+    			
+				</div>				
 			</div>
 	
 

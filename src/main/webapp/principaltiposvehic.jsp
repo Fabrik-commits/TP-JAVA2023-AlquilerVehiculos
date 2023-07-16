@@ -19,7 +19,7 @@
 	Persona p = (Persona)session.getAttribute("usuario");
 	//TipoVehiculo tv = (TipoVehiculo)request.getAttribute("tipovehiculo");
 	//TipoVehiculo tv = new TipoVehiculo();
-	LinkedList<TipoVehiculo> ltv = (LinkedList<TipoVehiculo>)request.getAttribute("listaTipoVehiculo");
+	
 %>
 
 </head>
@@ -119,7 +119,7 @@
 			<% 
 			TipoVehiculoLogic tvl = new TipoVehiculoLogic();
 			LinkedList<TipoVehiculo> listtv = tvl.getAllTiposVehiculo();
-			//TipoVehiculo tv = null;
+
 			for (TipoVehiculo tve : listtv) { 
 			%>
 				<tr>

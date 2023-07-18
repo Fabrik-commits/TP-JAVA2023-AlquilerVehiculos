@@ -102,6 +102,7 @@
 					<th>ESTADO</th>
 					<th>PRECIOxKM</th>
 					<th>MATRICULA</th>
+					<th>CAP MAX</th>
 					<th>TIPO</th>
 					<th>ACCIONES</th>	
 				</tr>
@@ -121,6 +122,8 @@
 
 					<td data-label="PRECIOxKM">2</td>
 					<td data-label="MATRICULA">3</td>
+					
+					<td data-label="CAP MAX">3</td>
 
 					<td data-label="TIPO">3</td>
 					
@@ -148,6 +151,8 @@
 
 					<td data-label="PRECIOxKM">2</td>
 					<td data-label="MATRICULA">3</td>
+					
+					<td data-label="CAP MAX">3</td>
 
 					<td data-label="TIPO">3</td>
 					
@@ -175,6 +180,8 @@
 
 					<td data-label="PRECIOxKM">2</td>
 					<td data-label="MATRICULA">3</td>
+					
+					<td data-label="CAP MAX">3</td>
 
 					<td data-label="TIPO">3</td>
 					

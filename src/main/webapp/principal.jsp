@@ -57,7 +57,7 @@
 						<li><a href="#">Vehiculo</a>
 							<ul>
 								<li><a href="#">Alta</a></li>
-								<li><a href="#">Vehiculos</a></li>
+								<li><a href="ServletVehiculos?accion=principalvehic">Vehiculos</a></li>
 
 							</ul></li>
 						<li><a href="#">Tipo Vehiculo</a>

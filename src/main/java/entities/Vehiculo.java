@@ -7,7 +7,7 @@ package entities;
 public class Vehiculo {
 
 	private int idVehiculo;
-	private int idTipoVehiculo;
+	//private int idTipoVehiculo;
 	private double precioporKm;
 	private String marcayModelo;
 	private String color;
@@ -17,7 +17,7 @@ public class Vehiculo {
 	private int pasajeros;
 	private String matricula;
 	private TipoVehiculo tipoVehiculo;	
-	private double capacidadMax;
+	private double capacidadMaxima;
 			
 	public int getIdVehiculo() {
 		return idVehiculo;
@@ -26,12 +26,12 @@ public class Vehiculo {
 		this.idVehiculo = idVehiculo;
 	}
 			
-	public int getIdTipoVehiculo() {
-		return idTipoVehiculo;
-	}
-	public void setIdTipoVehiculo(int idTipoVehiculo) {
-		this.idTipoVehiculo = idTipoVehiculo;
-	}
+//	public int getIdTipoVehiculo() {
+//		return idTipoVehiculo;
+//	}
+//	public void setIdTipoVehiculo(int idTipoVehiculo) {
+//		this.idTipoVehiculo = idTipoVehiculo;
+//	}
 		
 	public double getPrecioporKm() {
 		return precioporKm;
@@ -96,11 +96,11 @@ public class Vehiculo {
 		this.tipoVehiculo = tipoVehiculo;
 	}
 	
-	public double getCapacidadMax() {
-		return capacidadMax;
+	public double getCapacidadMaxima() {
+		return capacidadMaxima;
 	}
-	public void setCapacidadMax(double capacidadMax) {
-		this.capacidadMax = capacidadMax;
+	public void setCapacidadMaxima(double capacidadMaxima) {
+		this.capacidadMaxima = capacidadMaxima;
 	}
 	
 //	public double calculaImporte() {

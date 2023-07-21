@@ -1,3 +1,6 @@
+<%@page import="entities.Vehiculo"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="logic.VehiculoLogic"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -109,81 +112,29 @@
 			</thead>
 			
 			<tbody>
+			<%
+			VehiculoLogic vehicl = new VehiculoLogic();
+			LinkedList<Vehiculo> listvehic = vehicl.getAll();
+				
+			for (Vehiculo vehic : listvehic) {	
+			%>
 				<tr>
 					
-					<td data-label="MARCA Y MODELO">2</td>
-					<td data-label="ANIO">3</td>
+					<td data-label="MARCA Y MODELO"><%=vehic.getMarcayModelo()%></td>
+					<td data-label="ANIO"><%=vehic.getAnio()%></td>
 
-					<td data-label="KILOMETRAJE">2</td>
-					<td data-label="PASAJEROS">3</td>
+					<td data-label="KILOMETRAJE"><%=vehic.getKilometraje()%></td>
+					<td data-label="PASAJEROS"><%=vehic.getPasajeros()%></td>
 
-					<td data-label="COLOR">2</td>
-					<td data-label="ESTADO">3</td>
+					<td data-label="COLOR"><%=vehic.getColor()%></td>
+					<td data-label="ESTADO"><%=vehic.isEstado()%></td>
 
-					<td data-label="PRECIOxKM">2</td>
-					<td data-label="MATRICULA">3</td>
+					<td data-label="PRECIOxKM"><%=vehic.getPrecioporKm()%></td>
+					<td data-label="MATRICULA"><%=vehic.getMatricula()%></td>
 					
-					<td data-label="CAP MAX">3</td>
+					<td data-label="CAP MAX"><%=vehic.getCapacidadMaxima()%></td>
 
-					<td data-label="TIPO">3</td>
-					
-					<td data-label="ACCIONES">
-						<div id="contenedorlinks">
-						<div id="editar">
-							<a href="">Editar</a>
-						</div>
-						<div id="eliminar">
-							<a href="">Eliminar</a>
-						</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					
-					<td data-label="MARCA Y MODELO">2</td>
-					<td data-label="ANIO">3</td>
-
-					<td data-label="KILOMETRAJE">2</td>
-					<td data-label="PASAJEROS">3</td>
-
-					<td data-label="COLOR">2</td>
-					<td data-label="ESTADO">3</td>
-
-					<td data-label="PRECIOxKM">2</td>
-					<td data-label="MATRICULA">3</td>
-					
-					<td data-label="CAP MAX">3</td>
-
-					<td data-label="TIPO">3</td>
-					
-					<td data-label="ACCIONES">
-						<div id="contenedorlinks">
-						<div id="editar">
-							<a href="">Editar</a>
-						</div>
-						<div id="eliminar">
-							<a href="">Eliminar</a>
-						</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					
-					<td data-label="MARCA Y MODELO">2</td>
-					<td data-label="ANIO">3</td>
-
-					<td data-label="KILOMETRAJE">2</td>
-					<td data-label="PASAJEROS">3</td>
-
-					<td data-label="COLOR">2</td>
-					<td data-label="ESTADO">3</td>
-
-					<td data-label="PRECIOxKM">2</td>
-					<td data-label="MATRICULA">3</td>
-					
-					<td data-label="CAP MAX">3</td>
-
-					<td data-label="TIPO">3</td>
+					<td data-label="TIPO"><%=vehic.getTipoVehiculo().getDescripcion()%></td>
 					
 					<td data-label="ACCIONES">
 						<div id="contenedorlinks">
@@ -197,6 +148,10 @@
 					</td>
 				</tr>
 				
+			<% } %>
+			
+			<% %>
+			<% %>	
 			</tbody>
 		</table>
 		</div>

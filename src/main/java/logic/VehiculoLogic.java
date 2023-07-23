@@ -17,4 +17,8 @@ public class VehiculoLogic {
 		return vehicd.getAll();
 	}
 	
+	public Vehiculo getById(int id) {
+		return vehicd.getById(id);
+	}
+	
 }

@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="estilos/estilostiposvehic.css">
 
 <%
-	Persona p = (Persona)session.getAttribute("usuario");
+	//Persona p = (Persona)session.getAttribute("usuario");
 	//TipoVehiculo tv = (TipoVehiculo)request.getAttribute("tipovehiculo");
 	//TipoVehiculo tv = new TipoVehiculo();
 	

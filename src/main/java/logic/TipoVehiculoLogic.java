@@ -3,7 +3,7 @@ package logic;
 import java.util.LinkedList;
 
 import data.TipoVehiculoData;
-import entities.Persona;
+//import entities.Persona;
 import entities.TipoVehiculo;
 
 public class TipoVehiculoLogic {

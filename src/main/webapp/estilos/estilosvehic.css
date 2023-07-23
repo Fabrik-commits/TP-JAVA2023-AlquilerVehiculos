@@ -198,6 +198,7 @@ a {
         display: block;
         border-bottom: 1px solid #ddd;
         text-align: right;
+        margin: 1px 50px 1px 1px;
     }
     .table td :last-child {
         border-bottom: 0px;
@@ -207,6 +208,7 @@ a {
         font-weight: bold;
         text-transform: uppercase;
         float: left;
+        margin: 1px 1px 1px 40px;
     }
 
 }

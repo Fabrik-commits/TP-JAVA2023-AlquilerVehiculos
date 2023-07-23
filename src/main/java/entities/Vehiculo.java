@@ -6,7 +6,7 @@ package entities;
  */
 public class Vehiculo {
 
-	private int idVehiculo;
+	private int id;
 	//private int idTipoVehiculo;
 	private double precioporKm;
 	private String marcayModelo;
@@ -20,10 +20,10 @@ public class Vehiculo {
 	private double capacidadMaxima;
 			
 	public int getIdVehiculo() {
-		return idVehiculo;
+		return id;
 	}
 	public void setIdVehiculo(int idVehiculo) {
-		this.idVehiculo = idVehiculo;
+		this.id = idVehiculo;
 	}
 			
 //	public int getIdTipoVehiculo() {

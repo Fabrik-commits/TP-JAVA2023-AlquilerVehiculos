@@ -35,7 +35,7 @@ input[type="password"]{
     border: none;
 }
 .input-contenedor{
-    width: 98%;
+    width: 100%;
     margin-bottom: 15px;
     border: 1px solid #aaa;
     margin-left: 2px;
@@ -88,7 +88,7 @@ p{
     }
 }
 .agrupainput {
-    width: 98%;
+    width: 100%;
     display: inline-flex;
 }
 

@@ -42,6 +42,10 @@ public class ServletVehiculos extends HttpServlet {
 		if (action.equalsIgnoreCase("principalvehic")) {
 		acceso=principalvehic;
 		}
+		else if (action.equalsIgnoreCase("editarvehiculo")) {
+			request.setAttribute("idvehiculo", request.getParameter("id"));
+			acceso=edit;
+		}
 		
 		RequestDispatcher vista=request.getRequestDispatcher(acceso);
 		vista.forward(request, response);

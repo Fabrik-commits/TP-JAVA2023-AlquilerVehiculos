@@ -139,10 +139,10 @@
 					<td data-label="ACCIONES">
 						<div id="contenedorlinks">
 						<div id="editar">
-							<a href="">Editar</a>
+							<a href="ServletVehiculos?accion=editarvehiculo&id=<%=vehic.getIdVehiculo()%>">Editar</a>
 						</div>
 						<div id="eliminar">
-							<a href="">Eliminar</a>
+							<a href="ServletVehiculos?accion=eliminarvehiculo&id=<%=vehic.getIdVehiculo()%>">Eliminar</a>
 						</div>
 						</div>
 					</td>
@@ -150,8 +150,7 @@
 				
 			<% } %>
 			
-			<% %>
-			<% %>	
+	
 			</tbody>
 		</table>
 		</div>

@@ -185,9 +185,10 @@
 					<% 
 					TipoVehiculoLogic tvl = new TipoVehiculoLogic();
 					LinkedList<TipoVehiculo> listtv = tvl.getAllTiposVehiculo();
-					for (TipoVehiculo tve : listtv) { 
+					for (TipoVehiculo tve : listtv) {
+						
 					%>
-        			
+        			        			
         			<option value="<%=tve.getId()%>"><%=tve.getDescripcion()%></option>
         			
         			<% } %>	

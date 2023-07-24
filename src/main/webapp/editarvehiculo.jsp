@@ -157,9 +157,21 @@
 			 
 			</div>
 			
+			<div class="agrupainput">
+
+			<div class="input-contenedor">
+				
+				<input type="text" name="txtmatricula" value="<%= vehic.getCapacidadMaxima()%>" placeholder="Capacidad Maxima">
+				
+			</div>
+			
+			
+			
+		</div>
+			
 			<div><input type="hidden" name="txtid" value="<%= vehic.getIdVehiculo()%>"></div>
 			
-			</div>
+		</div>
         
 		
 			<div class="agrupainputtipov">

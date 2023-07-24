@@ -34,6 +34,12 @@ input[type="password"]{
     padding: 10px;
     border: none;
 }
+select{
+    font-size: 18px; 
+}
+/* option{
+    font-size: 20px; 
+} */
 .input-contenedor{
     width: 100%;
     margin-bottom: 15px;
@@ -41,6 +47,28 @@ input[type="password"]{
     margin-left: 2px;
     margin-right: 2px;
 
+}
+.input-contenedortipov1{
+    width: 98%;
+    margin-bottom: 15px;
+    border: 1px #aaa;
+    margin-left: 2px;
+    margin-right: -20px;
+    text-align: right;
+
+}
+.input-contenedortipov2{
+    width: 98%;
+    margin-bottom: 15px;
+    border: 1px #aaa;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-left: 30px;
+    padding-top: 9px;
+
+}
+.labeltipov{
+    margin: 10px;
 }
 .icon{
     min-width: 50px;
@@ -63,7 +91,7 @@ input[type="password"]{
 }
 .agrupabotones {
     display: inline-flex;
-    width: 98%;
+    width: 100%;
 
 }
 
@@ -92,6 +120,11 @@ p{
     display: inline-flex;
 }
 
+.agrupainputtipov {
+    width: 98%;
+    display: inline-flex;
+}
+
 .checkbox {
     padding-left: 20px;
 }
@@ -113,14 +146,6 @@ label {
     padding: 8px 4px;
     border: 1px solid #aaa;
     width: 49%; 
-}
-.input-contrasena{
-    width: 98%;
-    margin-bottom: -3px;
-    border: 1px solid #aaa;
-    margin-left: 2px;
-    margin-right: 2px;
-
 }
 
 

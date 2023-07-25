@@ -37,5 +37,9 @@ private TipoVehiculoData tvd;
 	public TipoVehiculo update(TipoVehiculo tv) {
 		return tvd.update(tv);
 	}
+	
+	public TipoVehiculo getTipodelVehic(int id) {
+		return tvd.getTipodelVehic(id);
+	}
 
 }

@@ -158,5 +158,37 @@ public class TipoVehiculoData {
             }
 		}
 	}
+	
+	public TipoVehiculo getTipodelVehic(int id) {
+		TipoVehiculo tipov=null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select tipovehiculo.id, tipovehiculo.descripcion, tipovehiculo.costo from vehiculo inner join tipovehiculo on vehiculo.idtipovehiculo=tipovehiculo.id where vehiculo.id=?"
+					);
+			stmt.setInt(1, id);  // rolToSearch.getId()
+			rs=stmt.executeQuery();
+			if(rs!=null && rs.next()) {
+				tipov=new TipoVehiculo();
+				tipov.setId(rs.getInt("id"));
+				tipov.setDescripcion(rs.getString("descripcion"));
+				tipov.setCosto(rs.getDouble("costo"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return tipov;
+	}
 
 }

@@ -19,7 +19,7 @@ public class VehiculoData {
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("select vehiculo.id, vehiculo.marcaymodelo, vehiculo.anio, vehiculo.kilometraje, vehiculo.pasajeros, vehiculo.color, vehiculo.estado, vehiculo.precioxkm, vehiculo.matricula, vehiculo.capacidadmaxima, tipovehiculo.descripcion from vehiculo inner join tipovehiculo on vehiculo.idtipovehiculo=tipovehiculo.id");
+			rs = stmt.executeQuery("select vehiculo.id, vehiculo.marcaymodelo, vehiculo.anio, vehiculo.kilometraje, vehiculo.pasajeros, vehiculo.color, vehiculo.estado, vehiculo.precioxkm, vehiculo.matricula, vehiculo.capacidadmaxima, tipovehiculo.id, tipovehiculo.descripcion from vehiculo inner join tipovehiculo on vehiculo.idtipovehiculo=tipovehiculo.id");
 			if (rs!=null) {
 				while (rs.next()) {
 					Vehiculo veh = new Vehiculo();					
@@ -35,6 +35,7 @@ public class VehiculoData {
 					veh.setMatricula(rs.getString("matricula"));										
 					veh.setCapacidadMaxima(rs.getDouble("capacidadmaxima"));					
 					
+					veh.getTipoVehiculo().setId(rs.getInt("id"));
 					veh.getTipoVehiculo().setDescripcion(rs.getString("descripcion"));
 					
 //					TipoVehiculo tveh = new TipoVehiculo();

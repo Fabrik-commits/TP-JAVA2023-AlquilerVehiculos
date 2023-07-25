@@ -180,7 +180,15 @@
 				</div>
 				<div class="input-contenedortipov2">
     			<select name="" id="tipovehiculo">
-        			<option value="">Escoge una opcion</option>
+    				<%
+    				//int idtpo = vehic.getTipoVehiculo().getId();    				
+    				//TipoVehiculoLogic tvllog = new TipoVehiculoLogic();
+    				//TipoVehiculo tv = tvllog.getById(idtpo);
+    				int idvehic = vehic.getIdVehiculo();
+    				TipoVehiculoLogic tvllog = new TipoVehiculoLogic();
+    				TipoVehiculo tv = tvllog.getTipodelVehic(idvehic);
+    				%>
+        			<option value="<%=tv.getId()%>"><%=tv.getDescripcion()%></option>
         			
 					<% 
 					TipoVehiculoLogic tvl = new TipoVehiculoLogic();

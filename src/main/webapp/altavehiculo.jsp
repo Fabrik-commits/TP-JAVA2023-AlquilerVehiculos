@@ -87,7 +87,7 @@
 
 
 	 <div>
-	 <form class="formulario">
+	 <form class="formulario" action="ServletVehiculos">
     
 	 <h1>Alta Vehiculo</h1>
      <div class="contenedor">
@@ -96,61 +96,81 @@
 
         <div class="input-contenedor">
          
-         <input type="text" placeholder="Marca y Modelo">
+         <div class="titulo" style="padding: 3px">Marca y Modelo:</div>
+         <input type="text" name="txtmarcaymodelo" placeholder="Marca y Modelo">
          
         </div>
 
         <div class="input-contenedor">
             
-            <input type="text" placeholder="A&ntilde;o">
+            <div class="titulo">A&ntilde;o:</div>
+            <input type="text" name="txtanio" placeholder="A&ntilde;o">
+            
+        </div>
+        
+        <div class="input-contenedor">
+            
+            <div class="titulo">Kilometraje:</div>
+            <input type="text" name="txtkilometraje" placeholder="Kilometraje">
             
         </div>
 
         </div>
 
         <div class="agrupainput">
-        <div class="input-contenedor">
-            
-            <input type="text" placeholder="Kilometraje">
-            
-        </div>
+        
 
         <div class="input-contenedor">
             
-            <input type="text" placeholder="Pasajeros">
+            <div class="titulo">Pasajeros:</div>
+            <input type="text" name="txtpasajeros" placeholder="Pasajeros">
             
         </div>
-        </div>
-
-        <div class="agrupainput">
-
+        
         <div class="input-contenedor">
             
-            <input type="text" placeholder="Color">
+            <div class="titulo">Color:</div>
+            <input type="text" name="txtcolor" placeholder="Color">
             
         </div>
          
         <div class="input-contenedor">
          
-         <input type="text" placeholder="Estado">
+         <div class="titulo">Estado:</div>
+         <input type="text" name="txtestado" placeholder="Estado">
          
         </div>
+        
         </div>
+
+        
 
 		<div class="agrupainput">
 
 			<div class="input-contenedor">
 				
-				<input type="text" placeholder="Precio x Km">
+				<div class="titulo">Precio x Km:</div>
+				<input type="text" name="txtprecioxkm" placeholder="Precio x Km">
 				
 			</div>
 			 
 			<div class="input-contenedor">
 			 
-			 <input type="text" placeholder="Matricula">
+			 <div class="titulo">Matricula:</div>
+			 <input type="text" name="txtmatricula" placeholder="Matricula">
 			 
 			</div>
+			
+			<div class="input-contenedor">
+			 
+			 <div class="titulo">Capacidad Max:</div>
+			 <input type="text" name="txtcapacidadmaxima" placeholder="Capacidad Max">
+			 
 			</div>
+			
+				<div><input type="hidden" name="txtidtipovehiculo" value=""></div>
+			
+		</div>
         
 		
 			<div class="agrupainputtipov">
@@ -180,13 +200,13 @@
 	
 
 		<div class="agrupabotones">
-			<input type="button" value="Aceptar" class="button" onclick=mostrarPrincipal()>
-			<input type="button" value="Cancelar" class="button" onclick=mostrarPrincipal()>
+			<input type="submit" name="accion" value="Agregar" class="button" onclick=mostrarPrincipal()>
+			<input type="submit" name="accion" value="Cancelar" class="button" onclick=mostrarPrincipal()>
 		</div>
 		
      </div>
     </form>
 	</div>
 </body>
-<script src="scripts/script.js"></script>
+
 </html>

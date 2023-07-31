@@ -101,59 +101,71 @@
         <div class="agrupainput">
 
         <div class="input-contenedor">
-         
-         <input type="text" name="txtmarcaymodelo" value="<%= vehic.getMarcayModelo()%>" placeholder="Marca y Modelo">
+         	
+         	<div class="titulo" style="padding: 3px">Marca y Modelo:</div>
+         	<input type="text" name="txtmarcaymodelo" value="<%= vehic.getMarcayModelo()%>" placeholder="Marca y Modelo">
          
         </div>
 
         <div class="input-contenedor">
             
+            <div class="titulo">A&ntilde;o:</div>
             <input type="text" name="txtanio" value="<%= vehic.getAnio()%>" placeholder="A&ntilde;o">
             
         </div>
-
-        </div>
-
-        <div class="agrupainput">
+        
         <div class="input-contenedor">
             
+            <div class="titulo">Kilometraje:</div>
             <input type="text" name="txtkilometraje" value="<%= vehic.getKilometraje()%>" placeholder="Kilometraje">
             
         </div>
 
+        </div>
+        
+        
+
+        <div class="agrupainput">
+        
+
         <div class="input-contenedor">
             
+            <div class="titulo">Pasajeros:</div>
             <input type="text" name="txtpasajeros" value="<%= vehic.getPasajeros()%>" placeholder="Pasajeros">
             
         </div>
-        </div>
-
-        <div class="agrupainput">
-
-        <div class="input-contenedor">
+        
+                <div class="input-contenedor">
             
+            <div class="titulo">Color:</div>
             <input type="text" name="txtcolor" value="<%= vehic.getColor()%>" placeholder="Color">
             
         </div>
          
         <div class="input-contenedor">
          
+         <div class="titulo">Estado:</div>
          <input type="text" name="txtestado" value="<%= vehic.isEstado()%>" placeholder="Estado">
          
         </div>
+        
         </div>
+
+
 
 		<div class="agrupainput">
 
 			<div class="input-contenedor">
 				
+				<div class="titulo">Precio x Km:</div>
 				<input type="text" name="txtprecioxkm" value="<%= vehic.getPrecioporKm()%>" placeholder="Precio x Km">
 				
 			</div>
 			 
 			<div class="input-contenedor">
 			 
-			 <input type="text" name="txtmatricula" value="<%= vehic.getKilometraje()%>" placeholder="Matricula">
+			 <div class="titulo">Matricula:</div>
+			 <input type="text" name="txtmatricula" value="<%= vehic.getMatricula()%>" placeholder="Matricula">
 			 
 			</div>
 			
@@ -161,7 +173,8 @@
 
 			<div class="input-contenedor">
 				
-				<input type="text" name="txtmatricula" value="<%= vehic.getCapacidadMaxima()%>" placeholder="Capacidad Maxima">
+				<div class="titulo">Capacidad Max:</div>
+				<input type="text" name="txtcapacidadmaxima" value="<%= vehic.getCapacidadMaxima()%>" placeholder="Capacidad Max">
 				
 			</div>
 			
@@ -169,7 +182,7 @@
 			
 		</div>
 			
-			<div><input type="hidden" name="txtid" value="<%= vehic.getIdVehiculo()%>"></div>
+			<div><input type="hidden" name="txtidtipovehiculo" value="<%= vehic.getIdVehiculo()%>"></div>
 			
 		</div>
         

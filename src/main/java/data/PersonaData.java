@@ -81,7 +81,7 @@ public class PersonaData {
 				p.setTel(rs.getString("telefono"));
 				//p.setHabilitado(rs.getBoolean("habilitado"));
 				//
-				rd.setRoles(p);
+				//rd.setRoles(p);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

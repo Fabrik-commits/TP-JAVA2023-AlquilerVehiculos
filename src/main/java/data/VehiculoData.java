@@ -91,7 +91,106 @@ public class VehiculoData {
 		return vehic;
 		
 	}
-
 	
+	public Vehiculo update(Vehiculo vehic) {
+		//TipoVehiculo tipovehic = new TipoVehiculo();
+		PreparedStatement stmt=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().
+					prepareStatement(
+							"update vehiculo set vehiculo.marcaymodelo=?, vehiculo.anio=?, vehiculo.kilometraje=?, vehiculo.pasajeros=?, vehiculo.color=?, vehiculo.estado=?, vehiculo.precioxkm=?, vehiculo.matricula=?, vehiculo.capacidadmaxima=?, vehiculo.idtipovehiculo=? where vehiculo.id=?");
+									
+			stmt.setString(1, vehic.getMarcayModelo());
+			stmt.setInt(2, vehic.getAnio());
+			//stmt.setInt(3, vehic.getIdVehiculo());
+			stmt.setDouble(3, vehic.getKilometraje());
+			stmt.setInt(4, vehic.getPasajeros());
+			stmt.setString(5, vehic.getColor());
+			stmt.setBoolean(6, vehic.isEstado());
+			stmt.setDouble(7, vehic.getPrecioporKm());
+			stmt.setString(8, vehic.getMatricula());
+			stmt.setDouble(9, vehic.getCapacidadMaxima());
+			
+			stmt.setInt(10, vehic.getTipoVehiculo().getId());
+			//stmt.setString(11, vehic.getTipoVehiculo().getDescripcion());
+			//stmt.setDouble(12, vehic.getTipoVehiculo().getCosto());
+			
+			stmt.setInt(11, vehic.getIdVehiculo());
+						
+			stmt.executeUpdate();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		} finally {
+			try {
+				
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		}
+		return vehic;
+	}
+
+public void add(Vehiculo vehic) {
+		
+		PreparedStatement stmt= null;
+		ResultSet keyResultSet=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().
+					prepareStatement(
+							"insert into vehiculo(marcaymodelo, anio, kilometraje, pasajeros, color, estado, precioxkm, matricula, capacidadmaxima) values(?,?,?,?,?,?,?,?,?)",
+							PreparedStatement.RETURN_GENERATED_KEYS
+							);
+			stmt.setString(1, vehic.getMarcayModelo());
+			stmt.setDouble(2, vehic.getAnio());
+			stmt.setDouble(3, vehic.getKilometraje());
+			stmt.setDouble(4, vehic.getPasajeros());
+			stmt.setString(5, vehic.getColor());
+			stmt.setDouble(6, vehic.getAnio());
+			stmt.setDouble(7, vehic.getPrecioporKm());
+			stmt.setString(8, vehic.getMatricula());
+			stmt.setDouble(9, vehic.getCapacidadMaxima());			
+						
+			stmt.executeUpdate();
+			
+			keyResultSet=stmt.getGeneratedKeys();
+            if(keyResultSet!=null && keyResultSet.next()){
+                vehic.setIdVehiculo(keyResultSet.getInt(1));
+            }
+                       
+			
+		}  catch (SQLException e) {
+            e.printStackTrace();
+		} finally {
+            try {
+                if(keyResultSet!=null)keyResultSet.close();
+                if(stmt!=null)stmt.close();
+                DbConnector.getInstancia().releaseConn();
+            } catch (SQLException e) {
+            	e.printStackTrace();
+            }
+		}
+    }
+
+
+public void remove(int id) {
+	PreparedStatement stmt= null;
+	try {
+		stmt=DbConnector.getInstancia().getConn().
+				prepareStatement(
+						"delete from vehiculo where id=?");
+		stmt.setInt(1, id);
+		stmt.executeUpdate();
+	} catch (SQLException e) {
+        e.printStackTrace();
+	} finally {
+        try {
+            if(stmt!=null)stmt.close();
+            DbConnector.getInstancia().releaseConn();
+        } catch (SQLException e) {
+        	e.printStackTrace();
+        }
+	}
+}
 	
 }

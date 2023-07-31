@@ -91,7 +91,7 @@
 		
 		<div id="main-container">
 		<div id="agregarnuevo">
-			<a href="tipovehiculo.html">Agregar Nuevo</a>
+			<a href="ServletVehiculos?accion=altavehiculo">Agregar Nuevo</a>
 		</div>
 		<table class="table">
 			<thead>

@@ -116,7 +116,8 @@ public class VehiculoData {
 			//stmt.setDouble(12, vehic.getTipoVehiculo().getCosto());
 			
 			stmt.setInt(11, vehic.getIdVehiculo());
-						
+			System.out.println(vehic.getKilometraje());
+			System.out.println();
 			stmt.executeUpdate();
 			
 		} catch (Exception e) {
@@ -138,7 +139,7 @@ public void add(Vehiculo vehic) {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"insert into vehiculo(marcaymodelo, anio, kilometraje, pasajeros, color, estado, precioxkm, matricula, capacidadmaxima) values(?,?,?,?,?,?,?,?,?)",
+							"insert into vehiculo(marcaymodelo, anio, kilometraje, pasajeros, color, estado, precioxkm, matricula, capacidadmaxima, idtipovehiculo) values(?,?,?,?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, vehic.getMarcayModelo());
@@ -146,10 +147,11 @@ public void add(Vehiculo vehic) {
 			stmt.setDouble(3, vehic.getKilometraje());
 			stmt.setDouble(4, vehic.getPasajeros());
 			stmt.setString(5, vehic.getColor());
-			stmt.setDouble(6, vehic.getAnio());
+			stmt.setBoolean(6, vehic.isEstado());
 			stmt.setDouble(7, vehic.getPrecioporKm());
 			stmt.setString(8, vehic.getMatricula());
-			stmt.setDouble(9, vehic.getCapacidadMaxima());			
+			stmt.setDouble(9, vehic.getCapacidadMaxima());
+			stmt.setInt(10, vehic.getTipoVehiculo().getId());
 						
 			stmt.executeUpdate();
 			

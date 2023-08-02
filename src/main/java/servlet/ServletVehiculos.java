@@ -56,7 +56,7 @@ public class ServletVehiculos extends HttpServlet {
 			Vehiculo vehic = new Vehiculo();
 			TipoVehiculo tvehic = new TipoVehiculo();
 			VehiculoLogic vlogic = new VehiculoLogic();
-			int id = Integer.parseInt(request.getParameter("txtidtipovehiculo"));
+			//int id = Integer.parseInt(request.getParameter("txtidtipovehiculo"));
 			String marcaymodelo = request.getParameter("txtmarcaymodelo");
 			int anio = Integer.parseInt(request.getParameter("txtanio"));
 			String kilometraje = request.getParameter("txtkilometraje");
@@ -67,13 +67,15 @@ public class ServletVehiculos extends HttpServlet {
 			String matricula = request.getParameter("txtmatricula");
 			String capacidadmaxima = request.getParameter("txtcapacidadmaxima");
 			
-			int idtipovehiculo = Integer.parseInt(request.getParameter("txtidtipovehiculo"));
+			int idtipovehiculo = Integer.parseInt(request.getParameter("miSelect"));
 			tvehic.setId(idtipovehiculo);
 			
-			vehic.setIdVehiculo(id);
+			//vehic.setIdVehiculo(id);
 			vehic.setMarcayModelo(marcaymodelo);			
 			vehic.setAnio(anio);
-			vehic.setKilometraje(Double.parseDouble(kilometraje));
+//			System.out.println(vehic.getAnio());
+//			System.out.println();
+			vehic.setKilometraje(Double.parseDouble(kilometraje));			
 			vehic.setPasajeros(pasajeros);
 			vehic.setColor(color);
 			vehic.setEstado(estado);
@@ -83,7 +85,7 @@ public class ServletVehiculos extends HttpServlet {
 			vehic.setTipoVehiculo(tvehic);
 			
 			
-			vlogic.update(vehic);
+			vlogic.add(vehic);
 			acceso=principalvehic;
 		}
 		else if (action.equalsIgnoreCase("editarvehiculo")) {

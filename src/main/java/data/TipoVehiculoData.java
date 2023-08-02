@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 
-import entities.Persona;
-import entities.Rol;
+//import entities.Persona;
+//import entities.Rol;
 import entities.TipoVehiculo;
 
 public class TipoVehiculoData {

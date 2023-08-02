@@ -168,7 +168,7 @@
 			 
 			</div>
 			
-				<div><input type="hidden" name="txtidtipovehiculo" value=""></div>
+				<!-- <div><input type="hidden" name="txtidtipovehiculo" value=""></div> -->
 			
 		</div>
         
@@ -180,7 +180,7 @@
 				
 				<div class="input-contenedortipov2">
 				
-    			<select name="" id="tipovehiculo">
+    			<select name="miSelect" id="tipovehiculo">
         			<option value="">Escoge una opcion</option>
         			
         			<% 
@@ -189,7 +189,7 @@
 					for (TipoVehiculo tve : listtv) { 
 					%>
         			
-        			<option value="<%=tve.getId()%>"><%=tve.getDescripcion()%></option>
+        			<option value="<%=tve.getId()%>" name="txtidtipovehiculo"><%=tve.getDescripcion()%></option>
         			
         			<% } %>		
         			
@@ -200,8 +200,8 @@
 	
 
 		<div class="agrupabotones">
-			<input type="submit" name="accion" value="Agregar" class="button" onclick=mostrarPrincipal()>
-			<input type="submit" name="accion" value="Cancelar" class="button" onclick=mostrarPrincipal()>
+			<input type="submit" name="accion" value="Agregar" class="button">
+			<input type="submit" name="accion" value="Cancelar" class="button">
 		</div>
 		
      </div>

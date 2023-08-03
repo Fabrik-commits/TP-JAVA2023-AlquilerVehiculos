@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.TipoVehiculo;
 import entities.Vehiculo;
-import logic.TipoVehiculoLogic;
+//import logic.TipoVehiculoLogic;
 import logic.VehiculoLogic;
 
 /**
@@ -126,10 +126,12 @@ public class ServletVehiculos extends HttpServlet {
 			vlogic.update(vehic);
 			acceso=principalvehic;
 		}
-		else if (action.equalsIgnoreCase("eliminartipovehiculo")) {
+		else if (action.equalsIgnoreCase("eliminarvehiculo")) {
 			Vehiculo vehic = new Vehiculo();
 			VehiculoLogic vehicl = new VehiculoLogic();
 			int id = Integer.parseInt(request.getParameter("id"));
+//			System.out.println(id);
+//			System.out.println();
 			vehic.setIdVehiculo(id);
 			vehicl.remove(id);
 			acceso=principalvehic;

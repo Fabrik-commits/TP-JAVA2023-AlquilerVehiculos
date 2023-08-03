@@ -116,8 +116,8 @@ public class VehiculoData {
 			//stmt.setDouble(12, vehic.getTipoVehiculo().getCosto());
 			
 			stmt.setInt(11, vehic.getIdVehiculo());
-			System.out.println(vehic.getKilometraje());
-			System.out.println();
+//			System.out.println(vehic.getKilometraje());
+//			System.out.println();
 			stmt.executeUpdate();
 			
 		} catch (Exception e) {

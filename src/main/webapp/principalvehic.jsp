@@ -139,7 +139,9 @@
 					<td data-label="ACCIONES">
 						<div id="contenedorlinks">
 						<div id="editar">
+						
 							<a href="ServletVehiculos?accion=editarvehiculo&id=<%=vehic.getIdVehiculo()%>">Editar</a>
+							
 						</div>
 						<div id="eliminar">
 							<a href="ServletVehiculos?accion=eliminarvehiculo&id=<%=vehic.getIdVehiculo()%>">Eliminar</a>

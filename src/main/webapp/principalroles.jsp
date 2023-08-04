@@ -1,7 +1,6 @@
-<%@page import="logic.TipoVehiculoLogic"%>
-<%@page import="entities.TipoVehiculo"%>
 <%@page import="java.util.LinkedList"%>
-<%@page import="entities.Persona"%>
+<%@page import="entities.Rol"%>
+<%@page import="logic.RolLogic"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -14,13 +13,10 @@
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 <link rel="stylesheet" href="estilos/estilostiposvehic.css">
-
-
 </head>
 <body>
 
-
-<header class="header">
+	<header class="header">
 
 		<div class="logo">Xtreme</div>
 		<input type="checkbox" id="toggle">
@@ -88,44 +84,41 @@
 		</nav>
 
 	</header>
-
-
+	
 	<div>
 		<h1>Tipos vehiculo</h1>
 		
 		<div id="main-container">
 		<div id="agregarnuevo">
-			<a href="ServletTiposVehiculo?accion=altatipovehiculo">Agregar Nuevo</a>
+			<a href="ServletRoles?accion=altarol">Agregar Nuevo</a>
 		</div>
 		<table class="table">
 			<thead>
 				<tr>
 					<th>ID</th>
 					<th>DESCRIPCION</th>
-					<th>PRECIO</th>
 					<th>ACCIONES</th>	
 				</tr>
 			</thead>
 			
 			<tbody>
 			<% 
-			TipoVehiculoLogic tvl = new TipoVehiculoLogic();
-			LinkedList<TipoVehiculo> listtv = tvl.getAllTiposVehiculo();
+			RolLogic rollog = new RolLogic();
+			LinkedList<Rol> listrol = rollog.getAllRoles();
 
-			for (TipoVehiculo tve : listtv) { 
+			for (Rol rol : listrol) { 
 			%>
 				<tr>
-					<td data-label="ID"><%=tve.getId()%></td>
-					<td data-label="DESCRIPCION"><%=tve.getDescripcion()%></td>
-					<td data-label="PRECIO"><%=tve.getCosto()%></td>
+					<td data-label="ID"><%=rol.getId()%></td>
+					<td data-label="DESCRIPCION"><%=rol.getDescripcion()%></td>
 					
 					<td data-label="ACCIONES">
 						<div id="contenedorlinks">
 						<div id="editar">
-							<a href="ServletTiposVehiculo?accion=editartipovehiculo&id=<%=tve.getId()%>">Editar</a>
+							<a href="ServletRoles?accion=editarrol&id=<%=rol.getId()%>">Editar</a>
 						</div>
 						<div id="eliminar">
-							<a href="ServletTiposVehiculo?accion=eliminartipovehiculo&id=<%=tve.getId()%>">Eliminar</a>
+							<a href="ServletRoles?accion=eliminarrol&id=<%=rol.getId()%>">Eliminar</a>
 						</div>
 						</div>
 					</td>
@@ -135,7 +128,6 @@
 		</table>
 		</div>
 	</div>
-
 
 </body>
 </html>

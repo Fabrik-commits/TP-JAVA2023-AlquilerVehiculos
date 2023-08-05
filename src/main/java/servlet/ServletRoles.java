@@ -9,6 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.Rol;
+import entities.TipoVehiculo;
+import logic.RolLogic;
+import logic.TipoVehiculoLogic;
+
 /**
  * Servlet implementation class ServletRoles
  */
@@ -40,6 +45,39 @@ public class ServletRoles extends HttpServlet {
 		
 		if (action.equalsIgnoreCase("principalroles")) {
 		acceso=principalroles;
+		}
+		else if (action.equalsIgnoreCase("altarol")) {
+			acceso=add;
+		}
+		else if (action.equalsIgnoreCase("Agregar")) {
+			Rol rol = new Rol();
+			RolLogic rollog = new RolLogic();
+			String descripcion=request.getParameter("txtdescripcion");
+			rol.setDescripcion(descripcion);
+			rollog.add(rol);
+			acceso=principalroles;
+		}
+		else if (action.equalsIgnoreCase("editarrol")) {
+			request.setAttribute("idrol", request.getParameter("id"));
+			acceso=edit;
+		}
+		else if (action.equalsIgnoreCase("Actualizar")) {
+			Rol rol = new Rol();
+			RolLogic rollog = new RolLogic();
+			int id = Integer.parseInt(request.getParameter("txtid"));
+			String descripcion = request.getParameter("txtdescripcion");
+			rol.setId(id);
+			rol.setDescripcion(descripcion);			
+			rollog.update(rol);
+			acceso=principalroles;
+		}
+		else if (action.equalsIgnoreCase("eliminarrol")) {
+			Rol rol = new Rol();
+			RolLogic rollog = new RolLogic();
+			int id = Integer.parseInt(request.getParameter("id"));
+			rol.setId(id);
+			rollog.remove(id);
+			acceso=principalroles;
 		}
 		RequestDispatcher vista=request.getRequestDispatcher(acceso);
 		vista.forward(request, response);

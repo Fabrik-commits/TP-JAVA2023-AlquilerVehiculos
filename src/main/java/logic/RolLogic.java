@@ -22,5 +22,21 @@ public class RolLogic {
 	public Rol getByDesc(Rol rolToSearch) {
 		return rd.getByDesc(rolToSearch);
 	}
+	
+	public void add(Rol rol) {
+		rd.add(rol);
+	}
+	
+	public void remove(int id) {
+		rd.remove(id);
+	}
+	
+	public void update(Rol rol) {
+		rd.update(rol);
+	}
+	
+	public Rol getById(int id) {
+		return rd.getById(id);
+	}
 
 }

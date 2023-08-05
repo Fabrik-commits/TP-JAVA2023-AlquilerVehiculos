@@ -1,15 +1,14 @@
-<%@page import="entities.TipoVehiculo"%>
-<%@page import="logic.TipoVehiculoLogic"%>
+<%@page import="entities.Rol"%>
+<%@page import="logic.RolLogic"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="es">
-
+<html>
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Insert title here</title>
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
 	<link rel="stylesheet" href="estilos/tipovehiculo.css">
 </head>
 <body>
@@ -86,39 +85,30 @@
 
 	<div>
 	<%
-		TipoVehiculoLogic tvl = new TipoVehiculoLogic();
-		int id = Integer.parseInt((String)request.getAttribute("idtipovehiculo"));
-		TipoVehiculo tv = tvl.getById(id); //dao.list(id);		
+		RolLogic rollog = new RolLogic();
+		int id = Integer.parseInt((String)request.getAttribute("idrol"));
+		Rol rol = rollog.getById(id); //dao.list(id);		
 	%>
-	<form class="formulario" action="ServletTiposVehiculo">
+	<form class="formulario" action="ServletRoles">
     
-    <h1>Editar Tipo Vehiculo</h1>
+    <h1>Editar Rol</h1>
      <div class="contenedor">
      
-              
-         <div class="input-contenedor">
-         
-         <input type="text" name="txtdescripcion" value="<%= tv.getDescripcion()%>" placeholder="Descripcion">
-         
-         </div>
-
 		 <div class="input-contenedor">
          
-			<input type="text" name="txtcosto" value="<%= tv.getCosto()%>" placeholder="Costo">
+			<input type="text" name="txtdescripcion" value="<%=rol.getDescripcion()%>" placeholder="Descripcion">
 			
-		 </div>
-         
-         <div><input type="hidden" name="txtid" value="<%= tv.getId()%>"></div>
+		</div>
+        
+        <div><input type="hidden" name="txtid" value="<%= rol.getId()%>"></div>
                   
          <div class="agrupabotones">
 			<input type="submit" name="accion" value="Actualizar" class="button">
 			<input type="submit" name="accion" value="Cancelar" class="button">
-			
 		</div>
          
      </div>
     </form>
 	</div>
 </body>
-
 </html>

@@ -43,7 +43,7 @@ public class ServletTiposVehiculo extends HttpServlet {
 		String action=request.getParameter("accion");
 		
 		if (action.equalsIgnoreCase("principaltiposvehic")) {
-		acceso=principaltiposvehic;
+			acceso=principaltiposvehic;
 		}
 		else if (action.equalsIgnoreCase("altatipovehiculo")) {
 			acceso=add;

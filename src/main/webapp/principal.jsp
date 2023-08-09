@@ -45,7 +45,7 @@
 						<li><a href="#">Persona</a>
 							<ul>
 								<li><a href="altapersona.jsp">Alta</a></li>
-								<li><a href="principalpersonas.jsp">Personas</a></li>
+								<li><a href="ServletPersonas?accion=principalpersonas">Personas</a></li>
 
 							</ul></li>
 						<li><a href="#">Rol</a>

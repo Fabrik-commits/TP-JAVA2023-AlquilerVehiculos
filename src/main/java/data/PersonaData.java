@@ -20,7 +20,7 @@ public class PersonaData {
 		
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("select id,nombre,apellido,nroDni,email,tel,habilitado from persona");
+			rs= stmt.executeQuery("select id,nombre,apellido,dni,direccion,email,tel from persona");
 			//intencionalmente no se recupera la password
 			if(rs!=null) {
 				while(rs.next()) {

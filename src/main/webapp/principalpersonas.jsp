@@ -93,11 +93,12 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th>ID</th>
 					<th>DNI</th>
 					<th>NOMBRE</th>					
 					<th>APELLIDO</th>
 					<th>TELEFONO</th>
+					<th>DIRECCION</th>
+					<th>E-MAIL</th>
 					<th>ROL-CLTE</th>
 					<th>ROL-EMPL</th>
 					<th>ACCIONES</th>	
@@ -105,12 +106,16 @@
 			</thead>
 			
 			<tbody>
+			<%
+				
+			%>
 				<tr>
-					<td data-label="ID">1</td>
 					<td data-label="DNI">2</td>
 					<td data-label="NOMBRE">3</td>
 					<td data-label="APELLIDO">4</td>
 					<td data-label="TELEFONO">5</td>
+					<td data-label="DIRECCION">1</td>
+					<td data-label="E-MAIL">5</td>
 					<td data-label="ROL-CLTE">6</td>
 					<td data-label="ROL-EMPL">7</td>
 					<td data-label="ACCIONES">
@@ -125,11 +130,12 @@
 					</td>
 				</tr>
 				<tr>
-					<td data-label="ID">1</td>
 					<td data-label="DNI">2</td>
 					<td data-label="NOMBRE">3</td>
 					<td data-label="APELLIDO">4</td>
 					<td data-label="TELEFONO">5</td>
+					<td data-label="DIRECCION">1</td>
+					<td data-label="E-MAIL">5</td>
 					<td data-label="ROL-CLTE">6</td>
 					<td data-label="ROL-EMPL">7</td>
 					<td data-label="ACCIONES">					
@@ -144,11 +150,12 @@
 					</td>
 				</tr>
 				<tr>
-					<td data-label="ID">1</td>
 					<td data-label="DNI">2</td>
 					<td data-label="NOMBRE">3</td>
 					<td data-label="APELLIDO">4</td>
 					<td data-label="TELEFONO">5</td>
+					<td data-label="DIRECCION">1</td>
+					<td data-label="E-MAIL">5</td>
 					<td data-label="ROL-CLTE">6</td>
 					<td data-label="ROL-EMPL">7</td>
 					<td data-label="ACCIONES">

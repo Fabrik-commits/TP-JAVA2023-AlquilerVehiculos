@@ -1,0 +1,108 @@
+package servlet;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import entities.Persona;
+import entities.Rol;
+import logic.PersonaLogic;
+
+//import entities.TipoVehiculo;
+//import entities.Vehiculo;
+//import logic.VehiculoLogic;
+
+/**
+ * Servlet implementation class ServletPersonas
+ */
+@WebServlet("/ServletPersonas")
+public class ServletPersonas extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ServletPersonas() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+    String principalpersonas="principalpersonas.jsp";
+    String add="altapersona.jsp";
+    String edit="editarpersona.jsp";
+
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		String acceso="";
+		String action=request.getParameter("accion");
+		
+		if (action.equalsIgnoreCase("principalpersonas")) {
+		acceso=principalpersonas;
+		}
+		else if (action.equalsIgnoreCase("editarpersona")) {
+			request.setAttribute("id", request.getParameter("id"));
+			acceso=edit;
+		}
+		else if (action.equalsIgnoreCase("Actualizar")) {
+			Persona pers = new Persona();
+			PersonaLogic plogic = new PersonaLogic();
+			
+			int id = Integer.parseInt(request.getParameter("txtid"));
+			String nombre = request.getParameter("txtnombre");
+			String apellido = request.getParameter("txtapellido");
+			String dni = request.getParameter("txtdni");
+			String telefono = request.getParameter("txttelefono");
+			String email = request.getParameter("txtemail");
+			String password = request.getParameter("txtpassword");
+			
+			if (request.getParameter("checkrol1")!=null) {
+				Rol rol1 = new Rol();
+				rol1.setId(1);
+				pers.addRol(rol1);
+			}
+			if (request.getParameter("checkrol2")!=null) {
+				Rol rol2 = new Rol();
+				rol2.setId(2);
+				pers.addRol(rol2);
+			}
+			
+			pers.setId(id);
+			pers.setNombre(nombre);
+			pers.setApellido(apellido);
+			pers.setDni(dni);
+			pers.setTel(telefono);
+			pers.setEmail(email);
+			pers.setPassword(password);
+			
+			
+			//vehic.setTipoVehiculo(tvehic);
+						
+			plogic.update(pers);
+			acceso=principalpersonas;
+		}
+		
+		RequestDispatcher vista=request.getRequestDispatcher(acceso);
+		vista.forward(request, response);
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}

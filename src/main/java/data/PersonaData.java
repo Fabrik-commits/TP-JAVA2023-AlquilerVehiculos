@@ -9,6 +9,7 @@ import java.util.LinkedList;
 //import entities.Documento;
 //import entities.Documento;
 import entities.Persona;
+import entities.Vehiculo;
 
 public class PersonaData {
 	
@@ -20,8 +21,9 @@ public class PersonaData {
 		
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("select id,nombre,apellido,dni,direccion,email,tel from persona");
+			rs= stmt.executeQuery("select id,nombre,apellido,dni,direccion,email,telefono,password from persona");
 			//intencionalmente no se recupera la password
+//select persona.id, persona.nombre, persona.apellido, persona.dni, persona.direccion, persona.telefono, email.estado, persona.password, tipovehiculo.id, tipovehiculo.descripcion from persona inner join rol on persona.id_persona=rol.id_rol			
 			if(rs!=null) {
 				while(rs.next()) {
 					Persona p=new Persona();
@@ -36,8 +38,8 @@ public class PersonaData {
 					//p.getDocumento().setTipo(rs.getString("tipo_doc"));
 					//p.getDocumento().setNro(rs.getString("nro_doc"));
 					p.setEmail(rs.getString("email"));
-					p.setTel(rs.getString("tel"));
-					
+					p.setTel(rs.getString("telefono"));
+					p.setPassword(rs.getString("password"));
 					//p.setHabilitado(rs.getBoolean("habilitado"));
 					
 					dr.setRoles(p);
@@ -52,6 +54,91 @@ public class PersonaData {
 		
 		return pers;
 	}
+	
+	public Persona getById(int id) {
+		RolData dr = new RolData();
+		Persona pers=null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select * from persona where id=?"
+					);
+			stmt.setInt(1, id);  // rolToSearch.getId()
+			rs=stmt.executeQuery();
+			if(rs!=null && rs.next()) {
+				pers=new Persona();
+				pers.setId(rs.getInt("id"));
+				pers.setNombre(rs.getString("nombre"));
+				pers.setApellido(rs.getString("apellido"));
+				pers.setDireccion(rs.getString("direccion"));
+				pers.setDni(rs.getString("dni"));
+				pers.setTel(rs.getString("telefono"));
+				pers.setEmail(rs.getString("email"));
+				pers.setPassword(rs.getString("password"));
+				//vehic.setMatricula(rs.getString("matricula"));
+				//vehic.setCapacidadMaxima(rs.getDouble("capacidadmaxima"));
+				
+				dr.setRoles(pers);
+				
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return pers;
+		
+	}
+
+	
+//	public LinkedList<Persona> getDatosPersonas(){
+//		RolData dr = new RolData();
+//		Statement stmt = null;
+//		ResultSet rs = null;
+//		LinkedList<Persona> pers = new LinkedList<Persona>();
+//		
+//		try {
+//			stmt= DbConnector.getInstancia().getConn().createStatement();
+//			rs= stmt.executeQuery("select id,nombre,apellido,dni,direccion,email,tel, password from persona");
+//			//intencionalmente no se recupera la password
+//			if(rs!=null) {
+//				while(rs.next()) {
+//					Persona p=new Persona();
+//					//p.setDocumento(new Documento());
+//					p.setId(rs.getInt("id"));
+//					p.setNombre(rs.getString("nombre"));
+//					p.setApellido(rs.getString("apellido"));
+//					p.setDni(rs.getString("dni"));
+//					
+//					p.setDireccion(rs.getString("direccion"));
+//					
+//					//p.getDocumento().setTipo(rs.getString("tipo_doc"));
+//					//p.getDocumento().setNro(rs.getString("nro_doc"));
+//					p.setEmail(rs.getString("email"));
+//					p.setTel(rs.getString("tel"));
+//					p.setPassword(rs.getString("password"));
+//					//p.setHabilitado(rs.getBoolean("habilitado"));
+//					
+//					dr.setRoles(p);
+//					
+//					pers.add(p);
+//				}
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return pers;
+//	}
 		
 	public Persona getByUser(Persona per) {
 		//RolData rd=new RolData();
@@ -97,12 +184,7 @@ public class PersonaData {
 		
 		return p;
 	}
-	
-	
-	
-	
-	
-	
+				
 	//public Persona getByDocumento(Persona per) falta
 	
 	
@@ -216,7 +298,7 @@ public class PersonaData {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"update persona set nombre=?, apellido=?, email=?, password=?, tel=?, direccion=? where nroDni=?");
+							"update persona set nombre=?, apellido=?, email=?, password=?, telefono=?, direccion=? where dni=?");
 			stmt.setString(1, p.getNombre());
 			stmt.setString(2, p.getApellido());			
 			stmt.setString(3, p.getEmail());

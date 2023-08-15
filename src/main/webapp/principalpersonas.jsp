@@ -1,3 +1,7 @@
+<%@page import="java.util.LinkedList"%>
+<%@page import="logic.PersonaLogic"%>
+<%@page import="entities.Persona"%>
+<%@page import="entities.Rol"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -100,28 +104,42 @@
 					<th>DIRECCION</th>
 					<th>E-MAIL</th>
 					<th>ROL-CLTE</th>
-					<th>ROL-EMPL</th>
+					<th>ROL-ADMIN</th>
 					<th>ACCIONES</th>	
 				</tr>
 			</thead>
 			
 			<tbody>
 			<%
-				
+			PersonaLogic perLog = new PersonaLogic();
+			LinkedList<Persona> listPers = perLog.getAll();	
+			Rol rol1 = new Rol();
+			Rol rol2 = new Rol();
+			rol1.setId(1);
+			rol2.setId(2);
+			for (Persona pers : listPers) {
+				if(pers.hasRol(rol1)){}
+				else{}
+				if(pers.hasRol(rol2)){}
+				else{}
 			%>
 				<tr>
-					<td data-label="DNI">2</td>
-					<td data-label="NOMBRE">3</td>
-					<td data-label="APELLIDO">4</td>
-					<td data-label="TELEFONO">5</td>
-					<td data-label="DIRECCION">1</td>
-					<td data-label="E-MAIL">5</td>
-					<td data-label="ROL-CLTE">6</td>
-					<td data-label="ROL-EMPL">7</td>
+					<td data-label="DNI"><%=pers.getDni()%></td>
+					<td data-label="NOMBRE"><%=pers.getNombre()%></td>
+					<td data-label="APELLIDO"><%=pers.getApellido()%></td>
+					<td data-label="TELEFONO"><%=pers.getTel()%></td>
+					<td data-label="DIRECCION"><%=pers.getDireccion()%></td>
+					<td data-label="E-MAIL"><%=pers.getEmail()%></td>
+					
+					
+					<td data-label="ROL-CLTE"><img class="visto" style="max-width: 20%" height="auto" src="<%=pers.hasRol(rol2)?"imagenes/visto.png":"imagenes/novisto.png"%>">  </td>
+					<td data-label="ROL-ADMIN"><img class="visto" style="max-width: 20%" height="auto" src="<%=pers.hasRol(rol1)?"imagenes/visto.png":"imagenes/novisto.png"%>"></td>
+					
+					
 					<td data-label="ACCIONES">
 						<div id="contenedorlinks">
 						<div id="editar">
-							<a href="">Editar</a>
+							<a href="ServletPersonas?accion=editarpersona&id=<%=pers.getId()%>">Editar</a>
 						</div>
 						<div id="eliminar">
 							<a href="">Eliminar</a>
@@ -129,51 +147,14 @@
 						</div>
 					</td>
 				</tr>
-				<tr>
-					<td data-label="DNI">2</td>
-					<td data-label="NOMBRE">3</td>
-					<td data-label="APELLIDO">4</td>
-					<td data-label="TELEFONO">5</td>
-					<td data-label="DIRECCION">1</td>
-					<td data-label="E-MAIL">5</td>
-					<td data-label="ROL-CLTE">6</td>
-					<td data-label="ROL-EMPL">7</td>
-					<td data-label="ACCIONES">					
-						<div id="contenedorlinks">
-							<div id="editar">
-								<a href="">Editar</a>
-							</div>
-							<div id="eliminar">
-								<a href="">Eliminar</a>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td data-label="DNI">2</td>
-					<td data-label="NOMBRE">3</td>
-					<td data-label="APELLIDO">4</td>
-					<td data-label="TELEFONO">5</td>
-					<td data-label="DIRECCION">1</td>
-					<td data-label="E-MAIL">5</td>
-					<td data-label="ROL-CLTE">6</td>
-					<td data-label="ROL-EMPL">7</td>
-					<td data-label="ACCIONES">
-						<div id="contenedorlinks">
-							<div id="editar">
-								<a href="">Editar</a>
-							</div>
-							<div id="eliminar">
-								<a href="">Eliminar</a>
-							</div>
-						</div>
-					</td>
-				</tr>
 				
+			<% } %>	
+				
+								
 			</tbody>
 		</table>
 		</div>
 	</div>
-
+<script src="scripts/script.js"></script>
 </body>
 </html>

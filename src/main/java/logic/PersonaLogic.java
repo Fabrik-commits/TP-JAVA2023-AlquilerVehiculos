@@ -26,7 +26,11 @@ public class PersonaLogic {
 	
 	public LinkedList<Persona> getAll(){
 		return pd.getAll();
-	}		
+	}
+	
+//	public LinkedList<Persona> getDatosPersonas(){
+//		return pd.getDatosPersonas();
+//	}
 
 //	public Persona getByDocumento(Persona per) {
 //		return pd.getByDocumento(per);
@@ -55,5 +59,9 @@ public class PersonaLogic {
 	
 	public Rol getByDesc(Rol rolToSearch) {
 		return rd.getByDesc(rolToSearch);
+	}
+	
+	public Persona getById(int id) {
+		return pd.getById(id);
 	}
 }

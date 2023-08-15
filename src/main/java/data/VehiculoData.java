@@ -53,12 +53,12 @@ public class VehiculoData {
 		return listveh;
 	}
 	
-	public LinkedList<Vehiculo> getAllVehicTipo() {
-		
-		LinkedList<Vehiculo> listveh = new LinkedList<Vehiculo>();
-		return listveh;
-		
-	}
+//	public LinkedList<Vehiculo> getAllVehicTipo() {
+//		
+//		LinkedList<Vehiculo> listveh = new LinkedList<Vehiculo>();
+//		return listveh;
+//		
+//	}
 	
 	public Vehiculo getById(int id) {
 		Vehiculo vehic=null;

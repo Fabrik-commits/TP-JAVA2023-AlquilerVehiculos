@@ -147,6 +147,14 @@ label {
     border: 1px solid #aaa;
     width: 49%; 
 }
+.input-contrasena{
+    width: 98%;
+    margin-bottom: -3px;
+    border: 1px solid #aaa;
+    margin-left: 2px;
+    margin-right: 2px;
+
+}
 
 
 

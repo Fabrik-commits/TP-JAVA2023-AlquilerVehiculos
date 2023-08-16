@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="es"></html>
-<html>
+<html lang="es">
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -90,7 +89,7 @@
 
 
 	 <div>
-	 <form class="formulario">
+	 <form class="formulario" action="ServletPersonas">
     
 	 <h1>Alta Persona</h1>
      <div class="contenedor">
@@ -99,13 +98,13 @@
 
         <div class="input-contenedor">
          <i class="fas fa-user icon"></i>
-         <input type="text" placeholder="Nombre">
+         <input type="text" name="txtnombre" placeholder="Nombre">
          
         </div>
 
         <div class="input-contenedor">
             <i class="fas fa-user icon"></i>
-            <input type="text" placeholder="Apellido">
+            <input type="text" name="txtapellido" placeholder="Apellido">
             
         </div>
 
@@ -114,13 +113,13 @@
         <div class="agrupainput">
         <div class="input-contenedor">
             <i class="fas fa-home icon"></i>
-            <input type="text" placeholder="Direccion">
+            <input type="text" name="txtdireccion" placeholder="Direccion">
             
         </div>
 
         <div class="input-contenedor">
             <i class="fas fa-mobile icon"></i>
-            <input type="text" placeholder="Telefono">
+            <input type="text" name="txttelefono" placeholder="Telefono">
             
         </div>
         </div>
@@ -128,13 +127,13 @@
         <div class="agrupainput">
         <div class="input-contenedor">
             <i class="fas fa-id-card icon"></i>
-            <input type="text" placeholder="Dni">
+            <input type="text" name="txtdni" placeholder="Dni">
             
         </div>
          
         <div class="input-contenedor">
          <i class="fas fa-envelope icon"></i>
-         <input type="text" placeholder="Correo Electronico">
+         <input type="text" name="txtemail" placeholder="Correo Electronico">
          
         </div>
         </div>
@@ -142,7 +141,7 @@
 		
         <div class="input-contrasena">
         <i class="fas fa-key icon"></i>
-        <input type="password" placeholder="Contrasena"> 
+        <input type="password" name="txtpassword" placeholder="Contrasena"> 
          
         </div>
 	
@@ -151,13 +150,13 @@
         
 
 		<div class="sumaroles">
-		<div class="rolunidad"><i class="fas fa-user icon"></i><label for="">Rol Empleado</label><input type="checkbox"></div>		
-		<div class="rolunidad"><i class="fas fa-user icon"></i><label for="">Rol Cliente</label><input type="checkbox"></div>
+		<div class="rolunidad"><i class="fas fa-user icon"></i><label for="">Rol Admin</label><input type="checkbox" name="checkrol1"></div>		
+		<div class="rolunidad"><i class="fas fa-user icon"></i><label for="">Rol Cliente</label><input type="checkbox" name="checkrol2"></div>
 		</div>
 
 		<div class="agrupabotones">
-			<input type="button" value="Aceptar" class="button" onclick=mostrarPrincipal()>
-			<input type="button" value="Cancelar" class="button" onclick=mostrarPrincipal()>
+			<input type="submit" name="accion" value="Agregar" class="button">
+			<input type="submit" name="accion" value="Cancelar" class="button" onclick=mostrarPrincipal()>
 		</div>
 		
      </div>

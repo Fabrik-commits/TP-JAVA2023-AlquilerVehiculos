@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Persona;
 import entities.Rol;
+import entities.Vehiculo;
 import logic.PersonaLogic;
+import logic.VehiculoLogic;
 
 //import entities.TipoVehiculo;
 //import entities.Vehiculo;
@@ -49,6 +51,45 @@ public class ServletPersonas extends HttpServlet {
 		
 		if (action.equalsIgnoreCase("principalpersonas")) {
 		acceso=principalpersonas;
+		}
+		else if (action.equalsIgnoreCase("altapersona")) {
+			acceso=add;
+		}
+		else if (action.equalsIgnoreCase("Agregar")) {
+			Persona pers = new Persona();
+			PersonaLogic plogic = new PersonaLogic();
+			
+			//int id = Integer.parseInt(request.getParameter("txtid"));
+			String nombre = request.getParameter("txtnombre");
+			String apellido = request.getParameter("txtapellido");
+			String dni = request.getParameter("txtdni");
+			String telefono = request.getParameter("txttelefono");
+			String email = request.getParameter("txtemail");
+			String password = request.getParameter("txtpassword");
+			
+			if (request.getParameter("checkrol1")!=null) {
+				Rol rol1 = new Rol();
+				rol1.setId(1);
+				pers.addRol(rol1);
+			}
+			if (request.getParameter("checkrol2")!=null) {
+				Rol rol2 = new Rol();
+				rol2.setId(2);
+				pers.addRol(rol2);
+			}
+			
+			//pers.setId(id);
+			pers.setNombre(nombre);
+			pers.setApellido(apellido);
+			pers.setDni(dni);
+			pers.setTel(telefono);
+			pers.setEmail(email);
+			pers.setPassword(password);
+						
+			//vehic.setTipoVehiculo(tvehic);
+						
+			plogic.add(pers);
+			acceso=principalpersonas;
 		}
 		else if (action.equalsIgnoreCase("editarpersona")) {
 			request.setAttribute("id", request.getParameter("id"));
@@ -89,6 +130,14 @@ public class ServletPersonas extends HttpServlet {
 			//vehic.setTipoVehiculo(tvehic);
 						
 			plogic.update(pers);
+			acceso=principalpersonas;
+		}
+		else if (action.equalsIgnoreCase("eliminarpersona")) {
+			Persona pers = new Persona();
+			PersonaLogic perLog = new PersonaLogic();
+			int id = Integer.parseInt(request.getParameter("id"));
+			pers.setId(id);
+			perLog.remove(pers);
 			acceso=principalpersonas;
 		}
 		

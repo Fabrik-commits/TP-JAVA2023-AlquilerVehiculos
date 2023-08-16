@@ -255,7 +255,7 @@ public class PersonaData {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"insert into persona(nombre, apellido, dni, direccion, email, password, tel) values(?,?,?,?,?,?,?)",
+							"insert into persona(nombre, apellido, dni, direccion, email, password, telefono) values(?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, p.getNombre());
@@ -332,13 +332,14 @@ public class PersonaData {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"delete from rol_persona where nroDni=?");
-			stmt.setString(1, per.getDni());
+							"delete from persona where id=?");
+			stmt.setInt(1, per.getId());
 			//stmt.setString(1, per.getDocumento().getTipo());
 			//stmt.setString(2, per.getDocumento().getNro());
-			stmt.executeUpdate();
-			
+						
 			dr.removeRoles(per);
+			
+			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
             e.printStackTrace();

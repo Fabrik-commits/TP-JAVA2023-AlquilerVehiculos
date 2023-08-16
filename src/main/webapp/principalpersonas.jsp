@@ -92,7 +92,7 @@
 		
 		<div id="main-container">
 		<div id="agregarnuevo">
-			<a href="altapersona.html">Agregar Nuevo</a>
+			<a href="ServletPersonas?accion=altapersona">Agregar Nuevo</a>
 		</div>
 		<table class="table">
 			<thead>
@@ -142,7 +142,7 @@
 							<a href="ServletPersonas?accion=editarpersona&id=<%=pers.getId()%>">Editar</a>
 						</div>
 						<div id="eliminar">
-							<a href="">Eliminar</a>
+							<a href="ServletPersonas?accion=eliminarpersona&id=<%=pers.getId()%>">Eliminar</a>
 						</div>
 						</div>
 					</td>

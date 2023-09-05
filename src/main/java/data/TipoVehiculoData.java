@@ -9,6 +9,7 @@ import java.util.LinkedList;
 //import entities.Persona;
 //import entities.Rol;
 import entities.TipoVehiculo;
+import entities.Vehiculo;
 
 public class TipoVehiculoData {
 	
@@ -45,6 +46,56 @@ public class TipoVehiculoData {
 		
 		
 		return tiposVehiculo;
+	}
+	
+	public LinkedList<Vehiculo> getAllVehiculosporTipo(int id){
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		LinkedList<Vehiculo> vehiculosporTipo= new LinkedList<>();
+		
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select vehiculo.id, vehiculo.marcaymodelo, vehiculo.anio, vehiculo.kilometraje, vehiculo.pasajeros, vehiculo.color, vehiculo.estado, vehiculo.precioxkm, vehiculo.matricula, vehiculo.capacidadmaxima, tipovehiculo.id, tipovehiculo.descripcion from vehiculo inner join tipovehiculo on vehiculo.idtipovehiculo=tipovehiculo.id where tipovehiculo.id=?");
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+			
+			if (rs!=null) {
+				while (rs.next()) {
+					Vehiculo veh = new Vehiculo();					
+					veh.setTipoVehiculo(new TipoVehiculo());
+					veh.setIdVehiculo(rs.getInt("id"));
+					veh.setMarcayModelo(rs.getString("marcaymodelo"));
+					veh.setAnio(rs.getInt("anio"));
+					veh.setKilometraje(rs.getDouble("kilometraje"));
+					veh.setPasajeros(rs.getInt("pasajeros"));
+					veh.setColor(rs.getString("color"));
+			    	veh.setEstado(rs.getBoolean("estado"));
+					veh.setPrecioporKm(rs.getDouble("precioxkm"));
+					veh.setMatricula(rs.getString("matricula"));										
+					veh.setCapacidadMaxima(rs.getDouble("capacidadmaxima"));					
+					
+					veh.getTipoVehiculo().setId(rs.getInt("id"));
+					veh.getTipoVehiculo().setDescripcion(rs.getString("descripcion"));
+					
+//					TipoVehiculo tveh = new TipoVehiculo();
+//					tveh.setDescripcion(rs.getString("descripcion"));
+					
+					vehiculosporTipo.add(veh);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return vehiculosporTipo;
 	}
 	
 	

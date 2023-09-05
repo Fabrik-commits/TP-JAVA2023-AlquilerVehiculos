@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import data.TipoVehiculoData;
 //import entities.Persona;
 import entities.TipoVehiculo;
+import entities.Vehiculo;
 
 public class TipoVehiculoLogic {
 	
@@ -18,6 +19,12 @@ private TipoVehiculoData tvd;
 	public LinkedList<TipoVehiculo> getAllTiposVehiculo(){
 		
 		return tvd.getAll();
+	}
+	
+	public LinkedList<Vehiculo> getAllVehiculosporTipo(int id){
+		
+		return tvd.getAllVehiculosporTipo(id);
+		
 	}
 	
 	public TipoVehiculo getById(int id) {

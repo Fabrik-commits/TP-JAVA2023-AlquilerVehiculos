@@ -68,7 +68,7 @@ public class VehiculoData {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					"select * from vehiculo where id=?"
 					);
-			stmt.setInt(1, id);  // rolToSearch.getId()
+			stmt.setInt(1, id);  
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
 				vehic=new Vehiculo();

@@ -149,8 +149,8 @@
 
 			<div class="input-contenedor">
 				
-				<div class="titulo">Precio x Km:</div>
-				<input type="text" name="txtprecioxkm" placeholder="Precio x Km">
+				<div class="titulo">Precio:</div>
+				<input type="text" name="txtprecio" placeholder="Precio x Km">
 				
 			</div>
 			 
@@ -189,7 +189,7 @@
 					for (TipoVehiculo tve : listtv) { 
 					%>
         			
-        			<option value="<%=tve.getId()%>" name="txtidtipovehiculo"><%=tve.getDescripcion()%></option>
+        			<option value="<%=tve.getId()%>"><%=tve.getDescripcion()%></option>
         			
         			<% } %>		
         			

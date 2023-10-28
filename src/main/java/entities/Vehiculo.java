@@ -8,7 +8,7 @@ public class Vehiculo {
 
 	private int id;
 	//private int idTipoVehiculo;
-	private double precioporKm;
+	private double precio;
 	private String marcayModelo;
 	private String color;
 	private boolean estado;
@@ -33,11 +33,11 @@ public class Vehiculo {
 //		this.idTipoVehiculo = idTipoVehiculo;
 //	}
 		
-	public double getPrecioporKm() {
-		return precioporKm;
+	public double getPrecio() {
+		return precio;
 	}
-	public void setPrecioporKm(double precioporKm) {
-		this.precioporKm = precioporKm;
+	public void setPrecio(double precio) {
+		this.precio = precio;
 	}
 	
 	public String getMarcayModelo() {

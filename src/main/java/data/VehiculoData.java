@@ -19,7 +19,11 @@ public class VehiculoData {
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("select vehiculo.id, vehiculo.marcaymodelo, vehiculo.anio, vehiculo.kilometraje, vehiculo.pasajeros, vehiculo.color, vehiculo.estado, vehiculo.precioxkm, vehiculo.matricula, vehiculo.capacidadmaxima, tipovehiculo.id, tipovehiculo.descripcion from vehiculo inner join tipovehiculo on vehiculo.idtipovehiculo=tipovehiculo.id");
+			rs = stmt.executeQuery("select vehiculo.id, vehiculo.marcaymodelo, "
+					+ "vehiculo.anio, vehiculo.kilometraje, vehiculo.pasajeros, "
+					+ "vehiculo.color, vehiculo.estado, vehiculo.precio, "
+					+ "vehiculo.matricula, vehiculo.capacidadmaxima, tipovehiculo.id, "
+					+ "tipovehiculo.descripcion from vehiculo inner join tipovehiculo on vehiculo.idtipovehiculo=tipovehiculo.id");
 			if (rs!=null) {
 				while (rs.next()) {
 					Vehiculo veh = new Vehiculo();					
@@ -31,7 +35,7 @@ public class VehiculoData {
 					veh.setPasajeros(rs.getInt("pasajeros"));
 					veh.setColor(rs.getString("color"));
 			    	veh.setEstado(rs.getBoolean("estado"));
-					veh.setPrecioporKm(rs.getDouble("precioxkm"));
+					veh.setPrecio(rs.getDouble("precio"));
 					veh.setMatricula(rs.getString("matricula"));										
 					veh.setCapacidadMaxima(rs.getDouble("capacidadmaxima"));					
 					
@@ -60,18 +64,25 @@ public class VehiculoData {
 //		
 //	}
 	
+
+	
 	public Vehiculo getById(int id) {
 		Vehiculo vehic=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select * from vehiculo where id=?"
+					"select vehiculo.id, vehiculo.marcaymodelo, "
+							+ "vehiculo.anio, vehiculo.kilometraje, vehiculo.pasajeros, "
+							+ "vehiculo.color, vehiculo.estado, vehiculo.precio, "
+							+ "vehiculo.matricula, vehiculo.capacidadmaxima, tipovehiculo.id, "
+							+ "tipovehiculo.descripcion from vehiculo inner join tipovehiculo on vehiculo.idtipovehiculo=tipovehiculo.id where vehiculo.id=?"
 					);
 			stmt.setInt(1, id);  
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
 				vehic=new Vehiculo();
+				vehic.setTipoVehiculo(new TipoVehiculo());
 				vehic.setIdVehiculo(rs.getInt("id"));
 				vehic.setMarcayModelo(rs.getString("marcaymodelo"));
 				vehic.setAnio(rs.getInt("anio"));
@@ -79,9 +90,12 @@ public class VehiculoData {
 				vehic.setPasajeros(rs.getInt("pasajeros"));
 				vehic.setColor(rs.getString("color"));
 				vehic.setEstado(rs.getBoolean("estado"));
-				vehic.setPrecioporKm(rs.getDouble("precioxkm"));
+				vehic.setPrecio(rs.getDouble("precio"));
 				vehic.setMatricula(rs.getString("matricula"));
 				vehic.setCapacidadMaxima(rs.getDouble("capacidadmaxima"));
+								
+				vehic.getTipoVehiculo().setId(rs.getInt("id"));
+				vehic.getTipoVehiculo().setDescripcion(rs.getString("descripcion"));
 			}	
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -105,7 +119,12 @@ public class VehiculoData {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"update vehiculo set vehiculo.marcaymodelo=?, vehiculo.anio=?, vehiculo.kilometraje=?, vehiculo.pasajeros=?, vehiculo.color=?, vehiculo.estado=?, vehiculo.precioxkm=?, vehiculo.matricula=?, vehiculo.capacidadmaxima=?, vehiculo.idtipovehiculo=? where vehiculo.id=?");
+							"update vehiculo set vehiculo.marcaymodelo=?,"
+							+ " vehiculo.anio=?, vehiculo.kilometraje=?, "
+							+ "vehiculo.pasajeros=?, vehiculo.color=?, "
+							+ "vehiculo.estado=?, vehiculo.precio=?, "
+							+ "vehiculo.matricula=?, vehiculo.capacidadmaxima=?, "
+							+ "vehiculo.idtipovehiculo=? where vehiculo.id=?");
 									
 			stmt.setString(1, vehic.getMarcayModelo());
 			stmt.setInt(2, vehic.getAnio());
@@ -114,21 +133,23 @@ public class VehiculoData {
 			stmt.setInt(4, vehic.getPasajeros());
 			stmt.setString(5, vehic.getColor());
 			stmt.setBoolean(6, vehic.isEstado());
-			stmt.setDouble(7, vehic.getPrecioporKm());
+			stmt.setDouble(7, vehic.getPrecio());
 			stmt.setString(8, vehic.getMatricula());
 			stmt.setDouble(9, vehic.getCapacidadMaxima());
 			
 			stmt.setInt(10, vehic.getTipoVehiculo().getId());
-			//stmt.setString(11, vehic.getTipoVehiculo().getDescripcion());
-			//stmt.setDouble(12, vehic.getTipoVehiculo().getCosto());
+
 			
 			stmt.setInt(11, vehic.getIdVehiculo());
-//			System.out.println(vehic.getKilometraje());
+			
+//			System.out.println(stmt.executeUpdate());
+//			System.out.println(vehic.getIdVehiculo());
+//			System.out.println(vehic.getTipoVehiculo().getId());
 //			System.out.println();
 			stmt.executeUpdate();
 			
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (SQLException e) {
+			e.printStackTrace();
 		} finally {
 			try {
 				
@@ -146,7 +167,7 @@ public void add(Vehiculo vehic) {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"insert into vehiculo(marcaymodelo, anio, kilometraje, pasajeros, color, estado, precioxkm, matricula, capacidadmaxima, idtipovehiculo) values(?,?,?,?,?,?,?,?,?,?)",
+							"insert into vehiculo(marcaymodelo, anio, kilometraje, pasajeros, color, estado, precio, matricula, capacidadmaxima, idtipovehiculo) values(?,?,?,?,?,?,?,?,?,?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, vehic.getMarcayModelo());
@@ -155,7 +176,7 @@ public void add(Vehiculo vehic) {
 			stmt.setDouble(4, vehic.getPasajeros());
 			stmt.setString(5, vehic.getColor());
 			stmt.setBoolean(6, vehic.isEstado());
-			stmt.setDouble(7, vehic.getPrecioporKm());
+			stmt.setDouble(7, vehic.getPrecio());
 			stmt.setString(8, vehic.getMatricula());
 			stmt.setDouble(9, vehic.getCapacidadMaxima());
 			stmt.setInt(10, vehic.getTipoVehiculo().getId());

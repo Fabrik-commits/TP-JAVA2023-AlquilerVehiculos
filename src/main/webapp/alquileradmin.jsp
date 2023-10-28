@@ -1,20 +1,40 @@
-<%@page import="logic.PersonaLogic"%>
-<%@page import="entities.Persona"%>
+<%
+	HttpSession miSesion = request.getSession();
+%>
+<%-- <%@page import="java.time.LocalDateTime"%> --%>
+<%@page import="entities.Vehiculo"%>
+<%@page import="logic.VehiculoLogic"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.TipoVehiculo"%>
 <%@page import="logic.TipoVehiculoLogic"%>
+<%@page import="logic.PersonaLogic"%>
+<%@page import="entities.Persona"%>
+<%@page import="entities.Alquiler"%>
+<%@page import="java.time.LocalDate"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
 	<link rel="stylesheet" href="estilos/estilosalquiler.css">
+    <%    
+    //Integer idVehiculo = (Integer)request.getAttribute("idVehic");
+    Integer idVehiculo = (Integer)miSesion.getAttribute("idVehic");
+    //Integer idPersona = (Integer)request.getAttribute("idPer");
+    Integer idPersona = (Integer)miSesion.getAttribute("idPer"); 
+    //Integer idPersona = (Integer)session.getAttribute("personaElegida"); //TODO session 
+    Double importeTotalVehic = (Double)request.getAttribute("importeTotal");
+    String fechaInicial = (String)request.getAttribute("fecInit");
+    String fechaFinal = (String)request.getAttribute("fecFin");
+	%>
 </head>
 <body>
+<!-- int number = Integer.parseInt(str); -->
+<!-- int idVehiculo = Integer.parseInt(request.getAttribute("idVehic")); -->
 
     <header class="header">
 
@@ -43,7 +63,7 @@
 						<li><a href="#">Persona</a>
 							<ul>
 								<li><a href="#">Alta</a></li>
-								<li><a href="principalpersonas.html">Personas</a></li>
+								<li><a href="#">Personas</a></li>
 								
 							</ul>
 						</li>
@@ -89,54 +109,46 @@
 
 
 	 <div>
-	 <form class="formulario">
+	 <form class="formulario" action="ServletAlquilerAdmin">
     
-	 <h1>Alquiler</h1>
+	 <h1>Alquiler Admin</h1>
      <div class="contenedor">
 
 		<div class="agrupainput">
 			 
 			<div class="input-contenedor">	
 				<div class="agrupainputtipov">
-					<label for="">Nom Ape Clte:</label>
-					<input type="text" name="gimnasios" id="gimnasios" list="personas">
-					<br>
-	
-					<datalist id="personas">
+					<div class="agrupabotonesBusc">
+						<input type="button" value="BuscarClte" class="buttonCliVe" onclick=mostrarPrincipalClientes()>
+					</div>
 					<%
-					PersonaLogic pl = new PersonaLogic();
-					LinkedList<Persona> listpl = pl.getAll();
-					for (Persona per : listpl) {
-					%>
-						<option value="<%=per.getNombre()%>  <%=per.getApellido()%>">Dni:  <%=per.getDni()%></option>
-
-					<%
+					PersonaLogic plog = new PersonaLogic();
+					Persona per = new Persona();
+					if(idPersona!=null){
+						per = plog.getById(idPersona);
+						//request.getSession().setAttribute("clienteBuscado", per);
+						//request.getSession().getAttribute("clienteBuscado");
 					}
-					%>	
-						
-					</datalist>
-					
+					%>
+					<input type="text" placeholder="Cliente" name="cliente" value="<%=idPersona==null?"":per.getApellido() %> <%=idPersona==null?"":per.getNombre()%> <%=idPersona==null?"":per.getDni()%>">
+					<div><input type="hidden" name="idPers" value="<%=per.getId()%>"></div>
+					<%-- <input type="text" placeholder="Cliente" value="<%=idPersona==null?"":((Persona) request.getSession().getAttribute("clienteBuscado")).getApellido()%>"> --%>
 				</div>
 			</div>
 
 			<div class="input-contenedor">	
 				<div class="agrupainputtipov">
 					<label for="">Tipo Vehic:</label>
-					<input type="text" name="gimnasios" id="gimnasios" list="tipoVehic">
-					<br>
-	
-					<datalist id="tipoVehic">
+					
+					<select name="txtidtipovehiculo" id="tipovehiculo" style="margin: 13px 0px 0px -20px;">
 					<% 
 					TipoVehiculoLogic tvl = new TipoVehiculoLogic();
 					LinkedList<TipoVehiculo> listtv = tvl.getAllTiposVehiculo();
-					for (TipoVehiculo tve : listtv) {
-						
+					for (TipoVehiculo tve : listtv) {				
 					%>
-        			        			
-        			<option value="<%=tve.getDescripcion()%>">Id: <%=tve.getId()%></option>
-        			
-        			<% } %>	
-					</datalist>
+					<option value="<%=tve.getId()%>"><%=tve.getDescripcion()%></option>
+					<% } %>
+					</select>
 					
 				</div>
 			</div>
@@ -150,41 +162,29 @@
 			 
 			<div class="input-contenedor">	
 				<div class="agrupainputtipov">
-					<label for="">Vehic:</label>
-					<%-- con el tipo vehic obtenido obtener todos los vehiculos --%>
-					<input type="text" name="gimnasios" id="gimnasios" list="vehic">
-					<br>	
-					<datalist id="vehic">
-						<option value="Camion c/Acomplado">
-						<option value="Chata">
-						<option value="Camion Simple">
-					</datalist>
-
-					
-<%-- 				<label for="">Vehic:</label>
-					con el tipo vehic obtenido obtener todos los vehiculos
-					<input type="text" name="gimnasios" id="gimnasios" list="vehic">
-					<br>	
-					<datalist id="vehic">
+					<div class="agrupabotonesBusc">
+						<input type="submit" name="accion" value="BuscarVehi" class="buttonCliVe">
+					</div>
 					<%
+					//int id = Integer.parseInt(idVehiculo);
 						VehiculoLogic vl = new VehiculoLogic();
-						LinkedList<Vehiculo> listvehic = vl.getAll();
-						for (Vehiculo vehic : listvehic) {
-							
+						Vehiculo vehic = new Vehiculo();
+						if(idVehiculo!=null)
+							{
+							vehic = vl.getById(idVehiculo);
+  
+							}
+						
+						//vehic = vl.getById(Integer.parseInt(idVehiculo));
 					%>
-						<option value="<%=vehic.getMarcayModelo()%>">Id: <%=vehic.getIdVehiculo()%></option>
-
-					<% } %>	
-					</datalist> --%>
-					
-					
+					<input type="text" placeholder="Vehiculo" name="vehiculo" value="<%=idVehiculo==null?"":vehic.getMarcayModelo()%> <%=idVehiculo==null?"":vehic.getColor()%>">
+					<div><input type="hidden" name="idVehiculo" value="<%=vehic.getIdVehiculo()%>"></div>
 				</div>
 			</div>
 
 			<div class="input-contenedor">	
 				<div class="agrupainputtipov">
-					<label for="">Estado Vehic:</label>
-					<input type="text" placeholder="Estado Vehic">
+					<div class="titulo">Senia: </div><div style="margin: -1px -54px 0px 54px;"><input type="text" name="senia" placeholder="Senia"></div>
 					
 				</div>
 			</div>
@@ -195,74 +195,87 @@
 
         <div class="agrupainput">
 
-        <div class="input-contenedor">
-         
-		 <div class="titulo">Fecha inic:</div> <div class="date"><input type="date"></div>
-         
-        </div>
-
-        <div class="input-contenedor">
-            
-            <div class="titulo">Fecha fin: </div> <div class="date"><input type="date"></div>
-            
-        </div>
-
-		<div class="input-contenedor">
-            
-            <div class="titulo">Fecha cancel: </div> <div class="date"><input type="date"></div>
-            
-        </div>
-
-        </div>
-
-       
-
-		<div class="agrupainput">
+			<div class="input-contenedor">
+			 
+				<div class="titulo">Fecha inic:</div> <div class="date"><input type="date" min="<%=LocalDate.now()%>" name="fecInic" value=<%=fechaInicial==null?"":fechaInicial%>></div>
+				
+				<%-- value=<%=importeTotalVehic==null?"":importeTotalVehic%> --%>
+				<%-- value=<%=fechaInicial==null?"":fechaInicial%> --%>
+				<%-- value="<%="fechaInicial==null?"":fechaInicial%>" --%>
+				<%--  --%>
+				<%-- value="<%=idVehiculo==null?"":vehic.getMarcayModelo()%> <%=idVehiculo==null?"":vehic.getColor()%>" --%>
+			</div>
 
 			<div class="input-contenedor">
-            
-				<div class="titulo">Fecha Entrega: </div> <div class="date2"><input type="date"></div>
+				
+				<div class="titulo">Fecha fin: </div> <div class="date"><input type="date" min="<%=LocalDate.now().plusDays(1)%>" name="fecFin" value=<%=fechaFinal==null?"":fechaFinal%>></div>
 				
 			</div>
 
 			<div class="input-contenedor">
 				
-				<div class="titulo">Km_Inic: </div><div style="margin: 0px -46px 0px 0px;"><input type="text" placeholder="Km_Inic"></div>
+				<input type="submit" name="accion" value="CalculaImporte" class="buttonCalcImp"><div style="margin: 0px -46px 0px 1px;"><input type="text" name="importe" placeholder="Importe" value=<%=importeTotalVehic==null?"":importeTotalVehic%>></div>
+																									
+			</div>
+
+        </div> 
+		
+		
+
+        <div class="agrupainput">
+
+			<div class="input-contenedor">
+				
+				<div class="titulo">Km_Inic: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" name="kminic" placeholder="Km_Inic"></div>
+				
+			</div>	
+
+			<div class="input-contenedor">
+			
+				<div class="titulo">Km_Fin: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" name="kmfin" placeholder="Km_Fin"></div>
 				
 			</div>
 	
+	
 			<div class="input-contenedor">
-			
-				<div class="titulo">Km_Fin: </div><div style="margin: 0px -46px 0px 0px;"><input type="text" placeholder="Km_Fin"></div>
+				
+				<div class="titulo">Fecha entrega: </div> <div class="date"><input type="date" name="fecentrega"></div>
 				
 			</div>
+	
 		</div>
+
+
 
 		<div class="agrupainput">
 
 			<div class="input-contenedor">
-				
-				<div class="titulo">Senia: </div><div style="margin: 0px -46px 0px 0px;"><input type="text" placeholder="Senia"></div>
+            
+				<div class="titulo">Fecha cancel: </div> <div class="date"><input type="date" name="feccancel"></div>
 				
 			</div>
-			 
+
+
 			<div class="input-contenedor">
 			 
-				<div class="titulo">Reclamos_Obs: </div><div style="margin: 0px -46px 0px 0px;"><input type="text" placeholder="Reclamos_Obs"></div>
+				<div class="titulo">Reclamos_Obs: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" name="recyobs" placeholder="Reclamos_Obs"></div>
 			 
 			</div>
 			
 			<div class="input-contenedor">	
 				<div class="agrupainputtipov">
-					<label for="">Estado Alq:</label>
-					<div style="margin: 24px -51px 0px -147px;"><input type="text" name="gimnasios" id="gimnasios" list="gyms"></div>
-					<br>
-	
-					<datalist id="gyms">
-						<option value="Camion c/Acomplado">
-						<option value="Chata">
-						<option value="Camion Simple">
-					</datalist>
+					<div class="input-contenedortipov1">
+					<div class="labeltipov"><div class="label1"><label for="tipovehiculo">Estado Alq:</label></div></div>
+					<div class="select">
+					<select name="txtestado" id="estado">
+						<option value="">-----------------------------</option>
+						<option value=<%=Alquiler.ESTADO_PENDIENTE%>>Pendiente</option> 
+						<option value=<%=Alquiler.ESTADO_VIGENTE%>>Vigente</option>
+						<option value=<%=Alquiler.ESTADO_FINALIZADO%>>Finalizado</option>
+						<option value=<%=Alquiler.ESTADO_CANCELADO%>>Cancelado</option>
+					</select>
+					</div>
+					</div>
 					
 				</div>
 			</div>
@@ -271,21 +284,16 @@
 			
 		</div>
 
-        
-		
-
-	
 
 		<div class="agrupabotones">
-			<input type="button" value="Aceptar" class="button" onclick=mostrarPrincipal()>
-			<input type="button" value="Cancelar" class="button" onclick=mostrarPrincipal()>
+			<input type="submit" name="accion" value="Aceptar" class="button">
+			<input type="submit" name="accion" value="Cancelar" class="button">
 		</div>
+		
 		
      </div>
     </form>
 	</div>
 </body>
 <script src="scripts/script.js"></script>
-
-
 </html>

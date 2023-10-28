@@ -30,18 +30,25 @@
 
 			<ul>
 				<li><a href="index.html">Inicio</a></li>
-				<li><a href="#">Reserva</a>
+				<li><a href="#">Alquiler</a>
 					<ul>
 						<li><a href="#">A B M C</a>
 							<ul>
 								<li><a href="#">Alta</a></li>
-								<li><a href="#">Reservas</a></li>
+								<li><a href="#">Alquileres de Cliente</a></li>
 
 							</ul></li>
 
 					</ul></li>
 				<li><a href="#">A B M Cs</a>
 					<ul>
+						<li><a href="#">Alquiler</a>
+							<ul>
+								<li><a href="alquileradmin.jsp">Alta</a></li>
+								<li><a href="principalbuscaralquileresxclte.jsp">Alquileres y Clientes</a></li>
+								
+							</ul>
+						</li>
 						<li><a href="#">Persona</a>
 							<ul>
 								<li><a href="altapersona.jsp">Alta</a></li>

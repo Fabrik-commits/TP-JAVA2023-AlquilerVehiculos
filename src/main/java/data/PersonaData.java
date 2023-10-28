@@ -55,6 +55,51 @@ public class PersonaData {
 		return pers;
 	}
 	
+	public LinkedList<Persona> getAllPersxRolUsr() {  
+		RolData dr = new RolData();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		LinkedList<Persona> listPersxRolUsr = new LinkedList<Persona>();
+		int idRol = 2;
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select persona.id, persona.nombre, "
+					+ "persona.apellido, persona.dni, persona.direccion, persona.telefono, persona.email "
+					+ "from persona inner join rol_persona on persona.id=rol_persona.id_persona where rol_persona.id_rol=?");
+			stmt.setInt(1, idRol);
+			rs = stmt.executeQuery();
+			
+			if (rs!=null) {
+				while (rs.next()) {
+					Persona p=new Persona();
+					p.setId(rs.getInt("id"));
+					p.setNombre(rs.getString("nombre"));
+					p.setApellido(rs.getString("apellido"));
+					p.setDni(rs.getString("dni"));					
+					p.setDireccion(rs.getString("direccion"));
+					p.setEmail(rs.getString("email"));
+					p.setTel(rs.getString("telefono"));
+					
+					dr.setRoles(p);
+					
+					listPersxRolUsr.add(p);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return listPersxRolUsr;
+		
+	}
+	
 	public Persona getById(int id) {
 		RolData dr = new RolData();
 		Persona pers=null;

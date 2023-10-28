@@ -153,10 +153,10 @@ a {
 table {
     background-color: #f8f8f8;
     text-align: center;
-    width: 100%;
+    width: 50%;
     border: 1px solid #ccc;
     border-collapse: collapse;
-    margin: 0;
+    margin: auto;
     padding: 0;
     table-layout: fixed;
 }
@@ -213,7 +213,7 @@ table tbody tr:hover {
     margin: 2px 2px;
     padding: 5px 0px;
     border-radius: 5px;
-    width: 60px;
+    width: 80px;
     background-color: rgba(1, 1, 1);
 }
 #aceptar a {
@@ -222,7 +222,7 @@ table tbody tr:hover {
 #aceptar:hover {
     background-color: #685cfe;
 }
-
 #contenedorlinks {
     display: inline-flex;
 }
+

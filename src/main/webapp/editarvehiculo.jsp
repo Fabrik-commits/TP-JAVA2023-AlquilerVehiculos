@@ -13,6 +13,9 @@
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
 	<link rel="stylesheet" href="estilos/estilosaltavehic.css">
+<%-- 	<%
+	Integer idVehic = (Integer)request.getAttribute("idvehiculo");
+	%> --%>
 </head>
 <body>
 
@@ -158,7 +161,7 @@
 			<div class="input-contenedor">
 				
 				<div class="titulo">Precio x Km:</div>
-				<input type="text" name="txtprecioxkm" value="<%= vehic.getPrecioporKm()%>" placeholder="Precio x Km">
+				<input type="text" name="txtprecio" value="<%= vehic.getPrecio()%>" placeholder="Precio x Km">
 				
 			</div>
 			 
@@ -182,7 +185,7 @@
 			
 		</div>
 			
-			<div><input type="hidden" name="txtidtipovehiculo" value="<%= vehic.getIdVehiculo()%>"></div>
+			<div><input type="hidden" name="txtidvehiculo" value="<%= vehic.getIdVehiculo()%>"></div>
 			
 		</div>
         
@@ -192,22 +195,17 @@
 				<div class="labeltipov"><label for="tipovehiculo">Tipo Vehiculo :</label></div>
 				</div>
 				<div class="input-contenedortipov2">
-    			<select name="" id="tipovehiculo">
-    				<%
-    				//int idtpo = vehic.getTipoVehiculo().getId();    				
-    				//TipoVehiculoLogic tvllog = new TipoVehiculoLogic();
-    				//TipoVehiculo tv = tvllog.getById(idtpo);
-    				int idvehic = vehic.getIdVehiculo();
-    				TipoVehiculoLogic tvllog = new TipoVehiculoLogic();
-    				TipoVehiculo tv = tvllog.getTipodelVehic(idvehic);
-    				%>
-        			<option value="<%=tv.getId()%>"><%=tv.getDescripcion()%></option>
-        			
+				<%
+ 					TipoVehiculo tVehic = vehic.getTipoVehiculo(); 
+				%>
+    			<select name="txtidtipovehiculo" id="tipovehiculo">
+    			
+    				<option value="<%=tVehic.getId()%>"><%=tVehic.getDescripcion()%></option>
+
 					<% 
 					TipoVehiculoLogic tvl = new TipoVehiculoLogic();
 					LinkedList<TipoVehiculo> listtv = tvl.getAllTiposVehiculo();
-					for (TipoVehiculo tve : listtv) {
-						
+					for (TipoVehiculo tve : listtv) {						
 					%>
         			        			
         			<option value="<%=tve.getId()%>"><%=tve.getDescripcion()%></option>
@@ -218,8 +216,6 @@
 				</div>
 			</div>
 	
-		
-
 		<div class="agrupabotones">
 			<input type="submit" name="accion" value="Actualizar" class="button">
 			<input type="submit" name="accion" value="Cancelar" class="button">

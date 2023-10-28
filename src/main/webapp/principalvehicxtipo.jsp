@@ -1,6 +1,7 @@
 <%@page import="entities.Vehiculo"%>
 <%@page import="java.util.LinkedList"%>
-<%@page import="logic.VehiculoLogic"%>
+<%@page import="logic.TipoVehiculoLogic"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -8,9 +9,9 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
-	<link rel="stylesheet" href="estilos/estilosvehic.css">
+	<link rel="stylesheet" href="estilos/estilosvehicxtipo.css">
 </head>
 <body>
 
@@ -87,43 +88,42 @@
 
 
 	<div class="contenedor-padre">
-		<h1>Vehiculos</h1>
+		<h1>Vehiculos x Tipo</h1>
 		
 		<div id="main-container">
-		<div id="agregarnuevo">
-			<a href="ServletVehiculos?accion=altavehiculo">Agregar Nuevo</a>
-		</div>
+
 		<table class="table">
 			<thead>
 				<tr>
 
 					<th>MARCA Y MODELO</th>
 					<th>ANIO</th>
-					<th>KILOMETRAJE</th>
 					<th>PASAJEROS</th>
 					<th>COLOR</th>
 					<th>ESTADO</th>
 					<th>PRECIOxKM</th>
 					<th>MATRICULA</th>
 					<th>CAP MAX</th>
-					<th>TIPO</th>
-					<th>ACCIONES</th>	
+					<th>ACCION</th>	
 				</tr>
 			</thead>
 			
 			<tbody>
 			<%
-			VehiculoLogic vehicl = new VehiculoLogic();
-			LinkedList<Vehiculo> listvehic = vehicl.getAll();
-				
-			for (Vehiculo vehic : listvehic) {	
+			TipoVehiculoLogic tvehiclog = new TipoVehiculoLogic();
+			/* con esto recupero lo que mando del servlet: idTipoVehiculo */
+			int idTipoVehiculo=((Number)request.getAttribute("idTipoVehiculo")).intValue();  
+			
+		  	LinkedList<Vehiculo> listVehicxTipo = tvehiclog.getAllVehiculosporTipo(idTipoVehiculo);				
+		  	
+			for (Vehiculo vehic : listVehicxTipo) {	
 			%>
+			
 				<tr>
 					
 					<td data-label="MARCA Y MODELO"><%=vehic.getMarcayModelo()%></td>
 					<td data-label="ANIO"><%=vehic.getAnio()%></td>
 
-					<td data-label="KILOMETRAJE"><%=vehic.getKilometraje()%></td>
 					<td data-label="PASAJEROS"><%=vehic.getPasajeros()%></td>
 
 					<td data-label="COLOR"><%=vehic.getColor()%></td>
@@ -131,28 +131,25 @@
 
 					<td data-label="PRECIOxKM"><%=vehic.getPrecio()%></td>
 					<td data-label="MATRICULA"><%=vehic.getMatricula()%></td>
-					
+
 					<td data-label="CAP MAX"><%=vehic.getCapacidadMaxima()%></td>
 
-					<td data-label="TIPO"><%=vehic.getTipoVehiculo().getDescripcion()%></td>
 					
-					<td data-label="ACCIONES">
+					<td data-label="ACCION">
 						<div id="contenedorlinks">
 						<div id="editar">
-							
-							<a href="ServletVehiculos?accion=editarvehiculo&id=<%=vehic.getIdVehiculo()%>">Editar</a>
-							
+						<!-- aca mando al servlet el vehic seleccionado que luego va a la vista -->
+							<a href="ServletAlquilerAdmin?accion=vehicelegido&id=<%=vehic.getIdVehiculo()%>">Aceptar</a>
+							<%-- <a href="ServletAlquilerAdmin?accion=vehicelegido&txtidtipovehiculo=<%=request.getParameter("txtidtipovehiculo") %>&id=<%=vehic.getIdVehiculo()%>">Aceptar</a> --%>							
 						</div>
-						<div id="eliminar">
-							<a href="ServletVehiculos?accion=eliminarvehiculo&id=<%=vehic.getIdVehiculo()%>">Eliminar</a>
-						</div>
+
 						</div>
 					</td>
 				</tr>
+
 				
-			<% } %>
-			
-	
+				<% } %>
+				
 			</tbody>
 		</table>
 		</div>

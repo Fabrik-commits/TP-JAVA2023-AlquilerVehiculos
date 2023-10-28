@@ -134,7 +134,10 @@ body {
 
 
 
-
+.contenedorpadre {
+    max-width: 850px;
+    margin: 10px 10px;
+}
 h1{
     text-align: center;
     color: #ffffff;
@@ -147,9 +150,69 @@ a {
 }
 #main-container {
     margin: 10px auto;
-    max-width: 1200px;
+    max-width: 900px;
     width: 100%;
 }
+/* @media(max-width: 770px) {
+    table {
+        width: 100%;
+    }
+    table tr {
+       display: flex;
+       flex-direction: column;
+       border: 1px solid black;
+       padding: 1em;       
+    }
+
+    table td[data-titulo] {
+        display: flex;        
+    }
+    table td[data-titulo]::before{
+        content: attr( data-titulo );
+        width: 90px;
+    }
+    table thead {
+        display: none;
+    }
+} */
+
+@media screen and (max-width: 769px) {
+    .table {
+        border: 0px;
+    }
+    .table caption {
+        font-size: 22px;
+    }
+    .table thead {
+        display: none;
+    }
+    .table tr {
+        margin-bottom: 8px;
+        border-bottom: 4px solid #ddd;
+        display: block;
+    }
+    .table th, .table td {
+        font-size: 12px;
+    }
+    .table td {
+        display: block;
+        border-bottom: 1px solid #ddd;
+        text-align: right;
+        margin: 1px 50px 1px 1px;
+    }
+    .table td :last-child {
+        border-bottom: 0px;
+    }
+    .table td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-transform: uppercase;
+        float: left;
+        margin: 1px 1px 1px 40px;
+    }
+
+}
+
 table {
     background-color: #f8f8f8;
     text-align: center;
@@ -158,7 +221,7 @@ table {
     border-collapse: collapse;
     margin: 0;
     padding: 0;
-    table-layout: fixed;
+    
 }
 #agregarnuevo {
     text-align: center;
@@ -196,7 +259,7 @@ table tbody tr:hover {
 #editar {
     text-align: center;
     margin: 2px 2px;
-    padding: 5px 0px;
+    padding: 5px 4px;
     border-radius: 5px;
     width: 50px;
     background-color: rgb(1, 1, 1);
@@ -208,18 +271,18 @@ table tbody tr:hover {
     background-color: #685cfe;
 }
 
-#aceptar {
+#eliminar {
     text-align: center;
     margin: 2px 2px;
-    padding: 5px 0px;
+    padding: 5px 4px;
     border-radius: 5px;
     width: 60px;
     background-color: rgba(1, 1, 1);
 }
-#aceptar a {
+#eliminar a {
     color: white;
 }
-#aceptar:hover {
+#eliminar:hover {
     background-color: #685cfe;
 }
 

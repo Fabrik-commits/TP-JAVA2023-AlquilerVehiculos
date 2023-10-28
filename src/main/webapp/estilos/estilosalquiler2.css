@@ -33,10 +33,10 @@ h1{
 input[type="text"],
 input[type="password"]{
     font-size: 20px;
-    width: 81%;
+    width: 82%;
     padding: 10px;
-    margin: 3px -6px 0px -1px;
-    border: 0px solid #aaa;;
+    margin: 0px -7px 0px 0px;
+    border: 1px solid #aaa;;
 }
 .select{
     font-size: 15px; 
@@ -60,6 +60,14 @@ input[type="password"]{
     width: 100%;
     margin-bottom: 15px;
     border: 1px solid #aaa;
+    margin-left: 2px;
+    margin-right: 2px;
+
+}
+.input-contenedor-buscar{
+    width: 100%;
+    margin-bottom: 15px;
+    border: 0px solid #aaa;
     margin-left: 2px;
     margin-right: 2px;
 
@@ -93,11 +101,11 @@ input[type="password"]{
 }
 .button{
     border: none;
-    width: 100%;
+    width: 99%;
     color: white;
     font-size: 20px;
     background:  #1a2537;
-    padding: 15px 20px;
+    padding: 14px 20px;
     border-radius: 5px;
     cursor: pointer;
     margin: -3px 2px;
@@ -105,42 +113,32 @@ input[type="password"]{
 .button:hover{
     background: cadetblue;
 }
-.buttonCliVe{
-    border: none;
-    width: 100%;
-    color: white;
-    font-size: 20px;
-    background:  #1a2537;
-    padding: 15px 7px;
+
+#buscarVehicxTipo {
+    text-align: center;
+    margin: 2px 0px;
+    padding: 19px 12px;
     border-radius: 5px;
-    cursor: pointer;
-    margin: -4px 2px -4px -2px;
+    width: 316px;
+    background:  #1a2537;
 }
-.buttonCliVe:hover{
+#buscarVehicxTipo a {
+    color: white;
+}
+#buscarVehicxTipo:hover {
     background: cadetblue;
 }
-.buttonCalcImp{
-    border: none;
-    width: 100%;
-    color: white;
-    font-size: 20px;
-    background:  #1a2537;
-    padding: 7px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: -3px 0px;
+a {
+    text-decoration: none;
+    font-size: 20px
 }
-.buttonCalcImp:hover{
-    background: cadetblue;
-}
+
 .agrupabotones {
     display: inline-flex;
     width: 100%;
+
 }
-.agrupabotonesBusc {
-    display: inline-flex;
-    width: 37%;
-}
+
 p{
     text-align: center;
 }

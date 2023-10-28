@@ -63,7 +63,7 @@ public class ServletVehiculos extends HttpServlet {
 			int pasajeros = Integer.parseInt(request.getParameter("txtpasajeros"));
 			String color = request.getParameter("txtcolor");
 			boolean estado = Boolean.valueOf(request.getParameter("txtestado"));
-			String precioxkm = request.getParameter("txtprecioxkm");
+			String precio = request.getParameter("txtprecio");
 			String matricula = request.getParameter("txtmatricula");
 			String capacidadmaxima = request.getParameter("txtcapacidadmaxima");
 			
@@ -79,7 +79,7 @@ public class ServletVehiculos extends HttpServlet {
 			vehic.setPasajeros(pasajeros);
 			vehic.setColor(color);
 			vehic.setEstado(estado);
-			vehic.setPrecioporKm(Double.parseDouble(precioxkm));
+			vehic.setPrecio(Double.parseDouble(precio));
 			vehic.setMatricula(matricula);
 			vehic.setCapacidadMaxima(Double.parseDouble(capacidadmaxima));
 			vehic.setTipoVehiculo(tvehic);
@@ -96,20 +96,22 @@ public class ServletVehiculos extends HttpServlet {
 			Vehiculo vehic = new Vehiculo();
 			TipoVehiculo tvehic = new TipoVehiculo();
 			VehiculoLogic vlogic = new VehiculoLogic();
-			int id = Integer.parseInt(request.getParameter("txtidtipovehiculo"));
+			int id = Integer.parseInt(request.getParameter("txtidvehiculo"));
 			String marcaymodelo = request.getParameter("txtmarcaymodelo");
 			int anio = Integer.parseInt(request.getParameter("txtanio"));
 			String kilometraje = request.getParameter("txtkilometraje");
 			int pasajeros = Integer.parseInt(request.getParameter("txtpasajeros"));
 			String color = request.getParameter("txtcolor");
 			boolean estado = Boolean.valueOf(request.getParameter("txtestado"));
-			String precioxkm = request.getParameter("txtprecioxkm");
+			String precio = request.getParameter("txtprecio");
 			String matricula = request.getParameter("txtmatricula");
 			String capacidadmaxima = request.getParameter("txtcapacidadmaxima");
 			
 			int idtipovehiculo = Integer.parseInt(request.getParameter("txtidtipovehiculo"));
-			tvehic.setId(idtipovehiculo);
+//			System.out.println(idtipovehiculo);
 			
+			tvehic.setId(idtipovehiculo);
+//			System.out.println();
 			vehic.setIdVehiculo(id);
 			vehic.setMarcayModelo(marcaymodelo);			
 			vehic.setAnio(anio);
@@ -117,12 +119,13 @@ public class ServletVehiculos extends HttpServlet {
 			vehic.setPasajeros(pasajeros);
 			vehic.setColor(color);
 			vehic.setEstado(estado);
-			vehic.setPrecioporKm(Double.parseDouble(precioxkm));
+			vehic.setPrecio(Double.parseDouble(precio));
 			vehic.setMatricula(matricula);
 			vehic.setCapacidadMaxima(Double.parseDouble(capacidadmaxima));
-			vehic.setTipoVehiculo(tvehic);
-			
-			
+			vehic.setTipoVehiculo(tvehic);  //aca estaba el problema pero no mas
+//			System.out.println(vehic.getTipoVehiculo().getId());			
+//			System.out.println();
+//			vehic.getTipoVehiculo().getId();
 			vlogic.update(vehic);
 			acceso=principalvehic;
 		}

@@ -54,7 +54,7 @@ public class TipoVehiculoData {
 		LinkedList<Vehiculo> vehiculosporTipo= new LinkedList<>();
 		
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select vehiculo.id, vehiculo.marcaymodelo, vehiculo.anio, vehiculo.kilometraje, vehiculo.pasajeros, vehiculo.color, vehiculo.estado, vehiculo.precioxkm, vehiculo.matricula, vehiculo.capacidadmaxima, tipovehiculo.id, tipovehiculo.descripcion from vehiculo inner join tipovehiculo on vehiculo.idtipovehiculo=tipovehiculo.id where tipovehiculo.id=?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select vehiculo.id, vehiculo.marcaymodelo, vehiculo.anio, vehiculo.kilometraje, vehiculo.pasajeros, vehiculo.color, vehiculo.estado, vehiculo.precio, vehiculo.matricula, vehiculo.capacidadmaxima, tipovehiculo.id, tipovehiculo.descripcion from vehiculo inner join tipovehiculo on vehiculo.idtipovehiculo=tipovehiculo.id where tipovehiculo.id=?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			
@@ -69,7 +69,7 @@ public class TipoVehiculoData {
 					veh.setPasajeros(rs.getInt("pasajeros"));
 					veh.setColor(rs.getString("color"));
 			    	veh.setEstado(rs.getBoolean("estado"));
-					veh.setPrecioporKm(rs.getDouble("precioxkm"));
+					veh.setPrecio(rs.getDouble("precio"));
 					veh.setMatricula(rs.getString("matricula"));										
 					veh.setCapacidadMaxima(rs.getDouble("capacidadmaxima"));					
 					
@@ -99,7 +99,7 @@ public class TipoVehiculoData {
 	}
 	
 	
-	public TipoVehiculo getById(int id) {    // Rol rolToSearch
+	public TipoVehiculo getById(int id) {    
 		TipoVehiculo tipov=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -107,7 +107,7 @@ public class TipoVehiculoData {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					"select * from tipovehiculo where id=?"
 					);
-			stmt.setInt(1, id);  // rolToSearch.getId()
+			stmt.setInt(1, id);  
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
 				tipov=new TipoVehiculo();

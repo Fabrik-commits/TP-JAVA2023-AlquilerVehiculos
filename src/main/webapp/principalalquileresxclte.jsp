@@ -1,16 +1,13 @@
-<%@page import="entities.Vehiculo"%>
-<%@page import="java.util.LinkedList"%>
-<%@page import="logic.VehiculoLogic"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
-	<link rel="stylesheet" href="estilos/estilosvehic.css">
+	<link rel="stylesheet" href="estilos/estilosbuscaralquileresxcltes.css">
 </head>
 <body>
 
@@ -86,77 +83,79 @@
 
 
 
-	<div class="contenedor-padre">
-		<h1>Vehiculos</h1>
+	<div>
+		<h1>Alquileres x Cliente</h1>
 		
 		<div id="main-container">
-		<div id="agregarnuevo">
-			<a href="ServletVehiculos?accion=altavehiculo">Agregar Nuevo</a>
+		<div style="text-align: center">
+			<input type="text" class="form-control" id="input-search" placeholder="Filtrar por tipo... " style="margin: 5px 0px 5px 8px; padding: 4px 0px 5px 5px; font-size: 14px;">
 		</div>
 		<table class="table">
 			<thead>
 				<tr>
-
-					<th>MARCA Y MODELO</th>
-					<th>ANIO</th>
-					<th>KILOMETRAJE</th>
-					<th>PASAJEROS</th>
-					<th>COLOR</th>
-					<th>ESTADO</th>
-					<th>PRECIOxKM</th>
-					<th>MATRICULA</th>
-					<th>CAP MAX</th>
-					<th>TIPO</th>
+					<th>VEHICULO</th>					
+					<th>TIPO VEHICULO</th>
 					<th>ACCIONES</th>	
 				</tr>
 			</thead>
 			
-			<tbody>
-			<%
-			VehiculoLogic vehicl = new VehiculoLogic();
-			LinkedList<Vehiculo> listvehic = vehicl.getAll();
-				
-			for (Vehiculo vehic : listvehic) {	
-			%>
+			<tbody id="tbody-clientes">
 				<tr>
-					
-					<td data-label="MARCA Y MODELO"><%=vehic.getMarcayModelo()%></td>
-					<td data-label="ANIO"><%=vehic.getAnio()%></td>
-
-					<td data-label="KILOMETRAJE"><%=vehic.getKilometraje()%></td>
-					<td data-label="PASAJEROS"><%=vehic.getPasajeros()%></td>
-
-					<td data-label="COLOR"><%=vehic.getColor()%></td>
-					<td data-label="ESTADO"><%=vehic.isEstado()%></td>
-
-					<td data-label="PRECIOxKM"><%=vehic.getPrecio()%></td>
-					<td data-label="MATRICULA"><%=vehic.getMatricula()%></td>
-					
-					<td data-label="CAP MAX"><%=vehic.getCapacidadMaxima()%></td>
-
-					<td data-label="TIPO"><%=vehic.getTipoVehiculo().getDescripcion()%></td>
-					
+					<td data-label="VEHICULO">3Fa</td>
+					<td data-label="TIPO VEHICULO">He</td>
 					<td data-label="ACCIONES">
 						<div id="contenedorlinks">
-						<div id="editar">
-							
-							<a href="ServletVehiculos?accion=editarvehiculo&id=<%=vehic.getIdVehiculo()%>">Editar</a>
-							
-						</div>
-						<div id="eliminar">
-							<a href="ServletVehiculos?accion=eliminarvehiculo&id=<%=vehic.getIdVehiculo()%>">Eliminar</a>
+						<div id="aceptar">
+							<a href="editaralquileradmin.html">Editar</a>
 						</div>
 						</div>
 					</td>
 				</tr>
+				<tr>
+					<td data-label="VEHICULO">3</td>
+					<td data-label="TIPO VEHICULO">Za</td>
+					<td data-label="ACCIONES">					
+						<div id="contenedorlinks">
+							<div id="aceptar">
+								<a href="">Editar</a>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td data-label="VEHICULO">3</td>
+					<td data-label="APELLIDO">Ger</td>
+					<td data-label="ACCIONES">
+						<div id="contenedorlinks">
+							<div id="aceptar">
+								<a href="">Editar</a>
+							</div>
+						</div>
+					</td>
+				</tr>
 				
-			<% } %>
-			
-	
 			</tbody>
 		</table>
 		</div>
 	</div>
-
+	<script>
+		document.getElementById("input-search").addEventListener("input", onInputChange);
+		function onInputChange(){
+			let inputText = document.getElementById("input-search").value.toString().toLowerCase();
+			/*console.log(inputText);*/
+			let tableBody = document.getElementById("tbody-clientes");
+			let tableRows = tableBody.getElementsByTagName("tr");
+			/*console.log(tableRows);*/	
+			for (let i = 0; i < tableRows.length; i++) {
+				/*console.log(tableRows[i].cells[2].textContent);*/	
+				let textoConsulta = tableRows[i].cells[2].textContent.toString().toLowerCase();
+				if (textoConsulta.indexOf(inputText) === -1) {
+					tableRows[i].style.visibility = "collapse";
+				} else {
+					tableRows[i].style.visibility = "";
+				}	
+			}
+		}
+	</script>
 </body>
 </html>

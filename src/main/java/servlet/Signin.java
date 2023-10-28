@@ -42,8 +42,7 @@ public class Signin extends HttpServlet {
 		Persona per = new Persona();
 		
 		PersonaLogic pl = new PersonaLogic();
-		
-		
+				
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		

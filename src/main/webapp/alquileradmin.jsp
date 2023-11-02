@@ -269,7 +269,7 @@
 					<div class="select">
 					<select name="txtestado" id="estado">
 						<option value="">-----------------------------</option>
-						<option value=<%=Alquiler.ESTADO_PENDIENTE%>>Pendiente</option> 
+						<option selected="selected" value=<%=Alquiler.ESTADO_PENDIENTE%>>Pendiente</option> 
 						<option value=<%=Alquiler.ESTADO_VIGENTE%>>Vigente</option>
 						<option value=<%=Alquiler.ESTADO_FINALIZADO%>>Finalizado</option>
 						<option value=<%=Alquiler.ESTADO_CANCELADO%>>Cancelado</option>

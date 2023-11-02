@@ -94,7 +94,7 @@ public class VehiculoData {
 				vehic.setMatricula(rs.getString("matricula"));
 				vehic.setCapacidadMaxima(rs.getDouble("capacidadmaxima"));
 								
-				vehic.getTipoVehiculo().setId(rs.getInt("id"));
+				vehic.getTipoVehiculo().setId(rs.getInt("tipovehiculo.id"));
 				vehic.getTipoVehiculo().setDescripcion(rs.getString("descripcion"));
 			}	
 		} catch (SQLException e) {

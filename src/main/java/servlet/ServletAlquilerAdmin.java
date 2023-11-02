@@ -45,6 +45,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
     String edit="editaralqadmin.jsp";
     String principalvehicxtipo="principalvehicxtipo.jsp";
     String principalalquileresxclte="principalalquileresxclte.jsp";
+    String editaralquileradmin="editaralquileradmin.jsp";
      
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -88,8 +89,9 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			acceso=alquileradmin;
 		}
 		else if (action.equalsIgnoreCase("clienteelegido")) {
-			int idPer = Integer.parseInt(request.getParameter("id"));//viene de la tabla alquileres y clientes
-			acceso=principalalquileresxclte;
+			int idPers = Integer.parseInt(request.getParameter("id"));//viene de la tabla alquileres y clientes, y va a alquileresxcllte
+			request.setAttribute("idPers", idPers);
+			acceso=principalalquileresxclte;						
 		} 
 		else if (action.equalsIgnoreCase("CalculaImporte")) {
 			VehiculoLogic vlogic = new VehiculoLogic();
@@ -223,11 +225,15 @@ public class ServletAlquilerAdmin extends HttpServlet {
 //			alq.setFechaEntrega(LocalDate.parse(fecentrega));
 //			alq.setFechaCancel(LocalDate.parse(feccancel));
 //			alq.setReclamoyObs(recyobs);
-//			alq.setEstado(estado);//
-			
+//			alq.setEstado(estado);//			
 			alqLog.add(alq);
 			miSesion.invalidate();
 			acceso=alquileradmin;
+		}
+		else if (action.equalsIgnoreCase("alquilerelegido")) {
+			int idAlq = Integer.parseInt(request.getParameter("id"));
+			request.setAttribute("idAlq", idAlq);
+			acceso=editaralquileradmin;			
 		}
 		
 				

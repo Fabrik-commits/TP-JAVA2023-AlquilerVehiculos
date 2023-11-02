@@ -96,7 +96,6 @@
 		<table class="table">
 			<thead>
 				<tr>
-
 					<th>MARCA Y MODELO</th>
 					<th>ANIO</th>
 					<th>KILOMETRAJE</th>

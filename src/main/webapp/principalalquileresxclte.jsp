@@ -1,3 +1,6 @@
+<%@page import="entities.Alquiler"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="logic.AlquilerLogic"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -8,6 +11,9 @@
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
 	<link rel="stylesheet" href="estilos/estilosbuscaralquileresxcltes.css">
+	<%
+	Integer idPersona = (Integer)request.getAttribute("idPers");
+	%>
 </head>
 <body>
 
@@ -100,40 +106,24 @@
 			</thead>
 			
 			<tbody id="tbody-clientes">
+			<%
+				AlquilerLogic alqLog = new AlquilerLogic();
+				LinkedList<Alquiler> listAlquileresxClte = alqLog.getAllByALquileresxClte(idPersona);
+				for(Alquiler alq : listAlquileresxClte) {
+			%>
 				<tr>
-					<td data-label="VEHICULO">3Fa</td>
-					<td data-label="TIPO VEHICULO">He</td>
+					<td data-label="VEHICULO"><%=alq.getVehiculo().getMarcayModelo()%> <%=alq.getVehiculo().getColor()%></td>
+					<td data-label="TIPO VEHICULO"><%=alq.getVehiculo().getTipoVehiculo().getDescripcion()%></td>
 					<td data-label="ACCIONES">
 						<div id="contenedorlinks">
 						<div id="aceptar">
-							<a href="editaralquileradmin.html">Editar</a>
+							<a href="ServletAlquilerAdmin?accion=alquilerelegido&id=<%=alq.getId()%>">Editar</a>
 						</div>
 						</div>
 					</td>
 				</tr>
-				<tr>
-					<td data-label="VEHICULO">3</td>
-					<td data-label="TIPO VEHICULO">Za</td>
-					<td data-label="ACCIONES">					
-						<div id="contenedorlinks">
-							<div id="aceptar">
-								<a href="">Editar</a>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td data-label="VEHICULO">3</td>
-					<td data-label="APELLIDO">Ger</td>
-					<td data-label="ACCIONES">
-						<div id="contenedorlinks">
-							<div id="aceptar">
-								<a href="">Editar</a>
-							</div>
-						</div>
-					</td>
-				</tr>
-				
+
+				<% } %>
 			</tbody>
 		</table>
 		</div>

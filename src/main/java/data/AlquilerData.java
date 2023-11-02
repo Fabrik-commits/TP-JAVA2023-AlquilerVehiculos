@@ -4,6 +4,7 @@ package data;
 //import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.LinkedList;
+import java.time.LocalDate;
 //import java.sql.Date;
 import java.time.ZoneId;
 import java.sql.PreparedStatement;
@@ -14,6 +15,8 @@ import java.sql.SQLException;
 
 import entities.Alquiler;
 import entities.Persona;
+import entities.TipoVehiculo;
+import entities.Vehiculo;
 
 public class AlquilerData {
 	
@@ -71,15 +74,32 @@ public class AlquilerData {
 	public LinkedList<Alquiler> getAllByALquileresxClte(int id) {
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
-		LinkedList<Alquiler> alquileres = new LinkedList<>();
+		LinkedList<Alquiler> alquileresxClte = new LinkedList<>();
 		
-		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select alquiler.id, alquiler.id_persona, "
-					+ "alquiler.id_vehiculo, alquiler.fec_inic, alquiler.fec_fin, alquiler.fec_entrega, alquiler.kms_inic, "
-					+ "alquiler.kms_fin, alquiler.importe, alquiler.fec_cancelacion, alquiler.senia, alquiler.reclamo_obs, alquiler.estado "
-					+ "from alquiler inner join vehiculo on alquiler.id_vehiculo=vehiculo.id where persona.id_rol=?");
+		try {//cargar AlquileresXClte.jsp
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select alquiler.id, alquiler.fec_inic, tipovehiculo.descripcion, vehiculo.marcaymodelo, vehiculo.color from alquiler inner join vehiculo on alquiler.id_vehiculo=vehiculo.id inner join tipovehiculo on vehiculo.idtipovehiculo=tipovehiculo.id inner join persona on alquiler.id_persona=persona.id where persona.id=?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
+			
+			if (rs!=null) {
+				while (rs.next()) {
+					Alquiler alq = new Alquiler();
+					alq.setId(rs.getInt("id"));
+					
+					String fec_inic = rs.getDate("fec_inic").toString();
+					LocalDate fecha_inicial = LocalDate.parse(fec_inic);					
+					alq.setFechaInic(fecha_inicial);
+					
+					alq.setVehiculo(new Vehiculo());
+					alq.getVehiculo().setMarcayModelo(rs.getString("marcaymodelo"));
+					alq.getVehiculo().setColor(rs.getString("color"));
+										
+					alq.getVehiculo().setTipoVehiculo(new TipoVehiculo());
+					alq.getVehiculo().getTipoVehiculo().setDescripcion(rs.getString("descripcion"));
+					
+					alquileresxClte.add(alq);
+				}
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -93,7 +113,71 @@ public class AlquilerData {
 			}
 		}
 		
-		return alquileres;
+		return alquileresxClte;
+	}
+	
+	public Alquiler getById(int id) {
+		Alquiler alq = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select alquiler.id, alquiler.id_persona, alquiler.id_vehiculo, alquiler.fec_inic, alquiler.fec_fin, alquiler.fec_entrega, alquiler.kms_inic, alquiler.kms_fin, alquiler.importe, alquiler.fec_cancelacion, alquiler.senia, alquiler.reclamo_obs, alquiler.estado from alquiler where id=?"
+					);
+			stmt.setInt(1, id);  
+			rs=stmt.executeQuery();
+			if(rs!=null && rs.next()) {
+				alq=new Alquiler();
+				alq.setId(rs.getInt("id"));
+				
+				alq.setPersona(new Persona());
+				alq.getPersona().setId(rs.getInt("id_persona"));
+				
+				alq.setVehiculo(new Vehiculo());
+				alq.getVehiculo().setIdVehiculo(rs.getInt("id_vehiculo"));
+				
+				String fec_inic = rs.getDate("fec_inic").toString();
+				LocalDate fecha_inicial = LocalDate.parse(fec_inic);					
+				alq.setFechaInic(fecha_inicial);
+				
+				if (rs.getDate("fec_fin").toString()!=null) {
+					String fec_fin = rs.getDate("fec_fin").toString();
+					LocalDate fecha_final = LocalDate.parse(fec_fin);
+					alq.setFechaFin(fecha_final);
+				}
+				
+				if ((rs.getDate("fec_entrega").toString())!=null) {
+					String fec_entrega = rs.getDate("fec_entrega").toString();
+					LocalDate fecha_entrega = LocalDate.parse(fec_entrega);					
+					alq.setFechaEntrega(fecha_entrega);
+				}
+				
+				alq.setKmInic(rs.getDouble("kms_inic"));
+				alq.setKmInic(rs.getDouble("kms_fin"));
+				alq.setImporte(rs.getDouble("importe"));
+				
+				if ((rs.getDate("fec_cancelacion").toString())!=null) {
+					String fec_cancelacion = rs.getDate("fec_cancelacion").toString();
+					LocalDate fecha_cancelacion = LocalDate.parse(fec_cancelacion);					
+					alq.setFechaCancel(fecha_cancelacion);
+				}
+				
+				alq.setSenia(rs.getDouble("senia"));
+				alq.setReclamoyObs(rs.getString("reclamo_obs"));
+				alq.setEstado(rs.getString("estado"));
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return alq;
 	}
 
 }

@@ -119,7 +119,9 @@
 							pers = perLog.getById(idPer);
 							}
 					%>
-					<input type="text" placeholder="Cliente" value="<%=idAlquiler==null?"":pers.getApellido() %> <%=idAlquiler==null?"":pers.getNombre()%> <%=idAlquiler==null?"":pers.getDni()%>">
+					<input type="text" placeholder="Cliente" name="cliente" value="<%=idAlquiler==null?"":pers.getApellido() %> <%=idAlquiler==null?"":pers.getNombre()%> <%=idAlquiler==null?"":pers.getDni()%>">
+					<div><input type="hidden" name="idPers" value="<%=pers.getId()%>"></div>
+					<div><input type="hidden" name="idAlq" value="<%=idAlquiler%>"></div>
 				</div>
 			</div>
 
@@ -181,7 +183,7 @@
 
 			<div class="input-contenedor">
 				
-				<div class="titulo">Fecha fin: </div> <div class="date"><input type="date" value=<%=alq.getFechaFin()%>></div>
+				<div class="titulo">Fecha fin: </div> <div class="date"><input type="date" name="fecFin" value=<%=alq.getFechaFin()%>></div>
 				
 			</div>
 
@@ -205,7 +207,7 @@
 
 			<div class="input-contenedor">
 			
-				<div class="titulo">Km_Fin: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" name="kmfin" placeholder="Km_Fin" value="<%=idAlquiler==null?"":alq.getKmFin()%>"></div>
+				<div class="titulo">Km_Fin: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" name="Kmfin" placeholder="Km_Fin" value="<%=idAlquiler==null?"":alq.getKmFin()%>"></div>
 				
 			</div>
 	
@@ -240,7 +242,7 @@
 					<div class="input-contenedortipov1">
 					<div class="labeltipov"><div class="label1"><label for="tipovehiculo">Estado Alq:</label></div></div>
 					<div class="select">
-					<select name="txtestado"" id="tipovehiculo">
+					<select name="txtestado" id="tipovehiculo">
 						<option value="<%=alq.getEstado()%>"><%=alq.getEstado()%></option>
 						<option value="<%=Alquiler.ESTADO_PENDIENTE%>">Pendiente</option>
 						<option value="<%=Alquiler.ESTADO_VIGENTE%>">Vigente</option>
@@ -263,8 +265,8 @@
 	
 
 		<div class="agrupabotones">
-			<input type="button" value="Aceptar" class="button" onclick=mostrarPrincipalAlquileresxCliente()>
-			<input type="button" value="Cancelar" class="button" onclick=mostrarPrincipal()>
+			<input type="submit" name="accion" value="Actualizar" class="button">
+			<input type="submit" name="accion" value="Cancelar" class="button">
 		</div>
 		
      </div>

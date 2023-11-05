@@ -13,6 +13,8 @@
 	<link rel="stylesheet" href="estilos/estilosbuscaralquileresxcltes.css">
 	<%
 	Integer idPersona = (Integer)request.getAttribute("idPers");
+	//int idPersona = Integer.parseInt(request.getParameter("idPers"));
+	//System.out.println(idPersona);
 	%>
 </head>
 <body>

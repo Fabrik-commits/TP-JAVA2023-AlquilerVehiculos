@@ -46,6 +46,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
     String principalvehicxtipo="principalvehicxtipo.jsp";
     String principalalquileresxclte="principalalquileresxclte.jsp";
     String editaralquileradmin="editaralquileradmin.jsp";
+    String principal="principal.jsp";
      
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -137,8 +138,6 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			String senia = request.getParameter("senia");
 			String fecInic = request.getParameter("fecInic");
 			String fecFin = request.getParameter("fecFin");
-			//System.out.println(fecFin);
-			//System.out.println();
 			String importe = request.getParameter("importe");
 			String kminic = request.getParameter("kminic");
 			String kmfin = request.getParameter("kmfin");
@@ -146,8 +145,6 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			String feccancel = request.getParameter("feccancel");
 			String recyobs = request.getParameter("recyobs");
 			String estado = request.getParameter("txtestado");
-			//System.out.println(estado);
-			//System.out.println();
 			alq.setPersona(pers);
 			alq.getPersona().setId(idPers);
 			
@@ -161,7 +158,6 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			}
 			
 			if (fecFin=="") {
-				//alq.setFechaFin(null);
 				alq.setFechaFin(LocalDate.now().plusDays(1));
 			}
 			else {
@@ -235,7 +231,63 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			request.setAttribute("idAlq", idAlq);
 			acceso=editaralquileradmin;			
 		}
-		
+		else if (action.equalsIgnoreCase("Actualizar")) {
+			Alquiler alq = new Alquiler();
+			AlquilerLogic alqLog = new AlquilerLogic();
+			
+			String idPer = request.getParameter("idPers");
+			
+			String id = request.getParameter("idAlq");
+			String Kmfin = request.getParameter("Kmfin");		
+			String fecentrega = request.getParameter("fecentrega");
+			String feccancel = request.getParameter("feccancel");
+			String recyobs = request.getParameter("recyobs");
+			String estado = request.getParameter("txtestado");
+
+			if (id=="") {
+				alq.setId(0);
+			} else {
+				alq.setId(Integer.parseInt(id));
+			}
+			if (Kmfin=="") {
+				alq.setKmFin(0.0);
+			} else {
+				alq.setKmFin(Double.parseDouble(Kmfin));//corregido letra k K 
+			}
+			
+			if (fecentrega=="") {
+				alq.setFechaEntrega(LocalDate.now());
+			} else {
+				alq.setFechaEntrega(LocalDate.parse(fecentrega));
+			}
+			
+			if (feccancel=="") {
+				alq.setFechaCancel(LocalDate.now());//corregido
+			} else {
+				alq.setFechaCancel(LocalDate.parse(feccancel));
+			}
+			
+			if (recyobs=="") {
+				alq.setReclamoyObs("");
+			} else {
+				alq.setReclamoyObs(recyobs);
+			}
+			
+			if (estado=="") {
+				alq.setEstado("");
+			} else {
+				alq.setEstado(estado);
+			}
+			//String idPersona = request.getParameter("idPers");
+			//System.out.println(idPersona);
+			//System.out.println();
+			alqLog.update(alq);
+			int idPersona = Integer.parseInt(idPer);//me esta devolviendo el idAlquiler
+			System.out.println(idPersona);
+			request.setAttribute("idPers", idPersona);
+			acceso=principalalquileresxclte;
+			//acceso=principal;
+		}
 				
 		RequestDispatcher vista=request.getRequestDispatcher(acceso);
 		//request.getRequestDispatcher(acceso).forward(request, response);

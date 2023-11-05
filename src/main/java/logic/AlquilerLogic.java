@@ -23,4 +23,8 @@ public class AlquilerLogic {
 	public Alquiler getById(int id) {
 		return alqd.getById(id);
 	} 
+	
+	public Alquiler update(Alquiler alq) {
+		return alqd.update(alq);
+	}
 }

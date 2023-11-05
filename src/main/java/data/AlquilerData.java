@@ -2,11 +2,11 @@ package data;
 
 //import java.time.LocalDate;
 //import java.time.format.DateTimeFormatter;
-import java.util.Date;
+//import java.util.Date;
 import java.util.LinkedList;
 import java.time.LocalDate;
 //import java.sql.Date;
-import java.time.ZoneId;
+//import java.time.ZoneId;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,10 +43,10 @@ public class AlquilerData {
 			stmt.setDouble(7, alq.getKmInic());
 			stmt.setDouble(8, alq.getKmFin());
 			
-			String fec_entrega = alq.getFechaFin().toString();
+			String fec_entrega = alq.getFechaEntrega().toString();
 			stmt.setDate(9, java.sql.Date.valueOf(fec_entrega));
 			
-			String fec_cancelacion = alq.getFechaFin().toString();
+			String fec_cancelacion = alq.getFechaCancel().toString();
 			stmt.setDate(10, java.sql.Date.valueOf(fec_cancelacion));
 			
 			stmt.setString(11, alq.getReclamoyObs());
@@ -69,6 +69,39 @@ public class AlquilerData {
 				// TODO: handle exception
 			}
 		}
+	}
+	
+	public Alquiler update(Alquiler alq) {
+		PreparedStatement stmt = null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().
+					prepareStatement("update alquiler set kms_fin=?, fec_entrega=?, fec_cancelacion=?, reclamo_obs=?, estado=? where id=?");
+			stmt.setDouble(1, alq.getKmFin());
+
+//			stmt.setDate(2, alq.getFechaEntrega());
+			String fec_entrega = alq.getFechaEntrega().toString();
+			stmt.setDate(2, java.sql.Date.valueOf(fec_entrega));
+						
+//			stmt.setDate(3, alq.getFechaCancel());
+			String fec_cancelacion = alq.getFechaCancel().toString();
+			stmt.setDate(3, java.sql.Date.valueOf(fec_cancelacion));
+			
+			stmt.setString(4, alq.getReclamoyObs());
+			stmt.setString(5, alq.getEstado());
+			stmt.setInt(6, alq.getId());
+
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+            try {
+                if(stmt!=null)stmt.close();
+                DbConnector.getInstancia().releaseConn();
+            } catch (SQLException e) {
+            	e.printStackTrace();
+            }
+		}
+		return alq;
 	}
 	
 	public LinkedList<Alquiler> getAllByALquileresxClte(int id) {
@@ -153,7 +186,7 @@ public class AlquilerData {
 				}
 				
 				alq.setKmInic(rs.getDouble("kms_inic"));
-				alq.setKmInic(rs.getDouble("kms_fin"));
+				alq.setKmFin(rs.getDouble("kms_fin"));//aca estaba el error
 				alq.setImporte(rs.getDouble("importe"));
 				
 				if ((rs.getDate("fec_cancelacion").toString())!=null) {

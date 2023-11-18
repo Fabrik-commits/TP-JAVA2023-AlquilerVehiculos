@@ -186,7 +186,6 @@ public class PersonaData {
 //	}
 		
 	public Persona getByUser(Persona per) {
-		//RolData rd=new RolData();
 		Persona p=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;

@@ -21,6 +21,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
 	<link rel="stylesheet" href="estilos/estilosalquiler.css">
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <%    
     //Integer idVehiculo = (Integer)request.getAttribute("idVehic");
     Integer idVehiculo = (Integer)miSesion.getAttribute("idVehic");
@@ -286,7 +287,7 @@
 
 
 		<div class="agrupabotones">
-			<input type="submit" name="accion" value="Aceptar" class="button">
+			<input type="submit" name="accion" value="Aceptar" class="button" id="btn_aceptar">
 			<input type="submit" name="accion" value="Cancelar" class="button">
 		</div>
 		
@@ -294,6 +295,7 @@
      </div>
     </form>
 	</div>
+	<script src="scripts/btn.js"></script>
 </body>
 <script src="scripts/script.js"></script>
 </html>

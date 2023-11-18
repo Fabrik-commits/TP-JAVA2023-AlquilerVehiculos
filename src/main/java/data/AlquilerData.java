@@ -43,8 +43,12 @@ public class AlquilerData {
 			stmt.setDouble(7, alq.getKmInic());
 			stmt.setDouble(8, alq.getKmFin());
 			
+			if(alq.getFechaEntrega()==null) {
+				stmt.setObject(9, null); //o setDate
+			} else {
 			String fec_entrega = alq.getFechaEntrega().toString();
 			stmt.setDate(9, java.sql.Date.valueOf(fec_entrega));
+			}
 			
 			String fec_cancelacion = alq.getFechaCancel().toString();
 			stmt.setDate(10, java.sql.Date.valueOf(fec_cancelacion));

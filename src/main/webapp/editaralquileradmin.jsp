@@ -16,6 +16,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
 	<link rel="stylesheet" href="estilos/estilosalquiler.css">
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <%
     Integer idAlquiler = (Integer)request.getAttribute("idAlq");
     
@@ -265,13 +266,14 @@
 	
 
 		<div class="agrupabotones">
-			<input type="submit" name="accion" value="Actualizar" class="button">
+			<input type="submit" name="accion" value="Actualizar" class="button" id="btn_actualizar">
 			<input type="submit" name="accion" value="Cancelar" class="button">
 		</div>
 		
      </div>
     </form>
 	</div>
+	<script src="scripts/btn.js"></script>
 </body>
 <script src="scripts/script.js"></script>
 </html>

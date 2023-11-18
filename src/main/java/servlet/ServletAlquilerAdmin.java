@@ -189,16 +189,24 @@ public class ServletAlquilerAdmin extends HttpServlet {
 				alq.setKmFin(Double.parseDouble(kmfin));
 			}
 			
+			/*
+			 * if(fecentrega!=null || fecentrega!="") {
+			 * alq.setFechaEntrega(LocalDate.parse(fecentrega));
+			 * } 
+			 */
+			
+			
 			if (fecentrega=="") {
 				alq.setFechaEntrega(LocalDate.now());//alq.setFechaFin(LocalDate.now());
+				
 			} else {
 				alq.setFechaEntrega(LocalDate.parse(fecentrega));
 			}
 			
 			if (feccancel=="") {
-				alq.setFechaEntrega(LocalDate.now());
+				alq.setFechaCancel(LocalDate.now());
 			} else {
-				alq.setFechaEntrega(LocalDate.parse(feccancel));
+				alq.setFechaCancel(LocalDate.parse(feccancel));
 			}
 			
 			if (recyobs=="") {

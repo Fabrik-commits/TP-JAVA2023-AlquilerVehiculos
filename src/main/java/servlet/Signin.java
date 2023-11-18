@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Persona;
+import entities.Rol;
 import logic.PersonaLogic;
 
 /**
@@ -46,18 +47,16 @@ public class Signin extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		//validar email y password
-		
 		per.setEmail(email);
 		per.setPassword(password);
-		
-		//String var = per.getEmail();
 		
 		per = pl.validate(per);
 		
 		request.getSession().setAttribute("usuario", per);
 		//response.getWriter().append("Bienvenido ").append(per.getNombre()).append(" ").append(per.getApellido());
 		request.getRequestDispatcher("principal.jsp").forward(request, response);
+				
+		
 	}
 
 }

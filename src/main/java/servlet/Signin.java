@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entities.Persona;
 import entities.Rol;
@@ -31,18 +32,19 @@ public class Signin extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//doGet(request, response);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		HttpSession miSesion = request.getSession();
+		
 		Persona per = new Persona();
 		
 		PersonaLogic pl = new PersonaLogic();
+		
+		Rol rol1 = new Rol();
+		rol1.setId(1);
+		
+		Rol rol2 = new Rol();
+		rol2.setId(2);
 				
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -50,11 +52,45 @@ public class Signin extends HttpServlet {
 		per.setEmail(email);
 		per.setPassword(password);
 		
-		per = pl.validate(per);
+		String action=request.getParameter("accion");
 		
-		request.getSession().setAttribute("usuario", per);
-		//response.getWriter().append("Bienvenido ").append(per.getNombre()).append(" ").append(per.getApellido());
-		request.getRequestDispatcher("principal.jsp").forward(request, response);
+		if (action.equalsIgnoreCase("Login")) {
+			if (pl.validate(per)!=null) {
+				
+				
+				
+				per = pl.validate(per);
+				miSesion.setAttribute("nombre", per.getNombre());
+				miSesion.setAttribute("rol1", per.hasRol(rol1));
+				miSesion.setAttribute("rol2", per.hasRol(rol2));
+				System.out.println( (per.getId()) );
+				System.out.println( (per.hasRol(rol2)) );
+				if ( (per.hasRol(rol1)) && (per.hasRol(rol2)) ) {
+					request.getRequestDispatcher("principal.jsp").forward(request, response);
+				}
+				else if ( (per.hasRol(rol2)) ) {
+					//System.out.println("Hola");
+					request.getRequestDispatcher("principalcliente.jsp").forward(request, response);
+				}
+				
+			}
+		}
+		
+		
+		//per = pl.validate(per);
+		
+		//request.getSession().setAttribute("usuario", per);
+
+		//request.getRequestDispatcher("principal.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+
 				
 		
 	}

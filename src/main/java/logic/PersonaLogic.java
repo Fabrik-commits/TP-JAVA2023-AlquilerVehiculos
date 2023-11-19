@@ -41,6 +41,10 @@ public class PersonaLogic {
 		return pd.getAllPersxRolUsr();
 	}
 	
+	public LinkedList<Rol> getRolesByPersona(int idPer){
+		return pd.getRolesByPersona(idPer);
+	}
+	
 	public LinkedList<Persona> getAllByApellido(Persona per){
 		return pd.getAllByApellido(per);
 	}

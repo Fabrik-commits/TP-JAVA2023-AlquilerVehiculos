@@ -9,6 +9,7 @@ import java.util.LinkedList;
 //import entities.Documento;
 //import entities.Documento;
 import entities.Persona;
+import entities.Rol;
 import entities.Vehiculo;
 
 public class PersonaData {
@@ -231,13 +232,43 @@ public class PersonaData {
 				
 	//public Persona getByDocumento(Persona per) falta
 	
+	public LinkedList<Rol> getRolesByPersona(int idPer){//roles por persona
+		RolData dr=new RolData();
+		Rol rol=null;
+		PreparedStatement stmt=null;
+		ResultSet rs = null;
+		LinkedList<Rol> roles = new LinkedList<>();
+		
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("select rol_persona.id_rol from rol_persona where rol_persona.id_persona=?");
+			stmt.setInt(1, idPer);
+			rs=stmt.executeQuery();
+			if (rs!=null) {
+				while (rs.next()) {
+					rol=new Rol();
+					rol.setId(rs.getInt("id_rol"));
+					roles.add(rol);				
+				}
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return roles;
+	}
 	
-	
-	
-	
-	
-	
-	
+			
 	public LinkedList<Persona> getAllByApellido(Persona per){
 		RolData dr=new RolData();
 		Persona p=null;

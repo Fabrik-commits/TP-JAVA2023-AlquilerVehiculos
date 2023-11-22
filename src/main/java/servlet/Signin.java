@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +28,8 @@ public class Signin extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    String loginvista = "loginvista.jsp";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -52,35 +56,36 @@ public class Signin extends HttpServlet {
 		per.setEmail(email);
 		per.setPassword(password);
 		
+		String acceso="";		
 		String action=request.getParameter("accion");
 		
 		if (action.equalsIgnoreCase("Login")) {
 			if (pl.validate(per)!=null) {
-				
-				
-				
+								
 				per = pl.validate(per);
 				miSesion.setAttribute("nombre", per.getNombre());
 				miSesion.setAttribute("rol1", per.hasRol(rol1));
 				miSesion.setAttribute("rol2", per.hasRol(rol2));
-				System.out.println( (per.getId()) );
-				System.out.println( (per.hasRol(rol2)) );
+				//System.out.println( (per.getId()) );
 				if ( (per.hasRol(rol1)) && (per.hasRol(rol2)) ) {
 					request.getRequestDispatcher("principal.jsp").forward(request, response);
 				}
 				else if ( (per.hasRol(rol2)) ) {
-					//System.out.println("Hola");
 					request.getRequestDispatcher("principalcliente.jsp").forward(request, response);
 				}
 				
 			}
 		}
-		
-		
-		//per = pl.validate(per);
-		
+		else if (action.equalsIgnoreCase("cerrarsesion")) {
+			miSesion.invalidate();
+			acceso=loginvista;
+			RequestDispatcher vista=request.getRequestDispatcher(acceso);
+			//request.getRequestDispatcher(acceso).forward(request, response);
+			vista.forward(request, response);
+		}
+				
+		//per = pl.validate(per);		
 		//request.getSession().setAttribute("usuario", per);
-
 		//request.getRequestDispatcher("principal.jsp").forward(request, response);
 	}
 
@@ -89,9 +94,7 @@ public class Signin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
-
-				
+		doGet(request, response);				
 		
 	}
 

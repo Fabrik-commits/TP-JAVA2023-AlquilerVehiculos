@@ -50,8 +50,15 @@ public class AlquilerData {
 			stmt.setDate(9, java.sql.Date.valueOf(fec_entrega));
 			}
 			
-			String fec_cancelacion = alq.getFechaCancel().toString();
-			stmt.setDate(10, java.sql.Date.valueOf(fec_cancelacion));
+			if (alq.getFechaCancel()==null) {
+				stmt.setObject(10, null); //o setDate
+			} else {
+				String fec_cancelacion = alq.getFechaCancel().toString();
+				stmt.setDate(10, java.sql.Date.valueOf(fec_cancelacion));				
+			}
+			
+//			String fec_cancelacion = alq.getFechaCancel().toString();
+//			stmt.setDate(10, java.sql.Date.valueOf(fec_cancelacion));
 			
 			stmt.setString(11, alq.getReclamoyObs());
 			stmt.setString(12, alq.getEstado());

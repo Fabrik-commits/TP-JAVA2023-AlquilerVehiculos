@@ -64,7 +64,8 @@ public class ServletAlquilerAdmin extends HttpServlet {
 		else if (action.equalsIgnoreCase("BuscarVehi")) {
 			int idTipoVehiculo = Integer.parseInt(request.getParameter("txtidtipovehiculo"));
 			//el idTipoVehiculo es seteado 
-			request.setAttribute("idTipoVehiculo", idTipoVehiculo);
+			request.setAttribute("idTipoVehiculo", idTipoVehiculo); //esta linea seria reemplazada por la de abajo
+			miSesion.setAttribute("idTVSesion", idTipoVehiculo);
 			acceso=principalvehicxtipo;
 		}
 		else if (action.equalsIgnoreCase("vehicelegido")) {
@@ -195,17 +196,25 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			 * } 
 			 */
 			
+			//a modificar para probar en caso de null
+//			if (fecentrega=="") {
+//				alq.setFechaEntrega(LocalDate.now());//alq.setFechaFin(LocalDate.now());
+//				
+//			} else {
+//				alq.setFechaEntrega(LocalDate.parse(fecentrega));
+//			}
 			
-			if (fecentrega=="") {
-				alq.setFechaEntrega(LocalDate.now());//alq.setFechaFin(LocalDate.now());
-				
-			} else {
-				alq.setFechaEntrega(LocalDate.parse(fecentrega));
+			if (!(fecentrega=="")) {
+				alq.setFechaEntrega(LocalDate.parse(fecentrega));				
 			}
 			
-			if (feccancel=="") {
-				alq.setFechaCancel(LocalDate.now());
-			} else {
+//			if (feccancel=="") {
+//				alq.setFechaCancel(LocalDate.now());
+//			} else {
+//				alq.setFechaCancel(LocalDate.parse(feccancel));
+//			}
+			
+			if (!(feccancel=="")) {
 				alq.setFechaCancel(LocalDate.parse(feccancel));
 			}
 			

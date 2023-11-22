@@ -8,6 +8,14 @@
 <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
 	<link rel="stylesheet" href="estilos/estilos2.css">
+	
+<%
+	Boolean rol2 = (Boolean)request.getSession().getAttribute("rol2");
+	if( !( rol2) ){
+	response.sendRedirect("loginvista.jsp");
+	}
+%>	
+	
 </head>
 <body>
 
@@ -43,7 +51,7 @@
 						<li><a href="#">Tipos Vehiculos</a></li>
 					</ul>
 				</li>
-				<li><a href="#">Cerrar Sesion</a></li>
+				<li><a href="Signin?accion=cerrarsesion">Cerrar Sesion</a></li>
 			</ul>
 
 		</nav>

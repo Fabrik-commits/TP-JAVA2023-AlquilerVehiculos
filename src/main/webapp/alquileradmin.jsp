@@ -28,6 +28,7 @@
     //Integer idPersona = (Integer)request.getAttribute("idPer");
     Integer idPersona = (Integer)miSesion.getAttribute("idPer"); 
     //Integer idPersona = (Integer)session.getAttribute("personaElegida"); //TODO session 
+    Integer idTVSesion = (Integer)miSesion.getAttribute("idTVSesion");
     Double importeTotalVehic = (Double)request.getAttribute("importeTotal");
     String fechaInicial = (String)request.getAttribute("fecInit");
     String fechaFinal = (String)request.getAttribute("fecFin");
@@ -142,6 +143,18 @@
 					<label for="">Tipo Vehic:</label>
 					
 					<select name="txtidtipovehiculo" id="tipovehiculo" style="margin: 13px 0px 0px -20px;">
+					
+					<%
+					if(idTVSesion!=null){
+						TipoVehiculoLogic tvl = new TipoVehiculoLogic();
+						TipoVehiculo tve = new TipoVehiculo();
+						tve = tvl.getById(idTVSesion);
+					%>
+					<option selected="selected" value=<%=tve.getId()%>><%=tve.getDescripcion()%></option>
+					<%
+					}
+					%>					
+
 					<% 
 					TipoVehiculoLogic tvl = new TipoVehiculoLogic();
 					LinkedList<TipoVehiculo> listtv = tvl.getAllTiposVehiculo();
@@ -172,10 +185,8 @@
 						Vehiculo vehic = new Vehiculo();
 						if(idVehiculo!=null)
 							{
-							vehic = vl.getById(idVehiculo);
-  
-							}
-						
+							vehic = vl.getById(idVehiculo);  
+							}						
 						//vehic = vl.getById(Integer.parseInt(idVehiculo));
 					%>
 					<input type="text" placeholder="Vehiculo" name="vehiculo" value="<%=idVehiculo==null?"":vehic.getMarcayModelo()%> <%=idVehiculo==null?"":vehic.getColor()%>">

@@ -188,6 +188,7 @@ public class PersonaData {
 		
 	public Persona getByUser(Persona per) {
 		Persona p=null;
+		RolData rd=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		try {
@@ -199,6 +200,7 @@ public class PersonaData {
 			rs=stmt.executeQuery();
 			if(rs!=null && rs.next()) {
 				p=new Persona();
+				rd=new RolData();
 				//p.setDocumento(new Documento());
 				p.setId(rs.getInt("id"));
 				p.setNombre(rs.getString("nombre"));
@@ -213,7 +215,7 @@ public class PersonaData {
 				p.setTel(rs.getString("telefono"));
 				//p.setHabilitado(rs.getBoolean("habilitado"));
 				//
-				//rd.setRoles(p);
+				rd.setRoles(p);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

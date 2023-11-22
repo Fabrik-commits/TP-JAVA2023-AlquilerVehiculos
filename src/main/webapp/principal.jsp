@@ -13,7 +13,17 @@
 <link rel="stylesheet" href="estilos/estilos2.css">
 
 <%
-	Persona p = (Persona)session.getAttribute("usuario");
+	/* Persona p = (Persona)session.getAttribute("usuario"); */
+	//System.out.println(request.getSession().getAttribute("rol1"));
+	//System.out.println();
+	//String rol1 = (String)request.getSession().getAttribute("rol1");
+	//System.out.println(rol1);
+	Boolean rol1 = (Boolean)request.getSession().getAttribute("rol1");
+	Boolean rol2 = (Boolean)request.getSession().getAttribute("rol2");
+	//System.out.println(rol1);
+	if( !(rol1 && rol2) ){
+		response.sendRedirect("loginvista.jsp");
+	}
 %>
 
 </head>
@@ -82,7 +92,7 @@
 						<li><a href="#">Vehiculos</a></li>
 						<li><a href="#">Tipos Vehiculos</a></li>
 					</ul></li>
-				<li><a href="#">Cerrar Sesion</a></li>
+				<li><a href="Signin?accion=cerrarsesion">Cerrar Sesion</a></li>
 			</ul>
 		</nav>
 

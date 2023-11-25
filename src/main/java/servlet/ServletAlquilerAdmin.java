@@ -43,7 +43,10 @@ public class ServletAlquilerAdmin extends HttpServlet {
     //String add="altaalqadmin.jsp";
     String alquileradmin="alquileradmin.jsp";
     String edit="editaralqadmin.jsp";
+    
+    //Aca busca vehiculos disponibles
     String principalvehicxtipo="principalvehicxtipo.jsp";
+    
     String principalalquileresxclte="principalalquileresxclte.jsp";
     String editaralquileradmin="editaralquileradmin.jsp";
     String principal="principal.jsp";
@@ -135,12 +138,17 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			VehiculoLogic vl = new VehiculoLogic();
 			int idVehiculo = Integer.parseInt(request.getParameter("idVehiculo"));
 			vehic = vl.getById(idVehiculo);
+			vehic.setEstado(false);
+			vl.update(vehic);
 			
 			String senia = request.getParameter("senia");
 			String fecInic = request.getParameter("fecInic");
 			String fecFin = request.getParameter("fecFin");
 			String importe = request.getParameter("importe");
+			
+			//vehic.getKilometraje();
 			String kminic = request.getParameter("kminic");
+			
 			String kmfin = request.getParameter("kmfin");
 			String fecentrega = request.getParameter("fecentrega");
 			String feccancel = request.getParameter("feccancel");
@@ -205,7 +213,8 @@ public class ServletAlquilerAdmin extends HttpServlet {
 //			}
 			
 			if (!(fecentrega=="")) {
-				alq.setFechaEntrega(LocalDate.parse(fecentrega));				
+				//alq.setFechaEntrega(LocalDate.parse(fecentrega));	no corresponde por ser alta alquiler
+				//System.out.println();
 			}
 			
 //			if (feccancel=="") {
@@ -215,7 +224,8 @@ public class ServletAlquilerAdmin extends HttpServlet {
 //			}
 			
 			if (!(feccancel=="")) {
-				alq.setFechaCancel(LocalDate.parse(feccancel));
+				//alq.setFechaCancel(LocalDate.parse(feccancel)); no corresponde por ser alta alquiler 
+				//System.out.println();
 			}
 			
 			if (recyobs=="") {
@@ -259,7 +269,8 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			String fecentrega = request.getParameter("fecentrega");
 			String feccancel = request.getParameter("feccancel");
 			String recyobs = request.getParameter("recyobs");
-			String estado = request.getParameter("txtestado");
+//			String estado = request.getParameter("txtestado");
+			String estado;
 
 			if (id=="") {
 				alq.setId(0);
@@ -269,19 +280,38 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			if (Kmfin=="") {
 				alq.setKmFin(0.0);
 			} else {
-				alq.setKmFin(Double.parseDouble(Kmfin));//corregido letra k K 
+				alq.setKmFin(Double.parseDouble(Kmfin)); 
 			}
 			
-			if (fecentrega=="") {
-				alq.setFechaEntrega(LocalDate.now());
-			} else {
+//			if (fecentrega=="") {
+//				alq.setFechaEntrega(LocalDate.now());
+//			} else {
+//				alq.setFechaEntrega(LocalDate.parse(fecentrega));
+//			}
+			if (fecentrega!="") {
 				alq.setFechaEntrega(LocalDate.parse(fecentrega));
+				estado="Finalizado";
+				alq.setEstado(estado);
 			}
 			
-			if (feccancel=="") {
-				alq.setFechaCancel(LocalDate.now());//corregido
-			} else {
-				alq.setFechaCancel(LocalDate.parse(feccancel));
+//			if (feccancel=="") {
+//				alq.setFechaCancel(LocalDate.now());
+//			} else {
+//				alq.setFechaCancel(LocalDate.parse(feccancel));
+//			}
+			if (feccancel!="") {
+				alq.setFechaEntrega(LocalDate.parse(feccancel));
+				estado="Cancelado";
+				alq.setEstado(estado);
+			}
+			
+			if ((fecentrega!="")|| (feccancel!="")) {
+				VehiculoLogic vl = new VehiculoLogic();
+				Vehiculo vehic = new Vehiculo();				
+				int idVehiculo = Integer.parseInt(request.getParameter("idVehiculo"));
+				vehic = vl.getById(idVehiculo);
+				vehic.setEstado(true);
+				vl.update(vehic);
 			}
 			
 			if (recyobs=="") {
@@ -290,17 +320,17 @@ public class ServletAlquilerAdmin extends HttpServlet {
 				alq.setReclamoyObs(recyobs);
 			}
 			
-			if (estado=="") {
-				alq.setEstado("");
-			} else {
-				alq.setEstado(estado);
-			}
+//			if (estado=="") {
+//				alq.setEstado("");
+//			} else {
+//				alq.setEstado(estado);
+//			}
 			//String idPersona = request.getParameter("idPers");
 			//System.out.println(idPersona);
 			//System.out.println();
 			alqLog.update(alq);
 			int idPersona = Integer.parseInt(idPer);//me esta devolviendo el idAlquiler
-			System.out.println(idPersona);
+//			System.out.println(idPersona);
 			request.setAttribute("idPers", idPersona);
 			acceso=principalalquileresxclte;
 			//acceso=principal;

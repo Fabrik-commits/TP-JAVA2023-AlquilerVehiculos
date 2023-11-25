@@ -144,6 +144,8 @@
 					
 					<select name="txtidtipovehiculo" id="tipovehiculo" style="margin: 13px 0px 0px -20px;">
 					
+					<option value="">-----------------------------</option>	
+					
 					<%
 					if(idTVSesion!=null){
 						TipoVehiculoLogic tvl = new TipoVehiculoLogic();
@@ -153,7 +155,9 @@
 					<option selected="selected" value=<%=tve.getId()%>><%=tve.getDescripcion()%></option>
 					<%
 					}
-					%>					
+					%>	
+					
+								
 
 					<% 
 					TipoVehiculoLogic tvl = new TipoVehiculoLogic();
@@ -238,20 +242,20 @@
 
 			<div class="input-contenedor">
 				
-				<div class="titulo">Km_Inic: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" name="kminic" placeholder="Km_Inic"></div>
+				<div class="titulo">Km_Inic: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" name="kminic" placeholder="Km_Inic" value="<%=idVehiculo==null?"":vehic.getKilometraje()%>"></div>
 				
 			</div>	
 
 			<div class="input-contenedor">
 			
-				<div class="titulo">Km_Fin: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" name="kmfin" placeholder="Km_Fin"></div>
+				<div class="titulo">Km_Fin: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" name="kmfin" placeholder="Km_Fin" ></div>
 				
 			</div>
 	
 	
 			<div class="input-contenedor">
 				
-				<div class="titulo">Fecha entrega: </div> <div class="date"><input type="date" name="fecentrega"></div>
+				<div class="titulo">Fecha entrega: </div> <div class="date"><input type="date" name="fecentrega" disabled></div>
 				
 			</div>
 	
@@ -263,7 +267,7 @@
 
 			<div class="input-contenedor">
             
-				<div class="titulo">Fecha cancel: </div> <div class="date"><input type="date" name="feccancel"></div>
+				<div class="titulo">Fecha cancel: </div> <div class="date"><input type="date" name="feccancel" disabled></div>
 				
 			</div>
 

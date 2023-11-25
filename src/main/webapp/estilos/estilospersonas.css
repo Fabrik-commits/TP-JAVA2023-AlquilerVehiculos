@@ -208,7 +208,7 @@ table tbody tr:hover {
     background-color: #685cfe;
 }
 
-#aceptar {
+#eliminar {
     text-align: center;
     margin: 2px 2px;
     padding: 5px 0px;
@@ -216,10 +216,10 @@ table tbody tr:hover {
     width: 60px;
     background-color: rgba(1, 1, 1);
 }
-#aceptar a {
+#eliminar a {
     color: white;
 }
-#aceptar:hover {
+#eliminar:hover {
     background-color: #685cfe;
 }
 

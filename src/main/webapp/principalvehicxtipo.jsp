@@ -114,7 +114,8 @@
 			/* con esto recupero lo que mando del servlet: idTipoVehiculo */
 			int idTipoVehiculo=((Number)request.getAttribute("idTipoVehiculo")).intValue();  
 			
-		  	LinkedList<Vehiculo> listVehicxTipo = tvehiclog.getAllVehiculosporTipo(idTipoVehiculo);				
+			//LinkedList<Vehiculo> listVehicxTipo = tvehiclog.getAllVehiculosporTipo(idTipoVehiculo);
+		  	LinkedList<Vehiculo> listVehicxTipo = tvehiclog.getAllVehiculosDispPorTipo(idTipoVehiculo);				
 		  	
 			for (Vehiculo vehic : listVehicxTipo) {	
 			%>
@@ -127,7 +128,8 @@
 					<td data-label="PASAJEROS"><%=vehic.getPasajeros()%></td>
 
 					<td data-label="COLOR"><%=vehic.getColor()%></td>
-					<td data-label="ESTADO"><%=vehic.isEstado()%></td>
+					<%-- <td data-label="ESTADO"><%=vehic.isEstado()%></td> --%>
+					<td data-label="ESTADO">Disponible</td>
 
 					<td data-label="PRECIOxKM"><%=vehic.getPrecio()%></td>
 					<td data-label="MATRICULA"><%=vehic.getMatricula()%></td>

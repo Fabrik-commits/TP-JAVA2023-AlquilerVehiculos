@@ -137,7 +137,11 @@
         <div class="input-contenedor">
          
          <div class="titulo">Estado:</div>
-         <input type="text" name="txtestado" placeholder="Estado">
+			<select name="txtestado" id="tipovehiculo" style="margin-left: 3px;">
+				<option value="">-----------------------------</option>
+				<option value="true">Disponible</option>
+				<option value="false">No Disponible</option>				
+			</select>
          
         </div>
         
@@ -150,7 +154,7 @@
 			<div class="input-contenedor">
 				
 				<div class="titulo">Precio:</div>
-				<input type="text" name="txtprecio" placeholder="Precio x Km">
+				<input type="text" name="txtprecio" placeholder="Precio">
 				
 			</div>
 			 

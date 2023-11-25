@@ -135,11 +135,8 @@ public class VehiculoData {
 			stmt.setBoolean(6, vehic.isEstado());
 			stmt.setDouble(7, vehic.getPrecio());
 			stmt.setString(8, vehic.getMatricula());
-			stmt.setDouble(9, vehic.getCapacidadMaxima());
-			
-			stmt.setInt(10, vehic.getTipoVehiculo().getId());
-
-			
+			stmt.setDouble(9, vehic.getCapacidadMaxima());			
+			stmt.setInt(10, vehic.getTipoVehiculo().getId());		
 			stmt.setInt(11, vehic.getIdVehiculo());
 			
 //			System.out.println(stmt.executeUpdate());

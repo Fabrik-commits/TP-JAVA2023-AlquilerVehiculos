@@ -90,12 +90,28 @@ public class AlquilerData {
 			stmt.setDouble(1, alq.getKmFin());
 
 //			stmt.setDate(2, alq.getFechaEntrega());
-			String fec_entrega = alq.getFechaEntrega().toString();
-			stmt.setDate(2, java.sql.Date.valueOf(fec_entrega));
+			
+//			String fec_entrega = alq.getFechaEntrega().toString();
+//			stmt.setDate(2, java.sql.Date.valueOf(fec_entrega));
+			
+			if (alq.getFechaEntrega()==null) {
+				stmt.setObject(2, null); //o setDate
+			} else {
+				String fec_cancelacion = alq.getFechaEntrega().toString();
+				stmt.setDate(2, java.sql.Date.valueOf(fec_cancelacion));				
+			}			
 						
 //			stmt.setDate(3, alq.getFechaCancel());
-			String fec_cancelacion = alq.getFechaCancel().toString();
-			stmt.setDate(3, java.sql.Date.valueOf(fec_cancelacion));
+			
+//			String fec_cancelacion = alq.getFechaCancel().toString();
+//			stmt.setDate(3, java.sql.Date.valueOf(fec_cancelacion));
+			
+			if (alq.getFechaCancel()==null) {
+				stmt.setObject(3, null); //o setDate
+			} else {
+				String fec_cancelacion = alq.getFechaCancel().toString();
+				stmt.setDate(3, java.sql.Date.valueOf(fec_cancelacion));				
+			}
 			
 			stmt.setString(4, alq.getReclamoyObs());
 			stmt.setString(5, alq.getEstado());
@@ -183,24 +199,28 @@ public class AlquilerData {
 				String fec_inic = rs.getDate("fec_inic").toString();
 				LocalDate fecha_inicial = LocalDate.parse(fec_inic);					
 				alq.setFechaInic(fecha_inicial);
-				
-				if (rs.getDate("fec_fin").toString()!=null) {
+
+				if ((rs.getDate("fec_fin"))!=null) {
 					String fec_fin = rs.getDate("fec_fin").toString();
 					LocalDate fecha_final = LocalDate.parse(fec_fin);
 					alq.setFechaFin(fecha_final);
 				}
+//				(rs.getDate("fec_fin"))
+//				System.out.println(rs.getDate("fec_entrega"));
+//				System.out.println(rs.getDate("fec_entrega").toString());
+//				System.out.println();
 				
-				if ((rs.getDate("fec_entrega").toString())!=null) {
+				if ((rs.getDate("fec_entrega"))!=null) {
 					String fec_entrega = rs.getDate("fec_entrega").toString();
 					LocalDate fecha_entrega = LocalDate.parse(fec_entrega);					
 					alq.setFechaEntrega(fecha_entrega);
 				}
-				
+
 				alq.setKmInic(rs.getDouble("kms_inic"));
-				alq.setKmFin(rs.getDouble("kms_fin"));//aca estaba el error
+				alq.setKmFin(rs.getDouble("kms_fin"));
 				alq.setImporte(rs.getDouble("importe"));
 				
-				if ((rs.getDate("fec_cancelacion").toString())!=null) {
+				if ((rs.getDate("fec_cancelacion"))!=null) {
 					String fec_cancelacion = rs.getDate("fec_cancelacion").toString();
 					LocalDate fecha_cancelacion = LocalDate.parse(fec_cancelacion);					
 					alq.setFechaCancel(fecha_cancelacion);

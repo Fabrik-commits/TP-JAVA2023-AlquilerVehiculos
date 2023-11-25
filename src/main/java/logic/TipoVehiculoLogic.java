@@ -26,6 +26,12 @@ private TipoVehiculoData tvd;
 		return tvd.getAllVehiculosporTipo(id);
 		
 	}
+	//
+	public LinkedList<Vehiculo> getAllVehiculosDispPorTipo(int id){
+		
+		return tvd.getAllVehiculosDispPorTipo(id);
+		
+	}
 	
 	public TipoVehiculo getById(int id) {
 		

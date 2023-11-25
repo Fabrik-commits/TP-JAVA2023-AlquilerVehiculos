@@ -148,7 +148,17 @@
         <div class="input-contenedor">
          
          <div class="titulo">Estado:</div>
-         <input type="text" name="txtestado" value="<%= vehic.isEstado()%>" placeholder="Estado">
+         <%-- <input type="text" name="txtestado" value="<%= vehic.isEstado()%>" placeholder="Estado"> --%>
+         	<select name="txtestado" id="tipovehiculo" style="margin-left: 3px;">
+         		<%if(vehic.isEstado()==true){%>
+				<option value="true">Disponible</option><%-- value="<%=vehic.isEstado()%>" (otra manera a probar)--%>
+				<%}%>
+				<%if(vehic.isEstado()==false){%>
+				<option value="false">No Disponible</option>
+				<%}%>
+				<option value="true">Disponible</option>
+				<option value="false">No Disponible</option>				
+			</select>
          
         </div>
         
@@ -161,7 +171,7 @@
 			<div class="input-contenedor">
 				
 				<div class="titulo">Precio x Km:</div>
-				<input type="text" name="txtprecio" value="<%= vehic.getPrecio()%>" placeholder="Precio x Km">
+				<input type="text" name="txtprecio" value="<%= vehic.getPrecio()%>" placeholder="Precio">
 				
 			</div>
 			 

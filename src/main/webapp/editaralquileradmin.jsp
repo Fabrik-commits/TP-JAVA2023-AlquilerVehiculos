@@ -144,6 +144,7 @@
 						tVehic = tVehicLog.getById(idTipoVehic);
 					%>
 					<input type="text" placeholder="Tipo Vehiculo" value="<%=tVehic.getDescripcion()%>">
+					
 				</div>
 			</div>
 			
@@ -160,6 +161,7 @@
 						
 					</div>
 					<input type="text" placeholder="Vehiculo" value="<%=vehic.getMarcayModelo()%> <%=vehic.getColor()%>">
+					<div><input type="hidden" name="idVehiculo" value="<%=vehic.getIdVehiculo()%>"></div>
 				</div>
 			</div>
 

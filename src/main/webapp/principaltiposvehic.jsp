@@ -15,6 +15,23 @@
 	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 <link rel="stylesheet" href="estilos/estilostiposvehic.css">
 
+<%
+	/* Persona p = (Persona)session.getAttribute("usuario"); */
+	//System.out.println(request.getSession().getAttribute("rol1"));
+	//System.out.println();
+	//String rol1 = (String)request.getSession().getAttribute("rol1");
+	//System.out.println(rol1);
+	
+	//Todo este codigo de abajo es para validar si el usr es admin
+	Boolean rol1 = (Boolean)request.getSession().getAttribute("rol1");
+	Boolean rol2 = (Boolean)request.getSession().getAttribute("rol2");
+	if( !(rol1!=null && rol2!=null) ){
+		response.sendRedirect("loginvista.jsp");
+	}else if( !(rol1 && rol2) ){
+		request.getSession().invalidate();
+		response.sendRedirect("loginvista.jsp");
+	}
+%>
 
 </head>
 <body>
@@ -44,31 +61,38 @@
 				</li>
 				<li><a href="#">A B M Cs</a>
 					<ul>
+						<li><a href="#">Alquiler</a>
+							<ul>
+								<li><a href="alquileradmin.jsp">Alta</a></li>
+								<li><a href="principalbuscaralquileresxclte.jsp">Alquileres y Clientes</a></li>
+								
+							</ul>
+						</li>						
 						<li><a href="#">Persona</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="#">Personas</a></li>
+								<li><a href="altapersona.jsp">Alta</a></li>
+								<li><a href="ServletPersonas?accion=principalpersonas">Personas</a></li>
 								
 							</ul>
 						</li>
 						<li><a href="#">Rol</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="#">Roles</a></li>
+								<li><a href="ServletRoles?accion=altarol">Alta</a></li>
+								<li><a href="ServletRoles?accion=principalroles">Roles</a></li>
 								
 							</ul>
 						</li>
 						<li><a href="#">Vehiculo</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="#">Vehiculos</a></li>
+								<li><a href="ServletVehiculos?accion=altavehiculo">Alta</a></li>
+								<li><a href="ServletVehiculos?accion=principalvehic">Vehiculos</a></li>
 								
 							</ul>
 						</li>
 						<li><a href="#">Tipo Vehiculo</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="#">Tipos Vehiculo</a></li>
+								<li><a href="ServletTiposVehiculo?accion=add">Alta</a></li>
+								<li><a href="ServletTiposVehiculo?accion=principaltiposvehic">Tipos Vehiculo</a></li>
 								
 							</ul>
 						</li>
@@ -82,7 +106,7 @@
 						<li><a href="#">Tipos Vehiculos</a></li>
 					</ul>
 				</li>
-				<li><a href="#">Cerrar Sesion</a></li>
+				<li><a href="Signin?accion=cerrarsesion">Cerrar Sesion</a></li>
 			</ul>
 
 		</nav>
@@ -95,7 +119,7 @@
 		
 		<div id="main-container">
 		<div id="agregarnuevo">
-			<a href="ServletTiposVehiculo?accion=altatipovehiculo">Agregar Nuevo</a>
+			<a href="ServletTiposVehiculo?accion=add">Agregar Nuevo</a>
 		</div>
 		<table class="table">
 			<thead>

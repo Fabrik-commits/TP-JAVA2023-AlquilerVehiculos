@@ -18,10 +18,14 @@
 	//System.out.println();
 	//String rol1 = (String)request.getSession().getAttribute("rol1");
 	//System.out.println(rol1);
+	
+	//Todo este codigo de abajo es para validar si el usr es admin
 	Boolean rol1 = (Boolean)request.getSession().getAttribute("rol1");
 	Boolean rol2 = (Boolean)request.getSession().getAttribute("rol2");
-	//System.out.println(rol1);
-	if( !(rol1 && rol2) ){
+	if( !(rol1!=null && rol2!=null) ){
+		response.sendRedirect("loginvista.jsp");
+	}else if( !(rol1 && rol2) ){
+		request.getSession().invalidate();
 		response.sendRedirect("loginvista.jsp");
 	}
 %>
@@ -67,19 +71,19 @@
 							</ul></li>
 						<li><a href="#">Rol</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
+								<li><a href="ServletRoles?accion=altarol">Alta</a></li>
 								<li><a href="ServletRoles?accion=principalroles">Roles</a></li>
 
 							</ul></li>
 						<li><a href="#">Vehiculo</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
+								<li><a href="ServletVehiculos?accion=altavehiculo">Alta</a></li>
 								<li><a href="ServletVehiculos?accion=principalvehic">Vehiculos</a></li>
 
 							</ul></li>
 						<li><a href="#">Tipo Vehiculo</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
+								<li><a href="ServletTiposVehiculo?accion=add">Alta</a></li>
 								<li><a href="ServletTiposVehiculo?accion=principaltiposvehic">Tipos Vehiculo</a></li>
 
 							</ul></li>

@@ -12,6 +12,26 @@
 <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
 	<link rel="stylesheet" href="estilos/estilospersonas.css">
+	
+<%
+	/* Persona p = (Persona)session.getAttribute("usuario"); */
+	//System.out.println(request.getSession().getAttribute("rol1"));
+	//System.out.println();
+	//String rol1 = (String)request.getSession().getAttribute("rol1");
+	//System.out.println(rol1);
+	
+	//Todo este codigo de abajo es para validar si el usr es admin
+	Boolean rol11 = (Boolean)request.getSession().getAttribute("rol1");
+	Boolean rol22 = (Boolean)request.getSession().getAttribute("rol2");
+	if( !(rol11!=null && rol22!=null) ){
+		response.sendRedirect("loginvista.jsp");
+	}else if( !(rol11 && rol22) ){
+		request.getSession().invalidate();
+		response.sendRedirect("index2.jsp");
+	}
+
+%>	
+	
 </head>
 <body>
 
@@ -62,8 +82,8 @@
 						</li>
 						<li><a href="#">Tipo Vehiculo</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="#">Tipos Vehiculo</a></li>
+								<li><a href="ServletTiposVehiculo?accion=add">Alta</a></li>
+								<li><a href="ServletTiposVehiculo?accion=principaltiposvehic">Tipos Vehiculo</a></li>
 								
 							</ul>
 						</li>
@@ -77,7 +97,7 @@
 						<li><a href="#">Tipos Vehiculos</a></li>
 					</ul>
 				</li>
-				<li><a href="#">Cerrar Sesion</a></li>
+				<li><a href="Signin?accion=cerrarsesion">Cerrar Sesion</a></li>
 			</ul>
 
 		</nav>
@@ -91,6 +111,9 @@
 		<h1>Personas</h1>
 		
 		<div id="main-container">
+		<div style="text-align: center">
+			<input type="text" class="form-control" id="input-search" placeholder="Filtrar por apellido... " style="margin: 5px 0px 5px 8px; padding: 4px 0px 5px 5px; font-size: 14px;">
+		</div>		
 		<div id="agregarnuevo">
 			<a href="ServletPersonas?accion=altapersona">Agregar Nuevo</a>
 		</div>
@@ -118,10 +141,10 @@
 			rol1.setId(1);
 			rol2.setId(2);
 			for (Persona pers : listPers) {
-				if(pers.hasRol(rol1)){}
+/* 				if(pers.hasRol(rol1)){}
 				else{}
 				if(pers.hasRol(rol2)){}
-				else{}
+				else{} */
 			%>
 				<tr>
 					<td data-label="DNI"><%=pers.getDni()%></td>
@@ -155,6 +178,25 @@
 		</table>
 		</div>
 	</div>
-<script src="scripts/script.js"></script>
+	<script>
+		document.getElementById("input-search").addEventListener("input", onInputChange);
+		function onInputChange(){
+			let inputText = document.getElementById("input-search").value.toString().toLowerCase();
+			/*console.log(inputText);*/
+			let tableBody = document.getElementById("tbody-clientes");
+			let tableRows = tableBody.getElementsByTagName("tr");
+			/*console.log(tableRows);*/	
+			for (let i = 0; i < tableRows.length; i++) {
+				/*console.log(tableRows[i].cells[2].textContent);*/	
+				let textoConsulta = tableRows[i].cells[3].textContent.toString().toLowerCase();
+				if (textoConsulta.indexOf(inputText) === -1) {
+					tableRows[i].style.visibility = "collapse";
+				} else {
+					tableRows[i].style.visibility = "";
+				}	
+			}
+		}
+	</script>	
+<!-- <script src="scripts/script.js"></script> -->
 </body>
 </html>

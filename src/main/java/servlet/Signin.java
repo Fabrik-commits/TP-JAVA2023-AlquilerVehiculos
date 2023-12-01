@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.*;
 
 import entities.Persona;
 import entities.Rol;
@@ -30,6 +31,7 @@ public class Signin extends HttpServlet {
     }
     
     String loginvista = "loginvista.jsp";
+    String index2 ="index2.jsp";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -59,7 +61,13 @@ public class Signin extends HttpServlet {
 		String acceso="";		
 		String action=request.getParameter("accion");
 		
-		if (action.equalsIgnoreCase("Login")) {
+		if (action==null) {
+			acceso=loginvista;
+			RequestDispatcher vista=request.getRequestDispatcher(acceso);
+			vista.forward(request, response);
+		}
+		
+		else if (action.equalsIgnoreCase("Login")) {
 			if (pl.validate(per)!=null) {
 								
 				per = pl.validate(per);
@@ -75,7 +83,38 @@ public class Signin extends HttpServlet {
 				}
 				
 			}
+			else {
+				//aviso de clave o usu incorrecto
+				//JFrame f = new JFrame();
+				//JOptionPane.showMessageDialog(f,"Usuario o Clave incorrecta"); 
+				response.sendRedirect("loginvista2.jsp");
+			}
 		}
+		
+		else if (action.equalsIgnoreCase("Login2")) {
+			if (pl.validate(per)!=null) {
+								
+				per = pl.validate(per);
+				miSesion.setAttribute("nombre", per.getNombre());
+				miSesion.setAttribute("rol1", per.hasRol(rol1));
+				miSesion.setAttribute("rol2", per.hasRol(rol2));
+				//System.out.println( (per.getId()) );
+				if ( (per.hasRol(rol1)) && (per.hasRol(rol2)) ) {
+					request.getRequestDispatcher("principal.jsp").forward(request, response);
+				}
+				else if ( (per.hasRol(rol2)) ) {
+					request.getRequestDispatcher("principalcliente.jsp").forward(request, response);
+				}
+				
+			}
+			else {
+				//aviso de clave o usu incorrecto
+				//JFrame f = new JFrame();
+				//JOptionPane.showMessageDialog(f,"Usuario o Clave incorrecta"); 
+				response.sendRedirect("loginvista2.jsp");
+			}
+		}
+		
 		else if (action.equalsIgnoreCase("cerrarsesion")) {
 			miSesion.invalidate();
 			acceso=loginvista;
@@ -83,6 +122,18 @@ public class Signin extends HttpServlet {
 			//request.getRequestDispatcher(acceso).forward(request, response);
 			vista.forward(request, response);
 		}
+		
+
+		
+		
+		
+//		else if (action.equalsIgnoreCase("cerrarsesion")) {
+//			miSesion.invalidate();
+//			acceso=loginvista;
+//			RequestDispatcher vista=request.getRequestDispatcher(acceso);
+//			//request.getRequestDispatcher(acceso).forward(request, response);
+//			vista.forward(request, response);
+//		}
 				
 		//per = pl.validate(per);		
 		//request.getSession().setAttribute("usuario", per);

@@ -11,8 +11,8 @@
 	
 <%
 	Boolean rol2 = (Boolean)request.getSession().getAttribute("rol2");
-	if( !( rol2) ){
-	response.sendRedirect("loginvista.jsp");
+	if( !(rol2!=null) ){			//!(rol1!=null && rol2!=null)	!( rol2)
+	response.sendRedirect("index2.jsp");
 	}
 %>	
 	

@@ -29,7 +29,7 @@
 
 			<ul>
 				<li><a href="index.html">Inicio</a></li>
-				<li><a href="#">Reserva</a>
+				<li><a href="#">Alquiler</a>
 					<ul>
 						<li><a href="#">A B M C</a>
 							<ul>
@@ -43,31 +43,38 @@
 				</li>
 				<li><a href="#">A B M Cs</a>
 					<ul>
+						<li><a href="#">Alquiler</a>
+							<ul>
+								<li><a href="alquileradmin.jsp">Alta</a></li>
+								<li><a href="principalbuscaralquileresxclte.jsp">Alquileres y Clientes</a></li>
+								
+							</ul>
+						</li>						
 						<li><a href="#">Persona</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="principalpersonas.html">Personas</a></li>
+								<li><a href="altapersona.jsp">Alta</a></li>
+								<li><a href="ServletPersonas?accion=principalpersonas">Personas</a></li>
 								
 							</ul>
 						</li>
 						<li><a href="#">Rol</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="#">Roles</a></li>
+								<li><a href="ServletRoles?accion=altarol">Alta</a></li>
+								<li><a href="ServletRoles?accion=principalroles">Roles</a></li>
 								
 							</ul>
 						</li>
 						<li><a href="#">Vehiculo</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="#">Vehiculos</a></li>
+								<li><a href="ServletVehiculos?accion=altavehiculo">Alta</a></li>
+								<li><a href="ServletVehiculos?accion=principalvehic">Vehiculos</a></li>
 								
 							</ul>
 						</li>
 						<li><a href="#">Tipo Vehiculo</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="#">Tipos Vehiculo</a></li>
+								<li><a href="ServletTiposVehiculo?accion=add">Alta</a></li>
+								<li><a href="ServletTiposVehiculo?accion=principaltiposvehic">Tipos Vehiculo</a></li>
 								
 							</ul>
 						</li>
@@ -82,7 +89,7 @@
 						<li><a href="#">Tipos Vehiculos</a></li>
 					</ul>
 				</li>
-				<li><a href="#">Cerrar Sesion</a></li>
+				<li><a href="Signin?accion=cerrarsesion">Cerrar Sesion</a></li>
 			</ul>
 
 		</nav>

@@ -43,6 +43,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
     //String add="altaalqadmin.jsp";
     String alquileradmin="alquileradmin.jsp";
     String edit="editaralqadmin.jsp";
+    String login="loginvista.jsp";
     
     //Aca busca vehiculos disponibles
     String principalvehicxtipo="principalvehicxtipo.jsp";
@@ -61,7 +62,12 @@ public class ServletAlquilerAdmin extends HttpServlet {
 		String acceso="";
 		String action=request.getParameter("accion");
 		
-		if (action.equalsIgnoreCase("principalvehsxtipo")) {
+		if (action==null) {
+			acceso=login;
+//			RequestDispatcher vista=request.getRequestDispatcher(acceso);
+//			vista.forward(request, response);
+		}
+		else if (action.equalsIgnoreCase("principalvehsxtipo")) {
 		acceso=principalvehsxtipo;
 		}
 		else if (action.equalsIgnoreCase("BuscarVehi")) {
@@ -121,7 +127,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
 		}
 		else if (action.equalsIgnoreCase("Cancelar")) {
 			miSesion.invalidate();
-			acceso=alquileradmin;
+			acceso=login;
 		}
 		else if (action.equalsIgnoreCase("Aceptar")) {
 			Alquiler alq = new Alquiler();

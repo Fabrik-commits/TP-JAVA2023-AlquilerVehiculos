@@ -1,5 +1,6 @@
 <%
 	HttpSession miSesion = request.getSession();
+	/* HttpSession miSesion2 = request.getSession(); */
 %>
 <%-- <%@page import="java.time.LocalDateTime"%> --%>
 <%@page import="entities.Vehiculo"%>
@@ -27,21 +28,14 @@
     //Integer idVehiculo = (Integer)request.getAttribute("idVehic");
     Integer idVehiculo = (Integer)miSesion.getAttribute("idVehic");
     //Integer idPersona = (Integer)request.getAttribute("idPer");
-    Integer idPersona = (Integer)miSesion.getAttribute("idPer"); 
+    Integer idPersona = (Integer)miSesion.getAttribute("idPerqAlquila");
+    //Integer idPerqAlquila = (Integer)miSesion.getAttribute("idPerqAlquila");
     //Integer idPersona = (Integer)session.getAttribute("personaElegida"); //TODO session 
     Integer idTVSesion = (Integer)miSesion.getAttribute("idTVSesion");
     Double importeTotalVehic = (Double)request.getAttribute("importeTotal");
     String fechaInicial = (String)request.getAttribute("fecInit");
     String fechaFinal = (String)request.getAttribute("fecFin");
-//  Este codigo de abajo estoy probandolo 
-//if(Boolean.TRUE.equals(bool))  (Boolean.TRUE.equals(rol1))
-//	System.out.println(Boolean.toString(rol1));
-//	System.out.println();
-/* 	if( rol1!=null ){
-		response.sendRedirect("loginvista.jsp");
-	}   */	
-//	System.out.println(rol1);
-	
+
 	//Todo este codigo de abajo es para validar si el usr es admin
 	Boolean rol1 = (Boolean)request.getSession().getAttribute("rol1");
 	Boolean rol2 = (Boolean)request.getSession().getAttribute("rol2");	
@@ -50,13 +44,10 @@
 	}else if(!rol1 && !rol2){
 		miSesion.invalidate();
 		response.sendRedirect("loginvista.jsp");
-		//System.out.println("probando");
 	}    
 	%>
 </head>
 <body>
-<!-- int number = Integer.parseInt(str); -->
-<!-- int idVehiculo = Integer.parseInt(request.getAttribute("idVehic")); -->
 
     <header class="header">
 
@@ -138,7 +129,7 @@
 
 
 	 <div>
-	 <form class="formulario" action="ServletAlquilerAdmin">
+	 <form class="formulario" action="ServletAlquilerAdmin" id="myform" >
     
 	 <h1>Alquiler Admin</h1>
      <div class="contenedor">
@@ -331,13 +322,15 @@
 		<div class="agrupabotones">
 			<input type="submit" name="accion" value="Aceptar" class="button" id="btn_aceptar">
 			<input type="submit" name="accion" value="Cancelar" class="button">
+			<!-- <input type="reset" value="Limpiar formulario"> -->
 		</div>
 		
 		
      </div>
     </form>
 	</div>
-	<script src="scripts/btn.js"></script>
+
+	<!-- <script src="scripts/btn.js"></script> -->
 </body>
-<script src="scripts/script.js"></script>
+
 </html>

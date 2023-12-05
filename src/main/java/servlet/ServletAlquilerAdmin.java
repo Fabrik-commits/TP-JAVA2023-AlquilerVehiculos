@@ -71,6 +71,13 @@ public class ServletAlquilerAdmin extends HttpServlet {
 		acceso=principalvehsxtipo;
 		}
 		else if (action.equalsIgnoreCase("BuscarVehi")) {
+			if (request.getParameter("txtidtipovehiculo")=="") {
+				//acceso=alquileradmin;
+				//response.sendRedirect("alquileradmin.jsp");
+				acceso=alquileradmin;
+				RequestDispatcher vista=request.getRequestDispatcher(acceso);
+				vista.forward(request, response);
+			}
 			int idTipoVehiculo = Integer.parseInt(request.getParameter("txtidtipovehiculo"));
 			//el idTipoVehiculo es seteado 
 			request.setAttribute("idTipoVehiculo", idTipoVehiculo); //esta linea seria reemplazada por la de abajo
@@ -96,7 +103,8 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			int idPer = Integer.parseInt(request.getParameter("id"));//viene de la tabla persona
 			//request.setAttribute("idPer", idPer);
 			//request.getSession().setAttribute("personaElegida",idPer); //TODO session guia del profe
-			miSesion.setAttribute("idPer", idPer);			
+			miSesion.setAttribute("idPer", idPer);
+			miSesion.setAttribute("idPerqAlquila", idPer);
 			acceso=alquileradmin;
 		}
 		else if (action.equalsIgnoreCase("clienteelegido")) {
@@ -128,6 +136,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
 		else if (action.equalsIgnoreCase("Cancelar")) {
 			miSesion.invalidate();
 			acceso=login;
+			//acceso=alquileradmin;
 		}
 		else if (action.equalsIgnoreCase("Aceptar")) {
 			Alquiler alq = new Alquiler();
@@ -256,7 +265,11 @@ public class ServletAlquilerAdmin extends HttpServlet {
 //			alq.setReclamoyObs(recyobs);
 //			alq.setEstado(estado);//			
 			alqLog.add(alq);
-			miSesion.invalidate();
+			//miSesion.invalidate();
+			//miSesion.removeAttribute("idPer");
+			miSesion.removeAttribute("idPerqAlquila");
+			miSesion.removeAttribute("idTVSesion");
+			miSesion.removeAttribute("idVehic");
 			acceso=alquileradmin;
 		}
 		else if (action.equalsIgnoreCase("alquilerelegido")) {

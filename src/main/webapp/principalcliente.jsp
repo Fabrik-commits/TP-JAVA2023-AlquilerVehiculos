@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="estilos/estilos2.css">
 	
 <%
+	//Todo este codigo de abajo es para validar si el usr es solo cliente
 	Boolean rol2 = (Boolean)request.getSession().getAttribute("rol2");
 	if( !(rol2!=null) ){			//!(rol1!=null && rol2!=null)	!( rol2)
 	response.sendRedirect("index2.jsp");

@@ -1,3 +1,17 @@
+<%
+	HttpSession miSesion = request.getSession();
+	/* HttpSession miSesion2 = request.getSession(); */
+%>
+<%-- <%@page import="java.time.LocalDateTime"%> --%>
+<%@page import="entities.Vehiculo"%>
+<%@page import="logic.VehiculoLogic"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="entities.TipoVehiculo"%>
+<%@page import="logic.TipoVehiculoLogic"%>
+<%@page import="logic.PersonaLogic"%>
+<%@page import="entities.Persona"%>
+<%@page import="entities.Alquiler"%>
+<%@page import="java.time.LocalDate"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -8,6 +22,23 @@
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
 	<link rel="stylesheet" href="estilos/estilosalquiler.css">
+<%    
+    Integer idVehiculo = (Integer)miSesion.getAttribute("idVehic");
+    Integer idPersona = (Integer)miSesion.getAttribute("idUsr");
+    Integer idTVSesion = (Integer)miSesion.getAttribute("idTVSesion");
+    Double importeTotalVehic = (Double)request.getAttribute("importeTotal");
+    String fechaInicial = (String)request.getAttribute("fecInit");
+    String fechaFinal = (String)request.getAttribute("fecFin");
+
+	//Todo este codigo de abajo es para validar si el usr es usr simple
+	Boolean rol2 = (Boolean)request.getSession().getAttribute("rol2");	
+	if( !( rol2!=null) ){
+		response.sendRedirect("loginvista.jsp");
+	}else if(!rol2){
+		miSesion.invalidate();
+		response.sendRedirect("loginvista.jsp");
+	}    
+%>	
 </head>
 <body>
 
@@ -74,7 +105,7 @@
 						<li><a href="#">Tipos Vehiculos</a></li>
 					</ul>
 				</li>
-				<li><a href="#">Cerrar Sesion</a></li>
+				<li><a href="Signin?accion=cerrarsesion">Cerrar Sesion</a></li>
 			</ul>
 
 		</nav>
@@ -82,9 +113,9 @@
 	</header>
 	
 	 <div>
-	 <form class="formulario">
+	 <form class="formulario" action="ServletAlquilerUsuario" >
     
-	 <h1>Alquiler Admin</h1>
+	 <h1>Alquiler Usuario</h1>
      <div class="contenedor">
 
 		<div class="agrupainput">
@@ -94,7 +125,17 @@
 					<div class="agrupabotonesBusc">
 						
 					</div>
-					<input type="text" placeholder="Cliente">
+					<%
+					PersonaLogic plog = new PersonaLogic();
+					Persona per = new Persona();
+					if(idPersona!=null){
+						per = plog.getById(idPersona);
+						//request.getSession().setAttribute("clienteBuscado", per);
+						//request.getSession().getAttribute("clienteBuscado");
+					}
+					%>					
+					<input type="text" placeholder="Cliente" name="cliente" value="<%=idPersona==null?"":per.getApellido() %> <%=idPersona==null?"":per.getNombre()%> <%=idPersona==null?"":per.getDni()%>">
+					<div><input type="hidden" name="idPers" value="<%=per.getId()%>"></div>
 				</div>
 			</div>
 
@@ -102,11 +143,27 @@
 				<div class="agrupainputtipov">
 					<label for="">Tipo Vehic:</label>
 					
-					<select name="" id="tipovehiculo" style="margin: 13px 0px 0px -20px;">
+					<select name="txtidtipovehiculo" id="tipovehiculo" style="margin: 13px 0px 0px -20px;">
 						<option value="">-----------------------------</option>
-						<option value="">Camion   c/Acomplado</option>
-						<option value="">Chata</option>
-						<option value="">Camion   Simple</option>
+						
+					<%
+					if(idTVSesion!=null){
+						TipoVehiculoLogic tvl = new TipoVehiculoLogic();
+						TipoVehiculo tve = new TipoVehiculo();
+						tve = tvl.getById(idTVSesion);
+					%>
+					<option selected="selected" value=<%=tve.getId()%>><%=tve.getDescripcion()%></option>
+					<%
+					}
+					%>	
+													
+					<% 
+					TipoVehiculoLogic tvl = new TipoVehiculoLogic();
+					LinkedList<TipoVehiculo> listtv = tvl.getAllTiposVehiculo();
+					for (TipoVehiculo tve : listtv) {				
+					%>
+					<option value="<%=tve.getId()%>"><%=tve.getDescripcion()%></option>
+					<% } %>
 					</select>
 					
 				</div>
@@ -122,15 +179,24 @@
 			<div class="input-contenedor">	
 				<div class="agrupainputtipov">
 					<div class="agrupabotonesBusc">
-						<input type="button" value="BuscarVehi" class="buttonCliVe" onclick=mostrarPrincipal()>
+						<input type="submit" name="accion" value="BuscarVehi" class="buttonCliVe">
 					</div>
-					<input type="text" placeholder="Vehiculo">
+					<%
+						VehiculoLogic vl = new VehiculoLogic();
+						Vehiculo vehic = new Vehiculo();
+						if(idVehiculo!=null)
+						{
+							vehic = vl.getById(idVehiculo);
+						}
+					%>
+					<input type="text" placeholder="Vehiculo" name="vehiculo" value="<%=idVehiculo==null?"":vehic.getMarcayModelo()%> <%=idVehiculo==null?"":vehic.getColor()%>">
+					<div><input type="hidden" name="idVehiculo" value="<%=vehic.getIdVehiculo()%>"></div>
 				</div>
 			</div>
 
 			<div class="input-contenedor">	
 				<div class="agrupainputtipov">
-					<div class="titulo">Senia: </div><div style="margin: -1px -54px 0px 54px;"><input type="text" placeholder="Senia"></div>
+					<div class="titulo">Senia: </div><div style="margin: -1px -54px 0px 54px;"><input type="text" name="senia" placeholder="Senia"></div>
 					
 				</div>
 			</div>
@@ -143,19 +209,19 @@
 
 			<div class="input-contenedor">
 			 
-				<div class="titulo">Fecha inic:</div> <div class="date"><input type="date"></div>
+				<div class="titulo">Fecha inic:</div> <div class="date"><input type="date" min="<%=LocalDate.now()%>" name="fecInic" value=<%=fechaInicial==null?"":fechaInicial%>></div>
 				
 			</div>
 
 			<div class="input-contenedor">
 				
-				<div class="titulo">Fecha fin: </div> <div class="date"><input type="date"></div>
+				<div class="titulo">Fecha fin: </div> <div class="date"><input type="date" min="<%=LocalDate.now().plusDays(1)%>" name="fecFin" value=<%=fechaFinal==null?"":fechaFinal%>></div>
 				
 			</div>
 
 			<div class="input-contenedor">
 				
-				<input type="button" value="Calcula Importe" class="buttonCalcImp"><div style="margin: 0px -46px 0px 1px;"><input type="text" placeholder="Importe"></div>
+				<input type="submit" name="accion" value="CalculaImporte" class="buttonCalcImp"><div style="margin: 0px -46px 0px 1px;"><input type="text" name="importe" placeholder="Importe" value=<%=importeTotalVehic==null?"":importeTotalVehic%>></div>
 			
 			</div>
 
@@ -167,20 +233,20 @@
 
 			<div class="input-contenedor">
 				
-				<div class="titulo">Km_Inic: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" placeholder="Km_Inic"></div>
+				<div class="titulo">Km_Inic: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" name="kminic" placeholder="Km_Inic" value="<%=idVehiculo==null?"":vehic.getKilometraje()%>"></div>
 				
 			</div>	
 
 			<div class="input-contenedor">
 			
-				<div class="titulo">Km_Fin: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" placeholder="Km_Fin"></div>
+				<div class="titulo">Km_Fin: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" name="kmfin" placeholder="Km_Fin"></div>
 				
 			</div>
 	
 	
 			<div class="input-contenedor">
 				
-				<div class="titulo">Fecha entrega: </div> <div class="date"><input type="date"></div>
+				<div class="titulo">Fecha entrega: </div> <div class="date"><input type="date" name="fecentrega" disabled></div>
 				
 			</div>
 	
@@ -192,14 +258,14 @@
 
 			<div class="input-contenedor">
             
-				<div class="titulo">Fecha cancel: </div> <div class="date"><input type="date"></div>
+				<div class="titulo">Fecha cancel: </div> <div class="date"><input type="date" name="feccancel" disabled></div>
 				
 			</div>
 
 
 			<div class="input-contenedor">
 			 
-				<div class="titulo">Reclamos_Obs: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" placeholder="Reclamos_Obs"></div>
+				<div class="titulo">Reclamos_Obs: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" name="recyobs" placeholder="Reclamos_Obs"></div>
 			 
 			</div>
 			
@@ -207,18 +273,18 @@
 				<div class="agrupainputtipov">
 					<div class="input-contenedortipov1">
 					<div class="labeltipov"><div class="label1"><label for="tipovehiculo">Estado Alq:</label></div></div>
-					<div class="select">
+<!-- 					<div class="select">
 					<select name="" id="tipovehiculo">
 						<option value="">-----------------------------</option>
 						<option value="">Pendiente</option>
 						<option value="">En curso</option>
 						<option value="">Finalizado</option>
 						<option value="">Cancelado</option>
-					</select>
+					</select> -->
+					<input type="text" name="txtestado" placeholder="Estado Alq" value="<%=Alquiler.ESTADO_PENDIENTE%>">
 					</div>
-					</div>
-					
 				</div>
+					
 			</div>
 			
 			<div><input type="hidden"></div>
@@ -227,13 +293,14 @@
         		
 
 		<div class="agrupabotones">
-			<input type="button" value="Aceptar" class="button">
-			<input type="button" value="Cancelar" class="button">
+			<input type="submit" name="accion" value="Aceptar" class="button" id="btn_aceptar">
+			<input type="submit" name="accion" value="Cancelar" class="button">
 		</div>
 		
      </div>
     </form>
 	</div>	
-
+	<script src="scripts/script.js"></script>
+	<script src="scripts/btn.js"></script>
 </body>
 </html>

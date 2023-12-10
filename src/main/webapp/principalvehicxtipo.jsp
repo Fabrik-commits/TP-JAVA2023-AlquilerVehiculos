@@ -113,7 +113,7 @@
 			TipoVehiculoLogic tvehiclog = new TipoVehiculoLogic();
 			/* con esto recupero lo que mando del servlet: idTipoVehiculo */
 			int idTipoVehiculo=((Number)request.getAttribute("idTipoVehiculo")).intValue();  
-			
+			//ejemplo: Integer idPersona = (Integer)miSesion.getAttribute("idPerqAlquila");
 			//LinkedList<Vehiculo> listVehicxTipo = tvehiclog.getAllVehiculosporTipo(idTipoVehiculo);
 		  	LinkedList<Vehiculo> listVehicxTipo = tvehiclog.getAllVehiculosDispPorTipo(idTipoVehiculo);				
 		  	

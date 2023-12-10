@@ -51,6 +51,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
     String principalalquileresxclte="principalalquileresxclte.jsp";
     String editaralquileradmin="editaralquileradmin.jsp";
     String principal="principal.jsp";
+    String alquilerusuario="alquilerusuario.jsp";
      
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -80,8 +81,8 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			}
 			int idTipoVehiculo = Integer.parseInt(request.getParameter("txtidtipovehiculo"));
 			//el idTipoVehiculo es seteado 
-			request.setAttribute("idTipoVehiculo", idTipoVehiculo); //esta linea seria reemplazada por la de abajo
-			miSesion.setAttribute("idTVSesion", idTipoVehiculo);
+			request.setAttribute("idTipoVehiculo", idTipoVehiculo); //esta linea y la de abajo deberian ser una pero, habria que ......
+			miSesion.setAttribute("idTVSesion", idTipoVehiculo);    //modificar principalvehicxtipo.jsp 
 			acceso=principalvehicxtipo;
 		}
 		else if (action.equalsIgnoreCase("vehicelegido")) {
@@ -94,13 +95,22 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			//indicado porque tira error nullexception haciendo la busqueda
 			//en alquileradmin porque le falta el id
 			//request.setAttribute("idVehic", idVehic);
-			miSesion.setAttribute("idVehic", idVehic);
 			
-			//esa variable es enviada al input de vehiculo en alquileradmin
-			acceso=alquileradmin;
+			miSesion.setAttribute("idVehic", idVehic);		
+			//esa variable es enviada al input de vehiculo en alquileradmin o alquilerusuario
+			
+			Boolean rol1 = (Boolean)request.getSession().getAttribute("rol1");
+			Boolean rol2 = (Boolean)request.getSession().getAttribute("rol2");
+			if (rol1 && rol2) {
+				acceso=alquileradmin;
+			}
+			else if (rol2) {
+				acceso=alquilerusuario;
+			}
+			//acceso=alquileradmin;
 		}
 		else if (action.equalsIgnoreCase("personaelegida")) {
-			int idPer = Integer.parseInt(request.getParameter("id"));//viene de la tabla persona
+			int idPer = Integer.parseInt(request.getParameter("id"));//viene de la tabla principalclientes
 			//request.setAttribute("idPer", idPer);
 			//request.getSession().setAttribute("personaElegida",idPer); //TODO session guia del profe
 			miSesion.setAttribute("idPer", idPer);
@@ -134,9 +144,10 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			acceso=alquileradmin;
 		}
 		else if (action.equalsIgnoreCase("Cancelar")) {
-			miSesion.invalidate();
-			acceso=login;
-			//acceso=alquileradmin;
+			miSesion.removeAttribute("idPerqAlquila");
+			miSesion.removeAttribute("idTVSesion");
+			miSesion.removeAttribute("idVehic");
+			acceso=alquileradmin;
 		}
 		else if (action.equalsIgnoreCase("Aceptar")) {
 			Alquiler alq = new Alquiler();
@@ -345,14 +356,11 @@ public class ServletAlquilerAdmin extends HttpServlet {
 //				alq.setEstado(estado);
 //			}
 			//String idPersona = request.getParameter("idPers");
-			//System.out.println(idPersona);
-			//System.out.println();
+
 			alqLog.update(alq);
 			int idPersona = Integer.parseInt(idPer);//me esta devolviendo el idAlquiler
-//			System.out.println(idPersona);
 			request.setAttribute("idPers", idPersona);
 			acceso=principalalquileresxclte;
-			//acceso=principal;
 		}
 				
 		RequestDispatcher vista=request.getRequestDispatcher(acceso);

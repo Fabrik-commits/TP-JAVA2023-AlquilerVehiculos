@@ -71,6 +71,7 @@ public class Signin extends HttpServlet {
 			if (pl.validate(per)!=null) {
 								
 				per = pl.validate(per);
+				miSesion.setAttribute("idUsr", per.getId());
 				miSesion.setAttribute("nombre", per.getNombre());
 				miSesion.setAttribute("rol1", per.hasRol(rol1));
 				miSesion.setAttribute("rol2", per.hasRol(rol2));
@@ -95,6 +96,7 @@ public class Signin extends HttpServlet {
 			if (pl.validate(per)!=null) {
 								
 				per = pl.validate(per);
+				miSesion.setAttribute("idUsr", per.getId());
 				miSesion.setAttribute("nombre", per.getNombre());
 				miSesion.setAttribute("rol1", per.hasRol(rol1));
 				miSesion.setAttribute("rol2", per.hasRol(rol2));

@@ -137,7 +137,7 @@ public class AlquilerData {
 		LinkedList<Alquiler> alquileresxClte = new LinkedList<>();
 		
 		try {//cargar AlquileresXClte.jsp
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select alquiler.id, alquiler.fec_inic, tipovehiculo.descripcion, vehiculo.marcaymodelo, vehiculo.color from alquiler inner join vehiculo on alquiler.id_vehiculo=vehiculo.id inner join tipovehiculo on vehiculo.idtipovehiculo=tipovehiculo.id inner join persona on alquiler.id_persona=persona.id where persona.id=?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select alquiler.id, alquiler.fec_inic, tipovehiculo.descripcion, vehiculo.marcaymodelo, vehiculo.color, alquiler.estado from alquiler inner join vehiculo on alquiler.id_vehiculo=vehiculo.id inner join tipovehiculo on vehiculo.idtipovehiculo=tipovehiculo.id inner join persona on alquiler.id_persona=persona.id where persona.id=?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			
@@ -157,6 +157,8 @@ public class AlquilerData {
 					alq.getVehiculo().setTipoVehiculo(new TipoVehiculo());
 					alq.getVehiculo().getTipoVehiculo().setDescripcion(rs.getString("descripcion"));
 					
+					alq.setEstado(rs.getString("estado"));
+															
 					alquileresxClte.add(alq);
 				}
 			}

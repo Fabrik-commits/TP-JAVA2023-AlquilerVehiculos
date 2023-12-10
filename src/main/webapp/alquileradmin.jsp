@@ -174,9 +174,7 @@
 					<%
 					}
 					%>	
-					
-								
-
+													
 					<% 
 					TipoVehiculoLogic tvl = new TipoVehiculoLogic();
 					LinkedList<TipoVehiculo> listtv = tvl.getAllTiposVehiculo();
@@ -329,8 +327,8 @@
      </div>
     </form>
 	</div>
-
-	<!-- <script src="scripts/btn.js"></script> -->
+	<script src="scripts/script.js"></script>
+	<script src="scripts/btn.js"></script>
 </body>
 
 </html>

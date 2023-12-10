@@ -4,3 +4,6 @@ function mostrarPrincipal(){
 function mostrarPrincipalClientes(){
     window.location="principalclientes.jsp";
 }
+function mostrarPrincipalAlquileresxCliente(){
+    window.location="principalalquileresxclteUsur.jsp";
+}

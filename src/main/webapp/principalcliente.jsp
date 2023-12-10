@@ -14,7 +14,12 @@
 	Boolean rol2 = (Boolean)request.getSession().getAttribute("rol2");
 	if( !(rol2!=null) ){			//!(rol1!=null && rol2!=null)	!( rol2)
 	response.sendRedirect("index2.jsp");
-	}
+	}else if(!rol2){
+		request.getSession().invalidate();
+		response.sendRedirect("loginvista.jsp");
+	}  
+	
+	//Integer idUsr = (Integer)request.getSession().getAttribute("isUsr");
 %>	
 	
 </head>
@@ -34,8 +39,8 @@
 					<ul>
 						<li><a href="#">A B M C</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="#">Reservas</a></li>
+								<li><a href="alquilerusuario.jsp">Alta</a></li>
+								<li><a href="principalalquileresxclteUsur.jsp">Reservas</a></li>
 								
 							</ul>
 						</li>

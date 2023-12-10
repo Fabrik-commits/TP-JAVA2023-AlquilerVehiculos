@@ -33,7 +33,7 @@ Integer idPersona = (Integer)request.getSession().getAttribute("idUsr");
 		<nav class="navigation">
 
 			<ul>
-				<li><a href="#">Inicio</a></li>
+				<li><a href="principalcliente.jsp">Inicio</a></li>
 				<li><a href="#">Reserva</a>
 					<ul>
 						<li><a href="#">A B M C</a>

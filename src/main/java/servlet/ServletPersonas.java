@@ -37,6 +37,7 @@ public class ServletPersonas extends HttpServlet {
     String principalpersonas="principalpersonas.jsp";
     String add="altapersona.jsp";
     String edit="editarpersona.jsp";
+    String loginvista="loginvista.jsp";
 
 
 	/**
@@ -55,6 +56,33 @@ public class ServletPersonas extends HttpServlet {
 		else if (action.equalsIgnoreCase("altapersona")) {
 			acceso=add;
 		}
+		else if (action.equalsIgnoreCase("Registrate")) {
+			Persona pers = new Persona();
+			PersonaLogic plogic = new PersonaLogic();
+			
+			String nombre = request.getParameter("txtnombre");
+			String apellido = request.getParameter("txtapellido");
+			String direccion = request.getParameter("txtdireccion");
+			String dni = request.getParameter("txtdni");
+			String telefono = request.getParameter("txttelefono");
+			String email = request.getParameter("txtemail");
+			String password = request.getParameter("txtpassword");
+			
+			pers.setNombre(nombre);
+			pers.setApellido(apellido);
+			pers.setDireccion(direccion);
+			pers.setDni(dni);
+			pers.setTel(telefono);
+			pers.setEmail(email);
+			pers.setPassword(password);
+			
+			Rol rol2 = new Rol();
+			rol2.setId(2);
+			pers.addRol(rol2);	
+			
+			plogic.add(pers);
+			acceso=loginvista;
+		}		
 		else if (action.equalsIgnoreCase("Agregar")) {
 			Persona pers = new Persona();
 			PersonaLogic plogic = new PersonaLogic();

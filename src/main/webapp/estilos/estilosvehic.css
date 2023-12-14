@@ -286,6 +286,21 @@ table tbody tr:hover {
     background-color: #685cfe;
 }
 
+#actualizar {
+    text-align: center;
+    margin: 2px 2px;
+    padding: 5px 5px;
+    border-radius: 5px;
+    width: 60px;
+    background-color: rgba(1, 1, 1);
+}
+#actualizar a {
+    color: white;
+}
+#actualizar:hover {
+    background-color: #685cfe;
+}
+
 #contenedorlinks {
     display: inline-flex;
 }

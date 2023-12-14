@@ -57,6 +57,8 @@ public class VehiculoData {
 		return listveh;
 	}
 	
+	
+	
 //	public LinkedList<Vehiculo> getAllVehicTipo() {
 //		
 //		LinkedList<Vehiculo> listveh = new LinkedList<Vehiculo>();
@@ -64,7 +66,42 @@ public class VehiculoData {
 //		
 //	}
 	
-
+	public LinkedList<Vehiculo> getAllVehicNoDisp(){
+		
+		Statement stmt = null;
+		ResultSet rs = null;
+		LinkedList<Vehiculo> listveh = new LinkedList<Vehiculo>();
+		
+		try {
+			stmt = DbConnector.getInstancia().getConn().createStatement();
+			rs = stmt.executeQuery("select vehiculo.id, vehiculo.idtipovehiculo, vehiculo.marcaymodelo, vehiculo.color, vehiculo.estado, vehiculo.matricula, tipovehiculo.descripcion from vehiculo inner join tipovehiculo on vehiculo.idtipovehiculo=tipovehiculo.id where vehiculo.estado=0");
+			if (rs!=null) {
+				while (rs.next()) {
+					Vehiculo veh = new Vehiculo();					
+					veh.setTipoVehiculo(new TipoVehiculo());
+					
+					veh.setIdVehiculo(rs.getInt("id"));
+					
+					veh.getTipoVehiculo().setId(rs.getInt("vehiculo.idtipovehiculo"));
+					veh.getTipoVehiculo().setDescripcion(rs.getString("tipovehiculo.descripcion"));//rs.getString("tipovehiculo.descripcion") tipovehiculo.descripcion
+					
+					veh.setMarcayModelo(rs.getString("marcaymodelo"));
+					veh.setColor(rs.getString("color"));
+			    	veh.setEstado(rs.getBoolean("estado"));
+					veh.setMatricula(rs.getString("matricula"));
+					
+					//TipoVehiculo tVehic = new TipoVehiculo();
+					//tVehic.setDescripcion(rs.getString("descripcion"));
+								
+					listveh.add(veh);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return listveh;
+		
+		}
 	
 	public Vehiculo getById(int id) {
 		Vehiculo vehic=null;

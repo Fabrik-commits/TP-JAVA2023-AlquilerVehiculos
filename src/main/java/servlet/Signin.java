@@ -116,7 +116,6 @@ public class Signin extends HttpServlet {
 				response.sendRedirect("loginvista2.jsp");
 			}
 		}
-		
 		else if (action.equalsIgnoreCase("cerrarsesion")) {
 			miSesion.invalidate();
 			acceso=loginvista;

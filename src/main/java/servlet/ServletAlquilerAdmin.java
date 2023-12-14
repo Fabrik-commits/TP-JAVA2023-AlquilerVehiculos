@@ -330,18 +330,28 @@ public class ServletAlquilerAdmin extends HttpServlet {
 //				alq.setFechaCancel(LocalDate.parse(feccancel));
 //			}
 			if (feccancel!="") {
-				alq.setFechaEntrega(LocalDate.parse(feccancel));
+				alq.setFechaCancel(LocalDate.parse(feccancel));
 				estado="Cancelado";
 				alq.setEstado(estado);
-			}
-			
-			if ((fecentrega!="")|| (feccancel!="")) {
 				VehiculoLogic vl = new VehiculoLogic();
 				Vehiculo vehic = new Vehiculo();				
 				int idVehiculo = Integer.parseInt(request.getParameter("idVehiculo"));
 				vehic = vl.getById(idVehiculo);
 				vehic.setEstado(true);
 				vl.update(vehic);
+			}
+			
+			if (fecentrega!="") {     //(fecentrega!="")|| (feccancel!="") el vehic estara disponible despues que tecnico revise el auto
+				alq.setFechaEntrega(LocalDate.parse(fecentrega));
+				estado="Finalizado";
+				alq.setEstado(estado);
+//				VehiculoLogic vl = new VehiculoLogic();
+//				Vehiculo vehic = new Vehiculo();				
+//				int idVehiculo = Integer.parseInt(request.getParameter("idVehiculo"));
+//				vehic = vl.getById(idVehiculo);
+//				vehic.setEstado(true);
+//				vl.update(vehic);
+				
 			}
 			
 			if (recyobs=="") {

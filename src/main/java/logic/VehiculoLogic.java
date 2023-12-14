@@ -14,6 +14,10 @@ public class VehiculoLogic {
 		vehicd = new VehiculoData();
 	}
 	
+	public LinkedList<Vehiculo> getAllVehicNoDisp() {
+		return vehicd.getAllVehicNoDisp();
+	}
+	
 	public LinkedList<Vehiculo> getAll() {
 		return vehicd.getAll();
 	}

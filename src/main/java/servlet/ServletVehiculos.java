@@ -32,6 +32,7 @@ public class ServletVehiculos extends HttpServlet {
     String principalvehic="principalvehic.jsp";
     String add="altavehiculo.jsp";
     String edit="editarvehiculo.jsp";
+    String principalvehicnodisp="principalvehicnodisp.jsp";
 
 
 	/**
@@ -129,6 +130,15 @@ public class ServletVehiculos extends HttpServlet {
 			vlogic.update(vehic);
 			acceso=principalvehic;
 		}
+		else if (action.equalsIgnoreCase("estado")) {
+			Vehiculo vehic = new Vehiculo();
+			VehiculoLogic vlogic = new VehiculoLogic();
+			int id = Integer.parseInt(request.getParameter("id"));
+			vehic = vlogic.getById(id);
+			vehic.setEstado(true);
+			vlogic.update(vehic);
+			acceso=principalvehicnodisp;
+		}		
 		else if (action.equalsIgnoreCase("eliminarvehiculo")) {
 			Vehiculo vehic = new Vehiculo();
 			VehiculoLogic vehicl = new VehiculoLogic();

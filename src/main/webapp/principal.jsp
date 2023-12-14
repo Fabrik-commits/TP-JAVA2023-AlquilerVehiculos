@@ -93,7 +93,12 @@
 						<li><a href="#">Personas</a></li>
 						<li><a href="#">Roles</a></li>
 						<li><a href="#">Reservas</a></li>
-						<li><a href="#">Vehiculos</a></li>
+						<li><a href="#">Vehiculos</a>
+							<ul>
+								<li><a href="principalvehicnodisp.jsp">Vehiculos no Disponibles</a></li>
+								<li><a href="#">Vehiculos Temp</a></li>								
+							</ul>						
+						</li>
 						<li><a href="#">Tipos Vehiculos</a></li>
 					</ul></li>
 				<li><a href="Signin?accion=cerrarsesion">Cerrar Sesion</a></li>

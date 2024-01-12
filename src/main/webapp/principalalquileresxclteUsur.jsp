@@ -38,7 +38,7 @@ Integer idPersona = (Integer)request.getSession().getAttribute("idUsr");
 					<ul>
 						<li><a href="#">A B M C</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
+								<li><a href="alquilerusuario.jsp">Alta</a></li>
 								<li><a href="#">Reserva</a></li>
 								
 							</ul>

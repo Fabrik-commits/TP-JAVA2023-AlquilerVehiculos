@@ -57,7 +57,7 @@
 						<li><a href="#">A B M C</a>
 							<ul>
 								<li><a href="#">Alta</a></li>
-								<li><a href="#">Reservas</a></li>
+								<li><a href="principalalquileresxclteUsur.jsp">Reservas</a></li>
 								
 							</ul>
 						</li>

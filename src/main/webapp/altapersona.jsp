@@ -40,9 +40,9 @@
 		<nav class="navigation">
 
 			<ul>
-				<li><a href="index.html">Inicio</a></li>
+				<li><a href="principal.jsp">Inicio</a></li>
 				<li><a href="#">Reserva</a>
-					<ul>
+<!-- 					<ul>
 						<li><a href="#">A B M C</a>
 							<ul>
 								<li><a href="#">Alta</a></li>
@@ -51,7 +51,7 @@
 							</ul>
 						</li>
 						
-					</ul>
+					</ul> -->
 				</li>
 				<li><a href="#">A B M Cs</a>
 					<ul>
@@ -64,22 +64,22 @@
 						</li>					
 						<li><a href="#">Persona</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
+								<li><a href="altapersona.jsp">Alta</a></li>
 								<li><a href="principalpersonas.html">Personas</a></li>
 								
 							</ul>
 						</li>
 						<li><a href="#">Rol</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="#">Roles</a></li>
+								<li><a href="ServletRoles?accion=altarol">Alta</a></li>
+								<li><a href="ServletRoles?accion=principalroles">Roles</a></li>
 								
 							</ul>
 						</li>
 						<li><a href="#">Vehiculo</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="#">Vehiculos</a></li>
+								<li><a href="ServletVehiculos?accion=altavehiculo">Alta</a></li>
+								<li><a href="ServletVehiculos?accion=principalvehic">Vehiculos</a></li>
 								
 							</ul>
 						</li>

@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Persona;
 import entities.Rol;
-import entities.Vehiculo;
+//import entities.Vehiculo;
 import logic.PersonaLogic;
-import logic.VehiculoLogic;
+//import logic.VehiculoLogic;
 
 //import entities.TipoVehiculo;
 //import entities.Vehiculo;

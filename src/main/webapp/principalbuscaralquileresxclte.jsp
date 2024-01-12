@@ -36,7 +36,7 @@ if( !(rol1!=null && rol2!=null) ){
 			<ul>
 				<li><a href="principal.jsp">Inicio</a></li>
 				<li><a href="#">Reserva</a>
-					<ul>
+<!-- 					<ul>
 						<li><a href="#">A B M C</a>
 							<ul>
 								<li><a href="#">Alta</a></li>
@@ -45,7 +45,7 @@ if( !(rol1!=null && rol2!=null) ){
 							</ul>
 						</li>
 						
-					</ul>
+					</ul> -->
 				</li>
 				<li><a href="#">A B M Cs</a>
 					<ul>

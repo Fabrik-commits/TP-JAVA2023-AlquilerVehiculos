@@ -10,9 +10,11 @@ public class DbConnector {
 	
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	private String host = "localhost";
+	//private String host = "node165126-alquilervehiculos.jelastic.saveincloud.net";
 	private String port = "3306";
 	private String user = "root";
 	private String password = "root";
+	//private String password = "BQYafd30913";
 	private String db = "alqvehiculos";
 	private int conectados = 0;
 	private Connection conn = null;

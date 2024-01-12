@@ -43,9 +43,9 @@
 		<nav class="navigation">
 
 			<ul>
-				<li><a href="index.html">Inicio</a></li>
+				<li><a href="#">Inicio</a></li>
 				<li><a href="#">Alquiler</a>
-					<ul>
+<!-- 					<ul>
 						<li><a href="#">A B M C</a>
 							<ul>
 								<li><a href="#">Alta</a></li>
@@ -53,7 +53,7 @@
 
 							</ul></li>
 
-					</ul></li>
+					</ul> --></li>
 				<li><a href="#">A B M Cs</a>
 					<ul>
 						<li><a href="#">Alquiler</a>

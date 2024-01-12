@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Rol;
-import entities.TipoVehiculo;
+//import entities.TipoVehiculo;
 import logic.RolLogic;
-import logic.TipoVehiculoLogic;
+//import logic.TipoVehiculoLogic;
 
 /**
  * Servlet implementation class ServletRoles

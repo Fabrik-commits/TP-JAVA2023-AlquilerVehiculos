@@ -10,7 +10,7 @@ import java.util.LinkedList;
 //import entities.Documento;
 import entities.Persona;
 import entities.Rol;
-import entities.Vehiculo;
+//import entities.Vehiculo;
 
 public class PersonaData {
 	
@@ -235,7 +235,7 @@ public class PersonaData {
 	//public Persona getByDocumento(Persona per) falta
 	
 	public LinkedList<Rol> getRolesByPersona(int idPer){//roles por persona
-		RolData dr=new RolData();
+		//RolData dr=new RolData();
 		Rol rol=null;
 		PreparedStatement stmt=null;
 		ResultSet rs = null;

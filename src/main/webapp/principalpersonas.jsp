@@ -132,7 +132,7 @@
 				</tr>
 			</thead>
 			
-			<tbody>
+			<tbody id="tbody-clientes">
 			<%
 			PersonaLogic perLog = new PersonaLogic();
 			LinkedList<Persona> listPers = perLog.getAll();	
@@ -188,7 +188,7 @@
 			/*console.log(tableRows);*/	
 			for (let i = 0; i < tableRows.length; i++) {
 				/*console.log(tableRows[i].cells[2].textContent);*/	
-				let textoConsulta = tableRows[i].cells[3].textContent.toString().toLowerCase();
+				let textoConsulta = tableRows[i].cells[2].textContent.toString().toLowerCase();
 				if (textoConsulta.indexOf(inputText) === -1) {
 					tableRows[i].style.visibility = "collapse";
 				} else {

@@ -63,6 +63,7 @@ public class ServletAlquilerUsuario extends HttpServlet {
 				vista.forward(request, response);
 			}
 			int idTipoVehiculo = Integer.parseInt(request.getParameter("txtidtipovehiculo"));
+			System.out.println();
 			request.setAttribute("idTipoVehiculo", idTipoVehiculo);
 			miSesion.setAttribute("idTVSesion", idTipoVehiculo);
 			acceso=principalvehicxtipo;

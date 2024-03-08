@@ -212,19 +212,14 @@
 			
 		</div>
 
-        
-		
-
-	
-
 		<div class="agrupabotones">
-			<input type="button" value="Aceptar" class="button" onclick=mostrarPrincipal()>
+			<input type="submit" name="accion" value="Aceptar" class="button" id="btn_aceptar">
 			<input type="button" value="Cancelar" class="button" onclick=mostrarPrincipal()>
 		</div>
 		
      </div>
     </form>
 	</div>
-
+	<script src="scripts/btn.js"></script>
 </body>
 </html>

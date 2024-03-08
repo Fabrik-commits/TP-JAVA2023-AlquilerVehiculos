@@ -7,3 +7,10 @@ function mostrarPrincipalClientes(){
 function mostrarPrincipalAlquileresxCliente(){
     window.location="principalalquileresxclteUsur.jsp";
 }
+
+/*var btnaceptarUsr = document.getElementById('btn_aceptarUsr');
+btnaceptarUsr.addEventListener("click", clicked);
+
+function clicked() {
+	alert('Se guardo de la manera correcta');
+}*/

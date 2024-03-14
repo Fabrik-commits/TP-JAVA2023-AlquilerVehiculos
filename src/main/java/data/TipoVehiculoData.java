@@ -26,7 +26,7 @@ public class TipoVehiculoData {
 					TipoVehiculo tv=new TipoVehiculo();
 					tv.setId(rs.getInt("id"));
 					tv.setDescripcion(rs.getString("descripcion"));
-					tv.setCosto(rs.getDouble("costo"));
+					//tv.setCosto(rs.getDouble("costo"));
 					tiposVehiculo.add(tv);
 				}
 			}
@@ -167,7 +167,7 @@ public class TipoVehiculoData {
 				tipov=new TipoVehiculo();
 				tipov.setId(rs.getInt("id"));
 				tipov.setDescripcion(rs.getString("descripcion"));
-				tipov.setCosto(rs.getDouble("costo"));
+				//tipov.setCosto(rs.getDouble("costo"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -190,9 +190,9 @@ public class TipoVehiculoData {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"update tipovehiculo set descripcion=?, costo=? where id=?");
+							"update tipovehiculo set descripcion=? where id=?");
 			stmt.setString(1, tv.getDescripcion());
-			stmt.setDouble(2, tv.getCosto());
+			//stmt.setDouble(2, tv.getCosto());
 			stmt.setInt(3, tv.getId());
 			stmt.executeUpdate();
 			
@@ -217,11 +217,11 @@ public class TipoVehiculoData {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement(
-							"insert into tipovehiculo(descripcion, costo) values(?,?)",
+							"insert into tipovehiculo(descripcion) values(?)",
 							PreparedStatement.RETURN_GENERATED_KEYS
 							);
 			stmt.setString(1, tipov.getDescripcion());
-			stmt.setDouble(2, tipov.getCosto());			
+			//stmt.setDouble(2, tipov.getCosto());			
 						
 			stmt.executeUpdate();
 			
@@ -279,7 +279,7 @@ public class TipoVehiculoData {
 				tipov=new TipoVehiculo();
 				tipov.setId(rs.getInt("id"));
 				tipov.setDescripcion(rs.getString("descripcion"));
-				tipov.setCosto(rs.getDouble("costo"));
+				//tipov.setCosto(rs.getDouble("costo"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

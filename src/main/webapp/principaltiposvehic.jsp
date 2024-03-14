@@ -91,7 +91,7 @@
 						</li>
 						<li><a href="#">Tipo Vehiculo</a>
 							<ul>
-								<li><a href="ServletTiposVehiculo?accion=add">Alta</a></li>
+								<li><a href="ServletTiposVehiculo?accion=altatipovehiculo">Alta</a></li>
 								<li><a href="ServletTiposVehiculo?accion=principaltiposvehic">Tipos Vehiculo</a></li>
 								
 							</ul>
@@ -119,14 +119,14 @@
 		
 		<div id="main-container">
 		<div id="agregarnuevo">
-			<a href="ServletTiposVehiculo?accion=add">Agregar Nuevo</a>
+			<a href="ServletTiposVehiculo?accion=altatipovehiculo">Agregar Nuevo</a>
 		</div>
 		<table class="table">
 			<thead>
 				<tr>
 					<th>ID</th>
 					<th>DESCRIPCION</th>
-					<th>PRECIO</th>
+					<!-- <th>PRECIO</th> -->
 					<th>ACCIONES</th>	
 				</tr>
 			</thead>
@@ -141,7 +141,7 @@
 				<tr>
 					<td data-label="ID"><%=tve.getId()%></td>
 					<td data-label="DESCRIPCION"><%=tve.getDescripcion()%></td>
-					<td data-label="PRECIO"><%=tve.getCosto()%></td>
+					<%-- <td data-label="PRECIO"><%=tve.getCosto()%></td> --%>
 					
 					<td data-label="ACCIONES">
 						<div id="contenedorlinks">

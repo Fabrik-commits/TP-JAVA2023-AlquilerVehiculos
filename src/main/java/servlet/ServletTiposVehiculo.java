@@ -47,14 +47,15 @@ public class ServletTiposVehiculo extends HttpServlet {
 		}
 		else if (action.equalsIgnoreCase("altatipovehiculo")) {
 			acceso=add;
+			//System.out.println();
 		}
 		else if (action.equalsIgnoreCase("Agregar")) {
 			TipoVehiculo tv = new TipoVehiculo();
 			TipoVehiculoLogic tvl = new TipoVehiculoLogic();
 			String descripcion=request.getParameter("txtdescripcion");
-			String costo=request.getParameter("txtcosto");
+			//String costo=request.getParameter("txtcosto");
 			tv.setDescripcion(descripcion);
-			tv.setCosto(Double.parseDouble(costo));
+			//tv.setCosto(Double.parseDouble(costo));
 			tvl.add(tv);
 			acceso=principaltiposvehic;
 		}
@@ -67,10 +68,10 @@ public class ServletTiposVehiculo extends HttpServlet {
 			TipoVehiculoLogic tvl = new TipoVehiculoLogic();
 			int id = Integer.parseInt(request.getParameter("txtid"));
 			String descripcion = request.getParameter("txtdescripcion");
-			String costo = request.getParameter("txtcosto");
+			//String costo = request.getParameter("txtcosto");
 			tv.setId(id);
 			tv.setDescripcion(descripcion);
-			tv.setCosto(Double.parseDouble(costo));
+			//tv.setCosto(Double.parseDouble(costo));
 			tvl.update(tv);
 			acceso=principaltiposvehic;
 		}

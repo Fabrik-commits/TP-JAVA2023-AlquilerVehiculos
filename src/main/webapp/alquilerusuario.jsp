@@ -65,36 +65,7 @@
 					</ul>
 				</li>
 				<li><a href="#">A B M Cs</a>
-					<ul>
-						<li><a href="#">Persona</a>
-							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="principalpersonas.html">Personas</a></li>
-								
-							</ul>
-						</li>
-						<li><a href="#">Rol</a>
-							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="#">Roles</a></li>
-								
-							</ul>
-						</li>
-						<li><a href="#">Vehiculo</a>
-							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="#">Vehiculos</a></li>
-								
-							</ul>
-						</li>
-						<li><a href="#">Tipo Vehiculo</a>
-							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="#">Tipos Vehiculo</a></li>
-								
-							</ul>
-						</li>
-					</ul>
+
 				</li>
 				<li><a href="#">Informes</a>
 					<ul>

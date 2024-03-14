@@ -83,7 +83,7 @@
 							</ul></li>
 						<li><a href="#">Tipo Vehiculo</a>
 							<ul>
-								<li><a href="ServletTiposVehiculo?accion=add">Alta</a></li>
+								<li><a href="ServletTiposVehiculo?accion=altatipovehiculo">Alta</a></li>
 								<li><a href="ServletTiposVehiculo?accion=principaltiposvehic">Tipos Vehiculo</a></li>
 
 							</ul></li>

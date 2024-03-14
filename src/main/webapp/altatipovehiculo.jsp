@@ -84,7 +84,7 @@
 						</li>
 						<li><a href="#">Tipo Vehiculo</a>
 							<ul>
-								<li><a href="ServletTiposVehiculo?accion=add">Alta</a></li>
+								<li><a href="ServletTiposVehiculo?accion=altatipovehiculo">Alta</a></li>
 								<li><a href="ServletTiposVehiculo?accion=principaltiposvehic">Tipos Vehiculo</a></li>
 								
 							</ul>
@@ -119,11 +119,11 @@
          
          </div>
 
-		 <div class="input-contenedor">
+<!-- 		 <div class="input-contenedor">
          
 			<input type="text" name="txtcosto" placeholder="Costo">
 			
-		 </div>
+		 </div> -->
         
                   
          <div class="agrupabotones">

@@ -3,7 +3,7 @@ package entities;
 public class TipoVehiculo {
 	private int id;
 	private String descripcion;
-	private double costo;
+//	private double costo;
 //	private double senia;
 //	private double importe;
 //	private Reserva reserva;
@@ -26,13 +26,13 @@ public class TipoVehiculo {
 	
 	
 
-	public double getCosto() {
-		return costo;
-	}
-
-	public void setCosto(double costo) {
-		this.costo = costo;
-	}
+//	public double getCosto() {
+//		return costo;
+//	}
+//
+//	public void setCosto(double costo) {
+//		this.costo = costo;
+//	}
 	
 	
 	

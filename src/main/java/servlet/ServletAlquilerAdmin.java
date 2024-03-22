@@ -111,8 +111,6 @@ public class ServletAlquilerAdmin extends HttpServlet {
 		}
 		else if (action.equalsIgnoreCase("personaelegida")) {
 			int idPer = Integer.parseInt(request.getParameter("id"));//viene de la tabla principalclientes
-			//request.setAttribute("idPer", idPer);
-			//request.getSession().setAttribute("personaElegida",idPer); //TODO session guia del profe
 			miSesion.setAttribute("idPer", idPer);
 			miSesion.setAttribute("idPerqAlquila", idPer);
 			acceso=alquileradmin;
@@ -124,23 +122,29 @@ public class ServletAlquilerAdmin extends HttpServlet {
 		} 
 		else if (action.equalsIgnoreCase("CalculaImporte")) {
 			VehiculoLogic vlogic = new VehiculoLogic();
-			Vehiculo vehic = vlogic.getById(idVehicElegido);
-			double precio = vehic.getPrecio();
-					
+			
 			String fecInit = request.getParameter("fecInic");
 			String fecFin = request.getParameter("fecFin");
-			
-			request.setAttribute("fecInit", fecInit);
-			request.setAttribute("fecFin", fecFin);
-			
-			LocalDate fechaInic = LocalDate.parse(fecInit);
-			LocalDate fechaFin = LocalDate.parse(fecFin);
-			
-			long cantDias = ChronoUnit.DAYS.between(fechaInic, fechaFin);
 
-			Double importeTotal = cantDias*precio/730;
+			Vehiculo vehic = vlogic.getById(idVehicElegido);
 			
-			request.setAttribute("importeTotal", importeTotal);
+			if (vehic != null && fecInit != null && fecFin != null) {
+				System.out.println("vehiculo no es nulo");
+				double precio = vehic.getPrecio();
+				request.setAttribute("fecInit", fecInit);
+				request.setAttribute("fecFin", fecFin);
+				
+				LocalDate fechaInic = LocalDate.parse(fecInit);
+				LocalDate fechaFin = LocalDate.parse(fecFin);
+				
+				long cantDias = ChronoUnit.DAYS.between(fechaInic, fechaFin);
+
+				Double importeTotal = cantDias*precio/730;
+				
+				request.setAttribute("importeTotal", importeTotal);
+				
+			}
+
 			acceso=alquileradmin;
 		}
 		else if (action.equalsIgnoreCase("Cancelar")) {
@@ -153,31 +157,39 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			Alquiler alq = new Alquiler();
 			AlquilerLogic alqLog = new AlquilerLogic();
 			
-			//Persona pers;
-			Persona pers = new Persona();
 			PersonaLogic pl = new PersonaLogic();
 			int idPers = Integer.parseInt(request.getParameter("idPers"));			
-			pers = pl.getById(idPers);
+			Persona pers = pl.getById(idPers);
+
+			if (pers != null ) {
+				
+			}
 			
-			//Vehiculo vehic;
-			Vehiculo vehic = new Vehiculo();
 			VehiculoLogic vl = new VehiculoLogic();
 			int idVehiculo = Integer.parseInt(request.getParameter("idVehiculo"));
-			vehic = vl.getById(idVehiculo);
+			Vehiculo vehic = vl.getById(idVehiculo);
+			
+			if (pers != null && vehic != null) {
+				
+			}
+			
 			vehic.setEstado(false);
 			vl.update(vehic);
 			
 			String senia = request.getParameter("senia");
 			String fecInic = request.getParameter("fecInic");
 			String fecFin = request.getParameter("fecFin");
+			
+			if (pers != null && vehic != null && fecInic != null && fecFin != null) {
+				
+			}
+			
 			String importe = request.getParameter("importe");
 			
 			//vehic.getKilometraje();
 			String kminic = request.getParameter("kminic");
 			
 			String kmfin = request.getParameter("kmfin");
-			String fecentrega = request.getParameter("fecentrega");
-			String feccancel = request.getParameter("feccancel");
 			String recyobs = request.getParameter("recyobs");
 			String estado = request.getParameter("txtestado");
 			alq.setPersona(pers);
@@ -222,37 +234,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
 				alq.setKmFin(0.0);
 			} else {
 				alq.setKmFin(Double.parseDouble(kmfin));
-			}
-			
-			/*
-			 * if(fecentrega!=null || fecentrega!="") {
-			 * alq.setFechaEntrega(LocalDate.parse(fecentrega));
-			 * } 
-			 */
-			
-			//a modificar para probar en caso de null
-//			if (fecentrega=="") {
-//				alq.setFechaEntrega(LocalDate.now());//alq.setFechaFin(LocalDate.now());
-//				
-//			} else {
-//				alq.setFechaEntrega(LocalDate.parse(fecentrega));
-//			}
-			
-			if (!(fecentrega=="")) {
-				//alq.setFechaEntrega(LocalDate.parse(fecentrega));	no corresponde por ser alta alquiler
-				//System.out.println();
-			}
-			
-//			if (feccancel=="") {
-//				alq.setFechaCancel(LocalDate.now());
-//			} else {
-//				alq.setFechaCancel(LocalDate.parse(feccancel));
-//			}
-			
-			if (!(feccancel=="")) {
-				//alq.setFechaCancel(LocalDate.parse(feccancel)); no corresponde por ser alta alquiler 
-				//System.out.println();
-			}
+			}			
 			
 			if (recyobs=="") {
 				alq.setReclamoyObs("");
@@ -265,19 +247,9 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			} else {
 				alq.setEstado(estado);
 			}
-			//alq.setSenia(Double.parseDouble(senia));
-			//alq.setFechaInic(LocalDate.parse(fecInic));
-//			alq.setFechaFin(LocalDate.parse(fecFin));
-//			alq.setImporte(Double.parseDouble(importe));
-//			alq.setKmInic(Double.parseDouble(kminic));			
-//			alq.setKmFin(Double.parseDouble(kmfin));
-//			alq.setFechaEntrega(LocalDate.parse(fecentrega));
-//			alq.setFechaCancel(LocalDate.parse(feccancel));
-//			alq.setReclamoyObs(recyobs);
-//			alq.setEstado(estado);//			
+		
 			alqLog.add(alq);
-			//miSesion.invalidate();
-			//miSesion.removeAttribute("idPer");
+
 			miSesion.removeAttribute("idPerqAlquila");
 			miSesion.removeAttribute("idTVSesion");
 			miSesion.removeAttribute("idVehic");
@@ -299,7 +271,6 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			String fecentrega = request.getParameter("fecentrega");
 			String feccancel = request.getParameter("feccancel");
 			String recyobs = request.getParameter("recyobs");
-//			String estado = request.getParameter("txtestado");
 			String estado;
 
 			if (id=="") {
@@ -312,23 +283,13 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			} else {
 				alq.setKmFin(Double.parseDouble(Kmfin)); 
 			}
-			
-//			if (fecentrega=="") {
-//				alq.setFechaEntrega(LocalDate.now());
-//			} else {
-//				alq.setFechaEntrega(LocalDate.parse(fecentrega));
-//			}
+
 			if (fecentrega!="") {
 				alq.setFechaEntrega(LocalDate.parse(fecentrega));
 				estado="Finalizado";
 				alq.setEstado(estado);
 			}
-			
-//			if (feccancel=="") {
-//				alq.setFechaCancel(LocalDate.now());
-//			} else {
-//				alq.setFechaCancel(LocalDate.parse(feccancel));
-//			}
+
 			if (feccancel!="") {
 				alq.setFechaCancel(LocalDate.parse(feccancel));
 				estado="Cancelado";
@@ -344,14 +305,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			if (fecentrega!="") {     //(fecentrega!="")|| (feccancel!="") el vehic estara disponible despues que tecnico revise el auto
 				alq.setFechaEntrega(LocalDate.parse(fecentrega));
 				estado="Finalizado";
-				alq.setEstado(estado);
-//				VehiculoLogic vl = new VehiculoLogic();
-//				Vehiculo vehic = new Vehiculo();				
-//				int idVehiculo = Integer.parseInt(request.getParameter("idVehiculo"));
-//				vehic = vl.getById(idVehiculo);
-//				vehic.setEstado(true);
-//				vl.update(vehic);
-				
+		
 			}
 			
 			if (recyobs=="") {
@@ -359,13 +313,6 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			} else {
 				alq.setReclamoyObs(recyobs);
 			}
-			
-//			if (estado=="") {
-//				alq.setEstado("");
-//			} else {
-//				alq.setEstado(estado);
-//			}
-			//String idPersona = request.getParameter("idPers");
 
 			alqLog.update(alq);
 			int idPersona = Integer.parseInt(idPer);//me esta devolviendo el idAlquiler

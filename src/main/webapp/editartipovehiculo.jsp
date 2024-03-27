@@ -128,11 +128,11 @@
          
          </div>
 
-		 <div class="input-contenedor">
+<%-- 		 <div class="input-contenedor">
          
 			<input type="text" name="txtcosto" value="<%= tv.getCosto()%>" placeholder="Costo">
 			
-		 </div>
+		 </div> --%>
          
          <div><input type="hidden" name="txtid" value="<%= tv.getId()%>"></div>
                   

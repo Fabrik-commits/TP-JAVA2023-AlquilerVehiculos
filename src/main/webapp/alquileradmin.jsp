@@ -316,9 +316,9 @@
 			
 		</div>
 
-
+ 		<!-- id="btn_aceptar" -->
 		<div class="agrupabotones">
-			<input type="submit" name="accion" value="Aceptar" class="button" id="btn_aceptar">
+			<input type="submit" name="accion" value="Aceptar" class="button">
 			<input type="submit" name="accion" value="Cancelar" class="button">
 			<!-- <input type="reset" value="Limpiar formulario"> -->
 		</div>

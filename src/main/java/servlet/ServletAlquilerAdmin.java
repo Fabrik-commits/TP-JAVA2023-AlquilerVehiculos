@@ -52,6 +52,10 @@ public class ServletAlquilerAdmin extends HttpServlet {
     String editaralquileradmin="editaralquileradmin.jsp";
     String principal="principal.jsp";
     String alquilerusuario="alquilerusuario.jsp";
+    
+    String altaexitosa="altaexitosa.jsp";
+    String faltandatos="faltandatos.jsp";
+    String edicionexitosa="edicionexitosa.jsp";
      
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -149,7 +153,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
 		}
 		else if (action.equalsIgnoreCase("Cancelar")) {
 			miSesion.removeAttribute("idPerqAlquila");
-			miSesion.removeAttribute("idTVSesion");
+			//miSesion.removeAttribute("idTVSesion");
 			miSesion.removeAttribute("idVehic");
 			acceso=alquileradmin;
 		}
@@ -161,28 +165,45 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			int idPers = Integer.parseInt(request.getParameter("idPers"));			
 			Persona pers = pl.getById(idPers);
 
-			if (pers != null ) {
-				
-			}
+//			if (pers != null ) {
+//				
+//			}
 			
 			VehiculoLogic vl = new VehiculoLogic();
 			int idVehiculo = Integer.parseInt(request.getParameter("idVehiculo"));
 			Vehiculo vehic = vl.getById(idVehiculo);
 			
-			if (pers != null && vehic != null) {
-				
-			}
+//			if (pers != null && vehic != null) {
+//				
+//			}
 			
-			vehic.setEstado(false);
-			vl.update(vehic);
+//			vehic.setEstado(false);
+//			vl.update(vehic);
 			
 			String senia = request.getParameter("senia");
 			String fecInic = request.getParameter("fecInic");
 			String fecFin = request.getParameter("fecFin");
 			
-			if (pers != null && vehic != null && fecInic != null && fecFin != null) {
+			if (pers == null || vehic == null || fecInic == null || fecFin == null) {
+				acceso=faltandatos;
+				
+				RequestDispatcher vista=request.getRequestDispatcher(acceso);
+				//request.getRequestDispatcher(acceso).forward(request, response);
+				vista.forward(request, response);
+			} else {
+				vehic.setEstado(false);
+				vl.update(vehic);
+				
+				alq.setPersona(pers);
+				alq.getPersona().setId(idPers);
+				
+				alq.setVehiculo(vehic);
+				alq.getVehiculo().setIdVehiculo(idVehiculo);
 				
 			}
+//aca podes hacer el else para que se ejecute lo de abajo solo en ese caso			
+//			vehic.setEstado(false);
+//			vl.update(vehic);
 			
 			String importe = request.getParameter("importe");
 			
@@ -192,11 +213,11 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			String kmfin = request.getParameter("kmfin");
 			String recyobs = request.getParameter("recyobs");
 			String estado = request.getParameter("txtestado");
-			alq.setPersona(pers);
-			alq.getPersona().setId(idPers);
-			
-			alq.setVehiculo(vehic);
-			alq.getVehiculo().setIdVehiculo(idVehiculo);
+//			alq.setPersona(pers);
+//			alq.getPersona().setId(idPers);
+//			
+//			alq.setVehiculo(vehic);
+//			alq.getVehiculo().setIdVehiculo(idVehiculo);
 
 			if (fecInic=="") {
 				alq.setFechaFin(LocalDate.now());
@@ -247,13 +268,33 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			} else {
 				alq.setEstado(estado);
 			}
-		
-			alqLog.add(alq);
-
-			miSesion.removeAttribute("idPerqAlquila");
-			miSesion.removeAttribute("idTVSesion");
-			miSesion.removeAttribute("idVehic");
-			acceso=alquileradmin;
+			if (pers != null && vehic != null && fecInic != null && fecFin != null) {
+				alqLog.add(alq);
+			}	
+			//alqLog.add(alq);
+			int idAlq = 0;
+			if (pers != null && vehic != null && fecInic != null && fecFin != null) {
+				idAlq = alq.getId();
+			}			
+			//idAlq = alq.getId();
+			if (idAlq!=0) {
+				miSesion.removeAttribute("idPerqAlquila");
+				miSesion.removeAttribute("idTVSesion");
+				miSesion.removeAttribute("idVehic");
+				acceso=altaexitosa;
+			} //else {
+				//miSesion.removeAttribute("idPerqAlquila");
+				//miSesion.removeAttribute("idTVSesion");
+				//miSesion.removeAttribute("idVehic");
+				//acceso=alquileradmin;
+			//}
+			
+			
+//			miSesion.removeAttribute("idPerqAlquila");
+//			miSesion.removeAttribute("idTVSesion");
+//			miSesion.removeAttribute("idVehic");
+//			
+//			acceso=alquileradmin;
 		}
 		else if (action.equalsIgnoreCase("alquilerelegido")) {
 			int idAlq = Integer.parseInt(request.getParameter("id"));
@@ -323,6 +364,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
 		RequestDispatcher vista=request.getRequestDispatcher(acceso);
 		//request.getRequestDispatcher(acceso).forward(request, response);
 		vista.forward(request, response);
+		
 	}
 
 	/**

@@ -56,6 +56,8 @@ public class ServletAlquilerAdmin extends HttpServlet {
     String altaexitosa="altaexitosa.jsp";
     String faltandatos="faltandatos.jsp";
     String edicionexitosa="edicionexitosa.jsp";
+    
+    int verificador = 0; //para que no se ejecute el ultimo dispatcher
      
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -186,7 +188,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			
 			if (pers == null || vehic == null || fecInic == null || fecFin == null) {
 				acceso=faltandatos;
-				
+				verificador = 1;
 				RequestDispatcher vista=request.getRequestDispatcher(acceso);
 				//request.getRequestDispatcher(acceso).forward(request, response);
 				vista.forward(request, response);
@@ -360,10 +362,14 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			request.setAttribute("idPers", idPersona);
 			acceso=principalalquileresxclte;
 		}
-				
-		RequestDispatcher vista=request.getRequestDispatcher(acceso);
-		//request.getRequestDispatcher(acceso).forward(request, response);
-		vista.forward(request, response);
+		
+		if (verificador != 1) {
+			RequestDispatcher vista=request.getRequestDispatcher(acceso);
+			vista.forward(request, response);			
+		}
+//		RequestDispatcher vista=request.getRequestDispatcher(acceso);
+//		//request.getRequestDispatcher(acceso).forward(request, response);
+//		vista.forward(request, response);
 		
 	}
 

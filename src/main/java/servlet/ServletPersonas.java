@@ -38,7 +38,8 @@ public class ServletPersonas extends HttpServlet {
     String add="altapersona.jsp";
     String edit="editarpersona.jsp";
     String loginvista="loginvista.jsp";
-
+    
+    String altaexitosaPers="altaexitosaPers.jsp";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -116,8 +117,16 @@ public class ServletPersonas extends HttpServlet {
 						
 			//vehic.setTipoVehiculo(tvehic);
 						
-			plogic.add(pers);
-			acceso=principalpersonas;
+			
+			int idPers = 0;
+			if (pers.getApellido()!="" && pers.getNombre()!="" && pers.getDni()!="") {
+				plogic.add(pers);
+				idPers = pers.getId();
+			}
+			if (idPers != 0) {
+				acceso=altaexitosaPers;
+			}
+			//acceso=principalpersonas;
 		}
 		else if (action.equalsIgnoreCase("editarpersona")) {
 			request.setAttribute("id", request.getParameter("id"));

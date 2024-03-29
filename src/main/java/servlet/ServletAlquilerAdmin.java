@@ -39,7 +39,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     int idVehicElegido;//probando
-    String principalvehsxtipo="principalvehsxtipo.jsp";
+    //String principalvehsxtipo="principalvehsxtipo.jsp";
     //String add="altaalqadmin.jsp";
     String alquileradmin="alquileradmin.jsp";
     String edit="editaralqadmin.jsp";
@@ -74,9 +74,9 @@ public class ServletAlquilerAdmin extends HttpServlet {
 //			RequestDispatcher vista=request.getRequestDispatcher(acceso);
 //			vista.forward(request, response);
 		}
-		else if (action.equalsIgnoreCase("principalvehsxtipo")) {
-		acceso=principalvehsxtipo;
-		}
+//		else if (action.equalsIgnoreCase("principalvehsxtipo")) {
+//		acceso=principalvehsxtipo;
+//		}
 		else if (action.equalsIgnoreCase("BuscarVehi")) {
 			if (request.getParameter("txtidtipovehiculo")=="") {
 				//acceso=alquileradmin;

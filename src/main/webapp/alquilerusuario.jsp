@@ -264,14 +264,14 @@
         		
 
 		<div class="agrupabotones">
-			<input type="submit" name="accion" value="Aceptar" class="button" id="btn_aceptarUsr">
+			<input type="submit" name="accion" value="Aceptar" class="button">
 			<input type="submit" name="accion" value="Cancelar" class="button">
 		</div>
 		
      </div>
     </form>
 	</div>	
-	<script src="scripts/script2.js"></script>
+	<script src="scripts/script4.js"></script>
 	<!-- <script src="scripts/btn.js"></script> --> 
 </body>
 </html>

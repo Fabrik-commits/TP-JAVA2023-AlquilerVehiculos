@@ -12,10 +12,21 @@
 <body>
 	<form class="formulario">
     
-    <h1>Alta Exitosa</h1>
-    <div class="contenedor">
+    <h1>FALTAN DATOS: </h1>
+     <div class="contenedor">
+     
+     
+         
+         <div class="input-contenedor">
+            <p style="color:red">VEHICULO | FECHA INICIO | FECHA FIN</p>
+         </div>
+         
+         <div class="input-contenedor">
+         
+         </div>
          <input type="button" value="Aceptar" class="button" onclick=mostrarAlqUsr()>
-    </div>
+
+     </div>
     </form>
 </body>
 <script src="scripts/script4.js"></script>

@@ -39,8 +39,13 @@ public class ServletAlquilerUsuario extends HttpServlet {
     String datosalquilerusuario="datosalquilerusuario.jsp";
     String principalalquileresxclteUsur="principalalquileresxclteUsur.jsp";
     
+    String altaexitosausr="altaexitosausr.jsp";
+    String faltandatosusr="faltandatosusr.jsp";
+    
     //Aca busca vehiculos disponibles
     String principalvehicxtipo="principalvehicxtipo.jsp";
+    
+    int verificador = 0; //para que no se ejecute el ultimo dispatcher
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -63,7 +68,7 @@ public class ServletAlquilerUsuario extends HttpServlet {
 				vista.forward(request, response);
 			}
 			int idTipoVehiculo = Integer.parseInt(request.getParameter("txtidtipovehiculo"));
-			System.out.println();
+			//System.out.println();
 			request.setAttribute("idTipoVehiculo", idTipoVehiculo);
 			miSesion.setAttribute("idTVSesion", idTipoVehiculo);
 			acceso=principalvehicxtipo;
@@ -113,12 +118,27 @@ public class ServletAlquilerUsuario extends HttpServlet {
 			VehiculoLogic vl = new VehiculoLogic();
 			int idVehiculo = Integer.parseInt(request.getParameter("idVehiculo"));
 			vehic = vl.getById(idVehiculo);
-			vehic.setEstado(false);
-			vl.update(vehic);
+//			vehic.setEstado(false);
+//			vl.update(vehic);
 			
 			String senia = request.getParameter("senia");
 			String fecInic = request.getParameter("fecInic");
 			String fecFin = request.getParameter("fecFin");
+			
+			if (vehic == null || fecInic == null || fecFin == null) {
+				acceso=faltandatosusr;
+				verificador = 1;
+				RequestDispatcher vista=request.getRequestDispatcher(acceso);
+				//request.getRequestDispatcher(acceso).forward(request, response);
+				vista.forward(request, response);				
+			} else {
+				vehic.setEstado(false);
+				vl.update(vehic);
+				
+				alq.setVehiculo(vehic);
+				alq.getVehiculo().setIdVehiculo(idVehiculo);
+			}	
+			
 			String importe = request.getParameter("importe");
 			
 			//vehic.getKilometraje();
@@ -132,8 +152,8 @@ public class ServletAlquilerUsuario extends HttpServlet {
 			alq.setPersona(pers);
 			alq.getPersona().setId(idPers);
 			
-			alq.setVehiculo(vehic);
-			alq.getVehiculo().setIdVehiculo(idVehiculo);
+//			alq.setVehiculo(vehic);
+//			alq.getVehiculo().setIdVehiculo(idVehiculo);
 
 			if (fecInic=="") {
 				alq.setFechaFin(LocalDate.now());
@@ -214,20 +234,33 @@ public class ServletAlquilerUsuario extends HttpServlet {
 			} else {
 				alq.setEstado(estado);
 			}
-			
+			if (vehic != null && fecInic != null && fecFin != null) {
 			alqLog.add(alq);
-
-			miSesion.removeAttribute("idTVSesion");
-			miSesion.removeAttribute("idVehic");
-			acceso=alquilerusuario;
+			}
+			int idAlq = 0;
+			if (vehic != null && fecInic != null && fecFin != null) {
+				idAlq = alq.getId();
+			}
+			if (idAlq != 0) {
+				miSesion.removeAttribute("idTVSesion");
+				miSesion.removeAttribute("idVehic");
+				acceso=altaexitosausr;
+			}
+			
+			
+//			miSesion.removeAttribute("idTVSesion");
+//			miSesion.removeAttribute("idVehic");
+//			acceso=alquilerusuario;
 		}
 		else if (action.equalsIgnoreCase("Cancelar")) {
 			miSesion.removeAttribute("idTVSesion");
 			miSesion.removeAttribute("idVehic");
 			acceso=alquilerusuario;
-		}		
+		}
+		if (verificador != 1) {
 		RequestDispatcher vista=request.getRequestDispatcher(acceso);
 		vista.forward(request, response);
+		}
 	}
 
 	/**

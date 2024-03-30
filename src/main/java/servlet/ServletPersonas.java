@@ -40,6 +40,7 @@ public class ServletPersonas extends HttpServlet {
     String loginvista="loginvista.jsp";
     
     String altaexitosaPers="altaexitosaPers.jsp";
+    String eliminarpers="eliminarpers.jsp";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -170,9 +171,20 @@ public class ServletPersonas extends HttpServlet {
 			acceso=principalpersonas;
 		}
 		else if (action.equalsIgnoreCase("eliminarpersona")) {
+//			Persona pers = new Persona();
+//			PersonaLogic perLog = new PersonaLogic();
+//			int id = Integer.parseInt(request.getParameter("id"));
+//			pers.setId(id);
+//			perLog.remove(pers);
+//			acceso=principalpersonas;
+			int id = Integer.parseInt(request.getParameter("id"));
+			request.setAttribute("id", id);
+			acceso=eliminarpers;
+		}
+		else if (action.equalsIgnoreCase("Eliminar")) {
 			Persona pers = new Persona();
 			PersonaLogic perLog = new PersonaLogic();
-			int id = Integer.parseInt(request.getParameter("id"));
+			int id = Integer.parseInt(request.getParameter("idPers"));
 			pers.setId(id);
 			perLog.remove(pers);
 			acceso=principalpersonas;

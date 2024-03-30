@@ -41,7 +41,8 @@ public class ServletPersonas extends HttpServlet {
     
     String altaexitosaPers="altaexitosaPers.jsp";
     String eliminarpers="eliminarpers.jsp";
-
+    String faltandatosPers="faltandatosPers.jsp";
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -123,7 +124,16 @@ public class ServletPersonas extends HttpServlet {
 			if (pers.getApellido()!="" && pers.getNombre()!="" && pers.getDni()!="") {
 				plogic.add(pers);
 				idPers = pers.getId();
+			} 
+			if (pers.getApellido()=="" || pers.getNombre()=="" || pers.getDni()=="") {
+				acceso=faltandatosPers;
+//				RequestDispatcher vista=request.getRequestDispatcher(acceso);
+//				vista.forward(request, response);
 			}
+//			else {
+//				acceso=faltandatosPers;
+			
+//			}
 			if (idPers != 0) {
 				acceso=altaexitosaPers;
 			}

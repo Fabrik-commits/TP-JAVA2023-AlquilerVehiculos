@@ -165,6 +165,7 @@
          <div class="titulo">Estado:</div>
 			<select name="txtestado" id="tipovehiculo" style="margin-left: 3px;">
 				<option value="">-----------------------------</option>
+				<option selected="selected" value="true">Disponible</option>
 				<option value="true">Disponible</option>
 				<option value="false">No Disponible</option>				
 			</select>

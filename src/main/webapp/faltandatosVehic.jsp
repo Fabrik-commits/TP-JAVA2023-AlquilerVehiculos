@@ -12,10 +12,21 @@
 <body>
 	<form class="formulario">
     
-    <h1>Alta Exitosa Vehiculo</h1>
-    <div class="contenedor">
+    <h1>FALTAN DATOS VEHICULO: </h1>
+     <div class="contenedor">
+     
+     
+         
+         <div class="input-contenedor">
+            <p style="color:red">MARCA Y MODELO | MATRICULA | PRECIO | KILOMETRAJE | TIPO</p>
+         </div>
+         
+         <div class="input-contenedor">
+         
+         </div>
          <input type="button" value="Aceptar" class="button" onclick=mostrarPrincVehiculos()>
-    </div>
+
+     </div>
     </form>
 </body>
 <script src="scripts/script3.js"></script>

@@ -4,3 +4,6 @@ function mostrarAlqAdmin(){
 function mostrarPrincPersonas(){
 	window.location="principalpersonas.jsp";
 }
+function mostrarPrincVehiculos(){
+	window.location="principalvehic.jsp";
+}

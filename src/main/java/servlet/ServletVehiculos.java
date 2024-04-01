@@ -33,7 +33,8 @@ public class ServletVehiculos extends HttpServlet {
     String add="altavehiculo.jsp";
     String edit="editarvehiculo.jsp";
     String principalvehicnodisp="principalvehicnodisp.jsp";
-
+    String faltandatosVehic="faltandatosVehic.jsp";
+    String altaexitosavehiculo="altaexitosavehiculo.jsp";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -59,35 +60,67 @@ public class ServletVehiculos extends HttpServlet {
 			VehiculoLogic vlogic = new VehiculoLogic();
 			//int id = Integer.parseInt(request.getParameter("txtidtipovehiculo"));
 			String marcaymodelo = request.getParameter("txtmarcaymodelo");
-			int anio = Integer.parseInt(request.getParameter("txtanio"));
+//			if (request.getParameter("txtanio")!="") {
+//				int anio = Integer.parseInt(request.getParameter("txtanio"));
+//			}
+			String anio = request.getParameter("txtanio");
 			String kilometraje = request.getParameter("txtkilometraje");
-			int pasajeros = Integer.parseInt(request.getParameter("txtpasajeros"));
+//			int pasajeros = Integer.parseInt(request.getParameter("txtpasajeros"));
+			String pasajeros = request.getParameter("txtpasajeros");
 			String color = request.getParameter("txtcolor");
 			boolean estado = Boolean.valueOf(request.getParameter("txtestado"));
 			String precio = request.getParameter("txtprecio");
 			String matricula = request.getParameter("txtmatricula");
 			String capacidadmaxima = request.getParameter("txtcapacidadmaxima");
+			String idMiSelec =request.getParameter("miSelect");
+//			System.out.println(idMiSelec);
+//			System.out.println();
+//			int idtipovehiculo = Integer.parseInt(request.getParameter("miSelect"));
+			String idtipovehiculo = request.getParameter("miSelect");
+			if (idtipovehiculo!="") {
+				tvehic.setId(Integer.parseInt(idtipovehiculo));
+			}
+//			tvehic.setId(Integer.parseInt(idtipovehiculo));
 			
-			int idtipovehiculo = Integer.parseInt(request.getParameter("miSelect"));
-			tvehic.setId(idtipovehiculo);
-			
-			//vehic.setIdVehiculo(id);
-			vehic.setMarcayModelo(marcaymodelo);			
-			vehic.setAnio(anio);
+			//vehic.setIdVehiculo(id); vehic.setPasajeros(Integer.parseInt(pasajeros));
+			vehic.setMarcayModelo(marcaymodelo);
+			if (anio!="") {
+			vehic.setAnio(Integer.parseInt(anio));
+			}
 //			System.out.println(vehic.getAnio());
 //			System.out.println();
-			vehic.setKilometraje(Double.parseDouble(kilometraje));			
-			vehic.setPasajeros(pasajeros);
+			if (kilometraje!="") {
+			vehic.setKilometraje(Double.parseDouble(kilometraje));	
+			}
+//			vehic.setPasajeros(pasajeros);
+			if (pasajeros!="") {
+			vehic.setPasajeros(Integer.parseInt(pasajeros));
+			}
 			vehic.setColor(color);
 			vehic.setEstado(estado);
+			if (precio!="") {
 			vehic.setPrecio(Double.parseDouble(precio));
+			}
 			vehic.setMatricula(matricula);
+			if (capacidadmaxima!="") {
 			vehic.setCapacidadMaxima(Double.parseDouble(capacidadmaxima));
+			}
 			vehic.setTipoVehiculo(tvehic);
 			
+			int idVehic=0;
+			if (marcaymodelo!="" && precio!="" && kilometraje!="" && matricula!="" && idMiSelec!="") {
+				vlogic.add(vehic);
+				idVehic=vehic.getIdVehiculo();
+			}
+			if (idVehic != 0) {
+				acceso=altaexitosavehiculo;
+			}
+			if (marcaymodelo=="" || precio=="" || kilometraje=="" || matricula=="" || idMiSelec=="") {
+				acceso=faltandatosVehic;
+			}
 			
-			vlogic.add(vehic);
-			acceso=principalvehic;
+			//vlogic.add(vehic);
+			//acceso=principalvehic;
 		}
 		else if (action.equalsIgnoreCase("editarvehiculo")) {
 			request.setAttribute("idvehiculo", request.getParameter("id"));

@@ -35,6 +35,8 @@ public class ServletVehiculos extends HttpServlet {
     String principalvehicnodisp="principalvehicnodisp.jsp";
     String faltandatosVehic="faltandatosVehic.jsp";
     String altaexitosavehiculo="altaexitosavehiculo.jsp";
+    
+    String eliminarvehiculo="eliminarvehiculo.jsp";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -173,13 +175,22 @@ public class ServletVehiculos extends HttpServlet {
 			acceso=principalvehicnodisp;
 		}		
 		else if (action.equalsIgnoreCase("eliminarvehiculo")) {
-			Vehiculo vehic = new Vehiculo();
-			VehiculoLogic vehicl = new VehiculoLogic();
+//			Vehiculo vehic = new Vehiculo();
+//			VehiculoLogic vehicl = new VehiculoLogic();
+//			int id = Integer.parseInt(request.getParameter("id"));
+//			vehic.setIdVehiculo(id);
+//			vehicl.remove(id);
+//			acceso=principalvehic;
 			int id = Integer.parseInt(request.getParameter("id"));
-//			System.out.println(id);
-//			System.out.println();
+			request.setAttribute("id", id);
+			acceso=eliminarvehiculo;
+		}
+		else if (action.equalsIgnoreCase("Eliminar")) {
+			Vehiculo vehic = new Vehiculo();
+			VehiculoLogic vl = new VehiculoLogic();
+			int id = Integer.parseInt(request.getParameter("idVehic"));
 			vehic.setIdVehiculo(id);
-			vehicl.remove(id);
+			vl.remove(id);
 			acceso=principalvehic;
 		}
 		else if (action.equalsIgnoreCase("Cancelar")) {

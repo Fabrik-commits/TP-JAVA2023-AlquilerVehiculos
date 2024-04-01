@@ -7,7 +7,7 @@
 	<title>Insert title here</title>
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
-	<link rel="stylesheet" href="estilos/estilos.css">
+	<link rel="stylesheet" href="estilos/tipovehiculo.css">
 	<%
 		int id = (int)request.getAttribute("id");
 	%>	
@@ -24,7 +24,7 @@
 			 </div>
 								  
 			 <div class="agrupabotones">
-			    <input type="hidden" name="idPers" value="<%=id%>">
+			    <input type="hidden" name="idVehic" value="<%=id%>">
 				<input type="submit" name="accion" value="Eliminar" class="button">
 				<input type="button" value="Cancelar" class="button" onclick=mostrarPrincPersonas()>
 			</div>

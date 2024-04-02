@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Rol;
+import entities.TipoVehiculo;
 //import entities.TipoVehiculo;
 import logic.RolLogic;
 //import logic.TipoVehiculoLogic;
+import logic.TipoVehiculoLogic;
 
 /**
  * Servlet implementation class ServletRoles
@@ -32,6 +34,8 @@ public class ServletRoles extends HttpServlet {
     String principalroles="principalroles.jsp";
     String add="altarol.jsp";
     String edit="editarrol.jsp";
+    
+    String eliminarrol="eliminarrol.jsp";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -72,11 +76,22 @@ public class ServletRoles extends HttpServlet {
 			acceso=principalroles;
 		}
 		else if (action.equalsIgnoreCase("eliminarrol")) {
-			Rol rol = new Rol();
-			RolLogic rollog = new RolLogic();
+//			Rol rol = new Rol();
+//			RolLogic rollog = new RolLogic();
+//			int id = Integer.parseInt(request.getParameter("id"));
+//			rol.setId(id);
+//			rollog.remove(id);
+//			acceso=principalroles;
 			int id = Integer.parseInt(request.getParameter("id"));
+			request.setAttribute("id", id);
+			acceso=eliminarrol;			
+		}
+		else if (action.equalsIgnoreCase("Eliminar")) {
+			Rol rol = new Rol();
+			RolLogic rolLogic = new RolLogic();
+			int id = Integer.parseInt(request.getParameter("idRol"));
 			rol.setId(id);
-			rollog.remove(id);
+			rolLogic.remove(id);
 			acceso=principalroles;
 		}
 		RequestDispatcher vista=request.getRequestDispatcher(acceso);

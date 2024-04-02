@@ -7,3 +7,6 @@ function mostrarPrincPersonas(){
 function mostrarPrincVehiculos(){
 	window.location="principalvehic.jsp";
 }
+function mostrarPrincTiposVehic(){
+	window.location="principaltiposvehic.jsp";
+}

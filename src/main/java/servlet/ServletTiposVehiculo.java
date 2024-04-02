@@ -31,6 +31,9 @@ public class ServletTiposVehiculo extends HttpServlet {
     String principaltiposvehic="principaltiposvehic.jsp";
     String add="altatipovehiculo.jsp";
     String edit="editartipovehiculo.jsp";
+    
+    String altaexitosaTipoVehic="altaexitosaTipoVehic.jsp";
+    String faltadatoTipoVehic="faltadatoTipoVehic.jsp";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -51,13 +54,23 @@ public class ServletTiposVehiculo extends HttpServlet {
 		}
 		else if (action.equalsIgnoreCase("Agregar")) {
 			TipoVehiculo tv = new TipoVehiculo();
-			TipoVehiculoLogic tvl = new TipoVehiculoLogic();
+			TipoVehiculoLogic tvlogic = new TipoVehiculoLogic();
 			String descripcion=request.getParameter("txtdescripcion");
-			//String costo=request.getParameter("txtcosto");
 			tv.setDescripcion(descripcion);
-			//tv.setCosto(Double.parseDouble(costo));
-			tvl.add(tv);
-			acceso=principaltiposvehic;
+			
+			int idTVehic = 0;
+			if (descripcion!="") {
+				tvlogic.add(tv);
+				idTVehic = tv.getId();
+			}
+			if (idTVehic!=0) {
+				acceso=altaexitosaTipoVehic;
+			}
+			if (descripcion=="") {
+				acceso=faltadatoTipoVehic;
+			}
+			//tvlogic.add(tv);
+			//acceso=principaltiposvehic;
 		}
 		else if (action.equalsIgnoreCase("editartipovehiculo")) {
 			request.setAttribute("idtipovehiculo", request.getParameter("id"));

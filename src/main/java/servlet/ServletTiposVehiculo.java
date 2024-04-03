@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import entities.TipoVehiculo;
 import logic.TipoVehiculoLogic;
 
+import util.Valida;
+
 /**
  * Servlet implementation class ServletTiposVehiculo
  */
@@ -36,6 +38,8 @@ public class ServletTiposVehiculo extends HttpServlet {
     String faltadatoTipoVehic="faltadatoTipoVehic.jsp";
 
     String eliminarTipoVehic="eliminarTipoVehic.jsp";
+    
+    String formatoInvalidoTipoVehic="formatoInvalidoTipoVehic.jsp";
     
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -62,8 +66,14 @@ public class ServletTiposVehiculo extends HttpServlet {
 			
 			int idTVehic = 0;
 			if (descripcion!="") {
-				tvlogic.add(tv);
-				idTVehic = tv.getId();
+				if (Valida.isAlpha(descripcion)) {
+					tvlogic.add(tv);
+					idTVehic = tv.getId();					
+				} else {
+					acceso=formatoInvalidoTipoVehic;
+				}
+//				tvlogic.add(tv);
+//				idTVehic = tv.getId();
 			}
 			if (idTVehic!=0) {
 				acceso=altaexitosaTipoVehic;

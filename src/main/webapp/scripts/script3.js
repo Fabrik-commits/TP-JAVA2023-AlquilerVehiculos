@@ -13,3 +13,6 @@ function mostrarPrincTiposVehic(){
 function mostrarPrincRoles(){
 	window.location="principalroles.jsp";
 }
+function mostrarTiposVehic(){
+	window.location="principaltiposvehic.jsp";
+}

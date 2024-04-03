@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Rol;
-import entities.TipoVehiculo;
+//import entities.TipoVehiculo;
 //import entities.TipoVehiculo;
 import logic.RolLogic;
 //import logic.TipoVehiculoLogic;
-import logic.TipoVehiculoLogic;
+//import logic.TipoVehiculoLogic;
+
+import util.Valida;
 
 /**
  * Servlet implementation class ServletRoles
@@ -39,6 +41,8 @@ public class ServletRoles extends HttpServlet {
     
     String altaexitosaRol="altaexitosaRol.jsp";
     String faltadatoRol="faltadatoRol.jsp";
+    
+    String formatoInvalidoRol="formatoInvalidoRol.jsp";
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -68,8 +72,14 @@ public class ServletRoles extends HttpServlet {
 			rol.setDescripcion(descripcion);
 			int idRol = 0;
 			if (descripcion!="") {
-				rollog.add(rol);
-				idRol = rol.getId();
+				if (Valida.isAlpha(descripcion)) {
+					rollog.add(rol);
+					idRol = rol.getId();
+				} else {
+					acceso=formatoInvalidoRol;
+				}
+//				rollog.add(rol);
+//				idRol = rol.getId();
 			}
 			if (idRol!=0) {
 				acceso=altaexitosaRol;

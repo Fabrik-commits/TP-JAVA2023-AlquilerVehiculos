@@ -36,7 +36,9 @@ public class ServletRoles extends HttpServlet {
     String edit="editarrol.jsp";
     
     String eliminarrol="eliminarrol.jsp";
-
+    
+    String altaexitosaRol="altaexitosaRol.jsp";
+    String faltadatoRol="faltadatoRol.jsp";
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -54,12 +56,27 @@ public class ServletRoles extends HttpServlet {
 			acceso=add;
 		}
 		else if (action.equalsIgnoreCase("Agregar")) {
+//			Rol rol = new Rol();
+//			RolLogic rollog = new RolLogic();
+//			String descripcion=request.getParameter("txtdescripcion");
+//			rol.setDescripcion(descripcion);
+//			rollog.add(rol);
+//			acceso=principalroles;
 			Rol rol = new Rol();
 			RolLogic rollog = new RolLogic();
 			String descripcion=request.getParameter("txtdescripcion");
 			rol.setDescripcion(descripcion);
-			rollog.add(rol);
-			acceso=principalroles;
+			int idRol = 0;
+			if (descripcion!="") {
+				rollog.add(rol);
+				idRol = rol.getId();
+			}
+			if (idRol!=0) {
+				acceso=altaexitosaRol;
+			}
+			if (descripcion=="") {
+				acceso=faltadatoRol;
+			}			
 		}
 		else if (action.equalsIgnoreCase("editarrol")) {
 			request.setAttribute("idrol", request.getParameter("id"));

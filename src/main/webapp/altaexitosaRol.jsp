@@ -9,24 +9,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" >
 	<link rel="stylesheet" href="estilos/estilos.css">
 </head>
-<body>
 	<form class="formulario">
     
-    <h1>FALTA DATO TIPO VEHICULO: </h1>
-     <div class="contenedor">
-     
-     
-         
-         <div class="input-contenedor">
-            <p style="color:red">DESCRIPCION</p>
-         </div>
-         
-         <div class="input-contenedor">
-         
-         </div>
-         <input type="button" value="Aceptar" class="button" onclick=mostrarPrincTiposVehic()>
-
-     </div>
+    <h1>Alta Exitosa Rol</h1>
+    <div class="contenedor">
+         <input type="button" value="Aceptar" class="button" onclick=mostrarPrincRoles()>
+    </div>
     </form>
 </body>
 <script src="scripts/script3.js"></script>

@@ -13,6 +13,7 @@ import entities.Persona;
 import entities.Rol;
 //import entities.Vehiculo;
 import logic.PersonaLogic;
+import util.Valida;
 //import logic.VehiculoLogic;
 
 //import entities.TipoVehiculo;
@@ -42,6 +43,8 @@ public class ServletPersonas extends HttpServlet {
     String altaexitosaPers="altaexitosaPers.jsp";
     String eliminarpers="eliminarpers.jsp";
     String faltandatosPers="faltandatosPers.jsp";
+    
+    String formatoInvalidopers="formatoInvalidopers.jsp";
     
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -88,11 +91,11 @@ public class ServletPersonas extends HttpServlet {
 		}		
 		else if (action.equalsIgnoreCase("Agregar")) {
 			Persona pers = new Persona();
-			PersonaLogic plogic = new PersonaLogic();
-			
+			PersonaLogic plogic = new PersonaLogic();			
 			//int id = Integer.parseInt(request.getParameter("txtid"));
 			String nombre = request.getParameter("txtnombre");
 			String apellido = request.getParameter("txtapellido");
+			String direccion = request.getParameter("txtdireccion");
 			String dni = request.getParameter("txtdni");
 			String telefono = request.getParameter("txttelefono");
 			String email = request.getParameter("txtemail");
@@ -107,23 +110,44 @@ public class ServletPersonas extends HttpServlet {
 				Rol rol2 = new Rol();
 				rol2.setId(2);
 				pers.addRol(rol2);
-			}
-			
+			}			
 			//pers.setId(id);
-			pers.setNombre(nombre);
-			pers.setApellido(apellido);
-			pers.setDni(dni);
-			pers.setTel(telefono);
-			pers.setEmail(email);
-			pers.setPassword(password);
+//			pers.setNombre(nombre);
+//			pers.setApellido(apellido);
+//			pers.setDni(dni);
+//			pers.setDireccion(direccion);
+//			pers.setTel(telefono);
+//			pers.setEmail(email);
+//			pers.setPassword(password);
 						
 			//vehic.setTipoVehiculo(tvehic);
-						
-			
+								
 			int idPers = 0;
 			if (pers.getApellido()!="" && pers.getNombre()!="" && pers.getDni()!="") {
-				plogic.add(pers);
-				idPers = pers.getId();
+				boolean nombreboolean = Valida.isAlpha(nombre);
+				boolean apellidoboolean = Valida.isAlpha(apellido);
+				boolean dniboolean = Valida.isDni(dni);
+				boolean direccionboolean = Valida.isDireccion(direccion);
+				boolean telefonoboolean = Valida.isEntero(telefono);
+				boolean emailboolean = Valida.isMail(email);
+				boolean passwordboolean = Valida.isPassword(password);
+				
+				if (nombreboolean && apellidoboolean && dniboolean && direccionboolean && telefonoboolean && emailboolean && passwordboolean) {
+					pers.setNombre(nombre);
+					pers.setApellido(apellido);
+					pers.setDni(dni);
+					pers.setDireccion(direccion);
+					pers.setTel(telefono);
+					pers.setEmail(email);
+					pers.setPassword(password);					
+					
+					plogic.add(pers);
+					idPers = pers.getId();					
+				} else {
+					acceso=formatoInvalidopers;
+				}
+//				plogic.add(pers);
+//				idPers = pers.getId();
 			} 
 			if (pers.getApellido()=="" || pers.getNombre()=="" || pers.getDni()=="") {
 				acceso=faltandatosPers;

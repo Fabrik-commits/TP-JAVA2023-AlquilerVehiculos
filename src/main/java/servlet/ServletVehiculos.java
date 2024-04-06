@@ -13,6 +13,7 @@ import entities.TipoVehiculo;
 import entities.Vehiculo;
 //import logic.TipoVehiculoLogic;
 import logic.VehiculoLogic;
+import util.Valida;
 
 /**
  * Servlet implementation class ServletVehiculos
@@ -37,6 +38,8 @@ public class ServletVehiculos extends HttpServlet {
     String altaexitosavehiculo="altaexitosavehiculo.jsp";
     
     String eliminarvehiculo="eliminarvehiculo.jsp";
+    
+    String formatoInvalidoVehic="formatoInvalidoVehic.jsp";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -53,21 +56,14 @@ public class ServletVehiculos extends HttpServlet {
 		}
 		else if (action.equalsIgnoreCase("altavehiculo")) {
 			acceso=add;
-//			System.out.println(acceso);
-//			System.out.println();
 		}
 		else if (action.equalsIgnoreCase("Agregar")) {
 			Vehiculo vehic = new Vehiculo();
 			TipoVehiculo tvehic = new TipoVehiculo();
-			VehiculoLogic vlogic = new VehiculoLogic();
-			//int id = Integer.parseInt(request.getParameter("txtidtipovehiculo"));
+			VehiculoLogic vlogic = new VehiculoLogic();;
 			String marcaymodelo = request.getParameter("txtmarcaymodelo");
-//			if (request.getParameter("txtanio")!="") {
-//				int anio = Integer.parseInt(request.getParameter("txtanio"));
-//			}
 			String anio = request.getParameter("txtanio");
 			String kilometraje = request.getParameter("txtkilometraje");
-//			int pasajeros = Integer.parseInt(request.getParameter("txtpasajeros"));
 			String pasajeros = request.getParameter("txtpasajeros");
 			String color = request.getParameter("txtcolor");
 			boolean estado = Boolean.valueOf(request.getParameter("txtestado"));
@@ -75,44 +71,58 @@ public class ServletVehiculos extends HttpServlet {
 			String matricula = request.getParameter("txtmatricula");
 			String capacidadmaxima = request.getParameter("txtcapacidadmaxima");
 			String idMiSelec =request.getParameter("miSelect");
-//			System.out.println(idMiSelec);
-//			System.out.println();
-//			int idtipovehiculo = Integer.parseInt(request.getParameter("miSelect"));
 			String idtipovehiculo = request.getParameter("miSelect");
 			if (idtipovehiculo!="") {
 				tvehic.setId(Integer.parseInt(idtipovehiculo));
-			}
-//			tvehic.setId(Integer.parseInt(idtipovehiculo));
-			
-			//vehic.setIdVehiculo(id); vehic.setPasajeros(Integer.parseInt(pasajeros));
+			}		
 			vehic.setMarcayModelo(marcaymodelo);
 			if (anio!="") {
-			vehic.setAnio(Integer.parseInt(anio));
+//			vehic.setAnio(Integer.parseInt(anio));
 			}
-//			System.out.println(vehic.getAnio());
-//			System.out.println();
 			if (kilometraje!="") {
-			vehic.setKilometraje(Double.parseDouble(kilometraje));	
+//			vehic.setKilometraje(Double.parseDouble(kilometraje));	//error
 			}
-//			vehic.setPasajeros(pasajeros);
 			if (pasajeros!="") {
-			vehic.setPasajeros(Integer.parseInt(pasajeros));
+//			vehic.setPasajeros(Integer.parseInt(pasajeros));
 			}
-			vehic.setColor(color);
+//			vehic.setColor(color);
 			vehic.setEstado(estado);
 			if (precio!="") {
-			vehic.setPrecio(Double.parseDouble(precio));
+//			vehic.setPrecio(Double.parseDouble(precio));//error
 			}
 			vehic.setMatricula(matricula);
 			if (capacidadmaxima!="") {
-			vehic.setCapacidadMaxima(Double.parseDouble(capacidadmaxima));
+//			vehic.setCapacidadMaxima(Double.parseDouble(capacidadmaxima));//error
 			}
 			vehic.setTipoVehiculo(tvehic);
 			
 			int idVehic=0;
 			if (marcaymodelo!="" && precio!="" && kilometraje!="" && matricula!="" && idMiSelec!="") {
-				vlogic.add(vehic);
-				idVehic=vehic.getIdVehiculo();
+				boolean marymodboolean = Valida.isMarcaModelo(marcaymodelo);
+				boolean precboolean = Valida.isRealPositivo(precio);
+				boolean kmboolean = Valida.isRealPositivo(kilometraje);
+				boolean matricboolean = Valida.isMatricula(matricula);
+				
+				boolean anioboolean = Valida.isEntero(anio);
+				boolean pasajerosboolean = Valida.isEntero(pasajeros);
+				boolean colorboolean = Valida.isAlpha(color);
+				
+				if (marymodboolean && precboolean && kmboolean && matricboolean && anioboolean && pasajerosboolean && colorboolean) {
+					vehic.setKilometraje(Double.parseDouble(kilometraje));
+					vehic.setCapacidadMaxima(Double.parseDouble(capacidadmaxima));
+					vehic.setPrecio(Double.parseDouble(precio));
+					
+					vehic.setAnio(Integer.parseInt(anio));
+					vehic.setPasajeros(Integer.parseInt(pasajeros));
+					vehic.setColor(color);
+					
+					vlogic.add(vehic);
+					idVehic=vehic.getIdVehiculo();
+				} else {
+					acceso=formatoInvalidoVehic;
+				}
+//				vlogic.add(vehic);
+//				idVehic=vehic.getIdVehiculo();
 			}
 			if (idVehic != 0) {
 				acceso=altaexitosavehiculo;

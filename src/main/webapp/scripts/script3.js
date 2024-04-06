@@ -13,6 +13,9 @@ function mostrarPrincTiposVehic(){
 function mostrarPrincRoles(){
 	window.location="principalroles.jsp";
 }
-function mostrarTiposVehic(){
-	window.location="principaltiposvehic.jsp";
+function mostrarAltaVehiculo(){
+	window.location="altavehiculo.jsp";
+}
+function mostrarAltaPersona(){
+	window.location="altapersona.jsp";
 }

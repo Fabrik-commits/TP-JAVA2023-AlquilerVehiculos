@@ -19,13 +19,13 @@
          
          <div class="input-contenedor">
          <i class="fas fa-envelope icon"></i>
-         <input type="text" name="email" placeholder="Correo Electronico">
+         <input type="text" name="email" placeholder="Correo Electronico" autocomplete="off">
          
          </div>
          
          <div class="input-contenedor">
         <i class="fas fa-key icon"></i>
-         <input type="password" name="password" placeholder="Contraseña">
+         <input type="password" name="password" placeholder="Contraseña" autocomplete="off">
          
          </div>
          <input type="submit" name="accion" value="Login2" class="button">

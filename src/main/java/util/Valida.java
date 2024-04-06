@@ -34,8 +34,8 @@ public class Valida {
 		return pasajeros.matches("^[0-9]*$");
 	}
 	
-	public static boolean isDireccion(String pasajeros) {
-		return pasajeros.matches("^[A-Za-z0-9\\s]+$");
+	public static boolean isDireccion(String direccion) {
+		return direccion.matches("^[A-Za-z0-9\\s]+$");
 	}
 	
 	public static boolean isPassword(String password) {

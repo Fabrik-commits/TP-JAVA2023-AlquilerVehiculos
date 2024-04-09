@@ -40,6 +40,8 @@ public class ServletVehiculos extends HttpServlet {
     String eliminarvehiculo="eliminarvehiculo.jsp";
     
     String formatoInvalidoVehic="formatoInvalidoVehic.jsp";
+    
+    String formatoInvalidoVehic2="formatoInvalidoVehic2.jsp";
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -129,7 +131,6 @@ public class ServletVehiculos extends HttpServlet {
 				
 			}
 			
-
 		}
 		
 		
@@ -147,25 +148,25 @@ public class ServletVehiculos extends HttpServlet {
 			VehiculoLogic vlogic = new VehiculoLogic();
 			int id = Integer.parseInt(request.getParameter("txtidvehiculo"));
 			String marcaymodelo = request.getParameter("txtmarcaymodelo");
-			int anio = Integer.parseInt(request.getParameter("txtanio"));
+			String anio = request.getParameter("txtanio");
 			String kilometraje = request.getParameter("txtkilometraje");
-			int pasajeros = Integer.parseInt(request.getParameter("txtpasajeros"));
+			String pasajeros = request.getParameter("txtpasajeros");
 			String color = request.getParameter("txtcolor");
 			boolean estado = Boolean.valueOf(request.getParameter("txtestado"));
 			String precio = request.getParameter("txtprecio");
 			String matricula = request.getParameter("txtmatricula");
 			String capacidadmaxima = request.getParameter("txtcapacidadmaxima");
-			
+			if (Valida.isMarcaModelo(marcaymodelo) || Valida.isEntero(anio) || Valida.isRealPositivo(kilometraje) || Valida.isEntero(pasajeros) || Valida.isAlpha(color) || Valida.isRealPositivo(precio) || Valida.isMatricula(matricula) || Valida.isRealPositivo(capacidadmaxima)) {
+				acceso=formatoInvalidoVehic2;
+			}  
 			int idtipovehiculo = Integer.parseInt(request.getParameter("txtidtipovehiculo"));
-//			System.out.println(idtipovehiculo);
 			
 			tvehic.setId(idtipovehiculo);
-//			System.out.println();
 			vehic.setIdVehiculo(id);
 			vehic.setMarcayModelo(marcaymodelo);			
-			vehic.setAnio(anio);
+			vehic.setAnio(Integer.parseInt(anio));
 			vehic.setKilometraje(Double.parseDouble(kilometraje));
-			vehic.setPasajeros(pasajeros);
+			vehic.setPasajeros(Integer.parseInt(pasajeros));
 			vehic.setColor(color);
 			vehic.setEstado(estado);
 			vehic.setPrecio(Double.parseDouble(precio));

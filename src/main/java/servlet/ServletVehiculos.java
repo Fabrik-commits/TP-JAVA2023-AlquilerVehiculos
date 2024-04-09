@@ -71,69 +71,72 @@ public class ServletVehiculos extends HttpServlet {
 			String matricula = request.getParameter("txtmatricula");
 			String capacidadmaxima = request.getParameter("txtcapacidadmaxima");
 			String idMiSelec =request.getParameter("miSelect");
-			String idtipovehiculo = request.getParameter("miSelect");
-			if (idtipovehiculo!="") {
-				tvehic.setId(Integer.parseInt(idtipovehiculo));
-			}		
-			vehic.setMarcayModelo(marcaymodelo);
-			if (anio!="") {
-//			vehic.setAnio(Integer.parseInt(anio));
-			}
-			if (kilometraje!="") {
-//			vehic.setKilometraje(Double.parseDouble(kilometraje));	//error
-			}
-			if (pasajeros!="") {
-//			vehic.setPasajeros(Integer.parseInt(pasajeros));
-			}
-//			vehic.setColor(color);
-			vehic.setEstado(estado);
-			if (precio!="") {
-//			vehic.setPrecio(Double.parseDouble(precio));//error
-			}
-			vehic.setMatricula(matricula);
-			if (capacidadmaxima!="") {
-//			vehic.setCapacidadMaxima(Double.parseDouble(capacidadmaxima));//error
-			}
-			vehic.setTipoVehiculo(tvehic);
+//			String idtipovehiculo = request.getParameter("miSelect");
 			
 			int idVehic=0;
-			if (marcaymodelo!="" && precio!="" && kilometraje!="" && matricula!="" && idMiSelec!="") {
+			if (marcaymodelo=="" || precio=="" || matricula=="" || idMiSelec=="") {
+				acceso=faltandatosVehic;
+			} else {
 				boolean marymodboolean = Valida.isMarcaModelo(marcaymodelo);
-				boolean precboolean = Valida.isRealPositivo(precio);
-				boolean kmboolean = Valida.isRealPositivo(kilometraje);
+				boolean precboolean = Valida.isRealPositivo(precio);				
 				boolean matricboolean = Valida.isMatricula(matricula);
 				
-				boolean anioboolean = Valida.isEntero(anio);
-				boolean pasajerosboolean = Valida.isEntero(pasajeros);
-				boolean colorboolean = Valida.isAlpha(color);
-				
-				if (marymodboolean && precboolean && kmboolean && matricboolean && anioboolean && pasajerosboolean && colorboolean) {
-					vehic.setKilometraje(Double.parseDouble(kilometraje));
-					vehic.setCapacidadMaxima(Double.parseDouble(capacidadmaxima));
-					vehic.setPrecio(Double.parseDouble(precio));
-					
-					vehic.setAnio(Integer.parseInt(anio));
-					vehic.setPasajeros(Integer.parseInt(pasajeros));
-					vehic.setColor(color);
-					
-					vlogic.add(vehic);
-					idVehic=vehic.getIdVehiculo();
+				if (marymodboolean && precboolean && matricboolean) {
+					if (kilometraje=="" && anio=="" && pasajeros=="" && color=="" && capacidadmaxima=="") {
+//						alta
+//						vehic.setCapacidadMaxima(Double.parseDouble(capacidadmaxima));
+						vehic.setPrecio(Double.parseDouble(precio));
+						vehic.setEstado(estado);
+//						vehic.setAnio(Integer.parseInt(anio));
+//						vehic.setPasajeros(Integer.parseInt(pasajeros));
+//						vehic.setColor(color);
+						vehic.setMarcayModelo(marcaymodelo);
+						
+						tvehic.setId(Integer.parseInt(idMiSelec));
+						vehic.setTipoVehiculo(tvehic);
+
+						vlogic.add(vehic);
+						idVehic=vehic.getIdVehiculo();
+						if(idVehic!=0) {
+							acceso=altaexitosavehiculo;
+						}						
+					}
+					else if (Valida.isRealPositivo(kilometraje) && Valida.isEntero(anio) && Valida.isEntero(pasajeros) && Valida.isAlpha(color)) {
+//						alta
+						vehic.setCapacidadMaxima(Double.parseDouble(capacidadmaxima));
+						vehic.setPrecio(Double.parseDouble(precio));
+						vehic.setEstado(estado);
+						vehic.setAnio(Integer.parseInt(anio));
+						vehic.setPasajeros(Integer.parseInt(pasajeros));
+						vehic.setColor(color);
+						vehic.setMarcayModelo(marcaymodelo);
+						
+						tvehic.setId(Integer.parseInt(idMiSelec));
+						vehic.setTipoVehiculo(tvehic);
+						
+						vlogic.add(vehic);
+						idVehic=vehic.getIdVehiculo();
+						if(idVehic!=0) {
+							acceso=altaexitosavehiculo;
+						}
+					} else {
+						acceso=formatoInvalidoVehic;
+					}
+
 				} else {
 					acceso=formatoInvalidoVehic;
 				}
-//				vlogic.add(vehic);
-//				idVehic=vehic.getIdVehiculo();
-			}
-			if (idVehic != 0) {
-				acceso=altaexitosavehiculo;
-			}
-			if (marcaymodelo=="" || precio=="" || kilometraje=="" || matricula=="" || idMiSelec=="") {
-				acceso=faltandatosVehic;
+				
 			}
 			
-			//vlogic.add(vehic);
-			//acceso=principalvehic;
+
 		}
+		
+		
+		
+		
+		
+		
 		else if (action.equalsIgnoreCase("editarvehiculo")) {
 			request.setAttribute("idvehiculo", request.getParameter("id"));
 			acceso=edit;

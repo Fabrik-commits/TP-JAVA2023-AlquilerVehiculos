@@ -97,10 +97,18 @@ public class ServletRoles extends HttpServlet {
 			RolLogic rollog = new RolLogic();
 			int id = Integer.parseInt(request.getParameter("txtid"));
 			String descripcion = request.getParameter("txtdescripcion");
-			rol.setId(id);
-			rol.setDescripcion(descripcion);			
-			rollog.update(rol);
-			acceso=principalroles;
+			if (Valida.isAlpha(descripcion)) {
+				rol.setId(id);
+				rol.setDescripcion(descripcion);			
+				rollog.update(rol);
+				acceso=principalroles;				
+			} else {
+				acceso=formatoInvalidoRol;
+			}
+//			rol.setId(id);
+//			rol.setDescripcion(descripcion);			
+//			rollog.update(rol);
+//			acceso=principalroles;
 		}
 		else if (action.equalsIgnoreCase("eliminarrol")) {
 //			Rol rol = new Rol();

@@ -45,7 +45,7 @@ public class ServletPersonas extends HttpServlet {
     String faltandatosPers="faltandatosPers.jsp";
     
     String formatoInvalidopers="formatoInvalidopers.jsp";
-    
+    String formatoInvalidopers2="formatoInvalidopers2.jsp";
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -145,13 +145,19 @@ public class ServletPersonas extends HttpServlet {
 			request.setAttribute("id", request.getParameter("id"));
 			acceso=edit;
 		}
+		
+		
+		
+		
+		
 		else if (action.equalsIgnoreCase("Actualizar")) {
 			Persona pers = new Persona();
 			PersonaLogic plogic = new PersonaLogic();
 			
-			int id = Integer.parseInt(request.getParameter("txtid"));
+			String id = request.getParameter("txtid");
 			String nombre = request.getParameter("txtnombre");
 			String apellido = request.getParameter("txtapellido");
+			String direccion = request.getParameter("txtdireccion");
 			String dni = request.getParameter("txtdni");
 			String telefono = request.getParameter("txttelefono");
 			String email = request.getParameter("txtemail");
@@ -168,20 +174,60 @@ public class ServletPersonas extends HttpServlet {
 				pers.addRol(rol2);
 			}
 			
-			pers.setId(id);
-			pers.setNombre(nombre);
-			pers.setApellido(apellido);
-			pers.setDni(dni);
-			pers.setTel(telefono);
-			pers.setEmail(email);
-			pers.setPassword(password);
+			if (nombre=="" || apellido=="" || dni=="" || direccion=="" || telefono=="" || email=="" || password=="") {
+				acceso=faltandatosPers;
+			}
+			else if (Valida.isAlpha(nombre) && Valida.isAlpha(apellido) && Valida.isDni(dni) && Valida.isDireccion(direccion) && Valida.isEntero(telefono) && Valida.isMail(email) && Valida.isPassword(password)) {
+//				actualiza
+				pers.setId(Integer.parseInt(id));
+				pers.setNombre(nombre);
+				pers.setApellido(apellido);
+				pers.setDni(dni);
+				pers.setDireccion(direccion);
+				pers.setTel(telefono);
+				pers.setEmail(email);
+				pers.setPassword(password);					
+				
+				plogic.update(pers);
+				acceso=principalpersonas;
+				
+			}
+			else {
+				acceso=formatoInvalidopers2;
+			}			
 			
 			
-			//vehic.setTipoVehiculo(tvehic);
-						
-			plogic.update(pers);
-			acceso=principalpersonas;
+			
+			
+			
+			
+//			pers.setId(Integer.parseInt(id));
+//			pers.setNombre(nombre);
+//			pers.setApellido(apellido);
+//			pers.setDni(dni);
+//			pers.setTel(telefono);
+//			pers.setEmail(email);
+//			pers.setPassword(password);
+//			
+//			
+//			//vehic.setTipoVehiculo(tvehic);
+//						
+//			plogic.update(pers);
+//			acceso=principalpersonas;
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		else if (action.equalsIgnoreCase("eliminarpersona")) {
 //			Persona pers = new Persona();
 //			PersonaLogic perLog = new PersonaLogic();

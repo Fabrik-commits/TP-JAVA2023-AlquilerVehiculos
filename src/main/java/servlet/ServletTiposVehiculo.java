@@ -91,14 +91,27 @@ public class ServletTiposVehiculo extends HttpServlet {
 		else if (action.equalsIgnoreCase("Actualizar")) {
 			TipoVehiculo tv = new TipoVehiculo();
 			TipoVehiculoLogic tvl = new TipoVehiculoLogic();
-			int id = Integer.parseInt(request.getParameter("txtid"));
+//			int id = Integer.parseInt(request.getParameter("txtid"));
 			String descripcion = request.getParameter("txtdescripcion");
+			
+			if (Valida.isAlpha(descripcion)) {
+//				alta
+				int id = Integer.parseInt(request.getParameter("txtid"));
+				tv.setId(id);
+				tv.setDescripcion(descripcion);
+				tvl.update(tv);
+				acceso=principaltiposvehic;				
+
+			} else {
+				acceso=formatoInvalidoTipoVehic;
+			}
+			
 			//String costo = request.getParameter("txtcosto");
-			tv.setId(id);
-			tv.setDescripcion(descripcion);
+//			tv.setId(id);
+//			tv.setDescripcion(descripcion);
 			//tv.setCosto(Double.parseDouble(costo));
-			tvl.update(tv);
-			acceso=principaltiposvehic;
+//			tvl.update(tv);
+//			acceso=principaltiposvehic;
 		}
 		else if (action.equalsIgnoreCase("eliminartipovehiculo")) {
 //			TipoVehiculo tipov = new TipoVehiculo();

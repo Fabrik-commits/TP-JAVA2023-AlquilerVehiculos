@@ -23,7 +23,7 @@
          <div class="input-contenedor">
          
          </div>
-         <input type="button" value="Aceptar" class="button" onclick=mostrarTiposVehic()>
+         <input type="button" value="Aceptar" class="button" onclick=mostrarPrincTiposVehic()>
 
      </div>
     </form>

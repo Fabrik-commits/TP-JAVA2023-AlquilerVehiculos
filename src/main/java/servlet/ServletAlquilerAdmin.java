@@ -133,9 +133,10 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			String fecFin = request.getParameter("fecFin");
 
 			Vehiculo vehic = vlogic.getById(idVehicElegido);
-			
-			if (vehic != null && fecInit != null && fecFin != null) {
-				System.out.println("vehiculo no es nulo");
+//			System.out.println(vehic);
+//			System.out.println();
+			if (vehic != null && fecInit != "" && fecFin != "") {
+//				System.out.println(fecInit);
 				double precio = vehic.getPrecio();
 				request.setAttribute("fecInit", fecInit);
 				request.setAttribute("fecFin", fecFin);

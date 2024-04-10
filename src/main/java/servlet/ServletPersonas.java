@@ -111,58 +111,36 @@ public class ServletPersonas extends HttpServlet {
 				rol2.setId(2);
 				pers.addRol(rol2);
 			}			
-			//pers.setId(id);
-//			pers.setNombre(nombre);
-//			pers.setApellido(apellido);
-//			pers.setDni(dni);
-//			pers.setDireccion(direccion);
-//			pers.setTel(telefono);
-//			pers.setEmail(email);
-//			pers.setPassword(password);
-						
-			//vehic.setTipoVehiculo(tvehic);
 								
 			int idPers = 0;
-			if (pers.getApellido()!="" && pers.getNombre()!="" && pers.getDni()!="") {
-				boolean nombreboolean = Valida.isAlpha(nombre);
-				boolean apellidoboolean = Valida.isAlpha(apellido);
-				boolean dniboolean = Valida.isDni(dni);
-				boolean direccionboolean = Valida.isDireccion(direccion);
-				boolean telefonoboolean = Valida.isEntero(telefono);
-				boolean emailboolean = Valida.isMail(email);
-				boolean passwordboolean = Valida.isPassword(password);
-				
-				if (nombreboolean && apellidoboolean && dniboolean && direccionboolean && telefonoboolean && emailboolean && passwordboolean) {
-					pers.setNombre(nombre);
-					pers.setApellido(apellido);
-					pers.setDni(dni);
-					pers.setDireccion(direccion);
-					pers.setTel(telefono);
-					pers.setEmail(email);
-					pers.setPassword(password);					
-					
-					plogic.add(pers);
-					idPers = pers.getId();					
-				} else {
-					acceso=formatoInvalidopers;
-				}
-//				plogic.add(pers);
-//				idPers = pers.getId();
-			} 
-			if (pers.getApellido()=="" || pers.getNombre()=="" || pers.getDni()=="") {
+			if (nombre=="" || apellido=="" || dni=="" || direccion=="" || telefono=="" || email=="" || password=="") {
 				acceso=faltandatosPers;
-//				RequestDispatcher vista=request.getRequestDispatcher(acceso);
-//				vista.forward(request, response);
 			}
-//			else {
-//				acceso=faltandatosPers;
+			else if (Valida.isAlpha(nombre) && Valida.isAlpha(apellido) && Valida.isDni(dni) && Valida.isDireccion(direccion) && Valida.isEntero(telefono) && Valida.isMail(email) && Valida.isPassword(password)) {
+//				alta
+				pers.setNombre(nombre);
+				pers.setApellido(apellido);
+				pers.setDni(dni);
+				pers.setDireccion(direccion);
+				pers.setTel(telefono);
+				pers.setEmail(email);
+				pers.setPassword(password);					
+				
+				plogic.add(pers);
+				idPers = pers.getId();
+				if (idPers != 0) {
+					acceso=altaexitosaPers;
+				}				
+				
+			}
+			else {
+				acceso=formatoInvalidopers;
+			}
 			
-//			}
-			if (idPers != 0) {
-				acceso=altaexitosaPers;
-			}
-			//acceso=principalpersonas;
+			
 		}
+			
+		
 		else if (action.equalsIgnoreCase("editarpersona")) {
 			request.setAttribute("id", request.getParameter("id"));
 			acceso=edit;

@@ -39,7 +39,7 @@ public class Valida {
 	}
 	
 	public static boolean isPassword(String password) {
-		return password.matches(password);
+		return password.matches("^[1-9]\\d{5}$");  //"^[1-9]\\d{7}$"
 	}
 	
 }

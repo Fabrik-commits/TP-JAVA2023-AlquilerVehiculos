@@ -27,7 +27,7 @@
     Integer idPersona = (Integer)miSesion.getAttribute("idUsr");
     Integer idTVSesion = (Integer)miSesion.getAttribute("idTVSesion");
     Double importeTotalVehic = (Double)request.getAttribute("importeTotal");
-    String fechaInicial = (String)request.getAttribute("fecInit");
+    String fechaInicial = (String)request.getAttribute("fecInic");
     String fechaFinal = (String)request.getAttribute("fecFin");
 
 	//Todo este codigo de abajo es para validar si el usr es usr simple

@@ -23,6 +23,7 @@ import logic.PersonaLogic;
 //import logic.PersonaLogic;
 //import logic.TipoVehiculoLogic;
 import logic.VehiculoLogic;
+import util.Valida;
 
 /**
  * Servlet implementation class ServletAlquilerAdmin
@@ -57,8 +58,10 @@ public class ServletAlquilerAdmin extends HttpServlet {
     String faltandatos="faltandatos.jsp";
     String edicionexitosa="edicionexitosa.jsp";
     
-    int verificador = 0; //para que no se ejecute el ultimo dispatcher
-     
+    String formatoInvalidoAlqAdmin="formatoInvalidoAlqAdmin.jsp";
+    
+//    int verificador = 0; //para que no se ejecute el ultimo dispatcher
+    int idAlq = 0; 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -133,15 +136,13 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			String fecFin = request.getParameter("fecFin");
 
 			Vehiculo vehic = vlogic.getById(idVehicElegido);
-//			System.out.println(vehic);
-//			System.out.println();
-			if (vehic != null && fecInit != "" && fecFin != "") {
-//				System.out.println(fecInit);
+			if ((vehic != null) && (fecInit != "") && (fecFin != "")) {
+				//System.out.println("esto es: " + fecInit);
 				double precio = vehic.getPrecio();
 				request.setAttribute("fecInit", fecInit);
 				request.setAttribute("fecFin", fecFin);
 				
-				LocalDate fechaInic = LocalDate.parse(fecInit);
+				LocalDate fechaInic = LocalDate.parse(fecInit);//aca tira error en calcula
 				LocalDate fechaFin = LocalDate.parse(fecFin);
 				
 				long cantDias = ChronoUnit.DAYS.between(fechaInic, fechaFin);
@@ -167,138 +168,82 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			PersonaLogic pl = new PersonaLogic();
 			int idPers = Integer.parseInt(request.getParameter("idPers"));			
 			Persona pers = pl.getById(idPers);
-
-//			if (pers != null ) {
-//				
-//			}
 			
 			VehiculoLogic vl = new VehiculoLogic();
 			int idVehiculo = Integer.parseInt(request.getParameter("idVehiculo"));
 			Vehiculo vehic = vl.getById(idVehiculo);
 			
-//			if (pers != null && vehic != null) {
-//				
-//			}
-			
-//			vehic.setEstado(false);
-//			vl.update(vehic);
-			
 			String senia = request.getParameter("senia");
+			String importe = request.getParameter("importe");
 			String fecInic = request.getParameter("fecInic");
 			String fecFin = request.getParameter("fecFin");
-			
-			if (pers == null || vehic == null || fecInic == null || fecFin == null) {
-				acceso=faltandatos;
-				verificador = 1;
-				RequestDispatcher vista=request.getRequestDispatcher(acceso);
-				//request.getRequestDispatcher(acceso).forward(request, response);
-				vista.forward(request, response);
-			} else {
-				vehic.setEstado(false);
-				vl.update(vehic);
-				
-				alq.setPersona(pers);
-				alq.getPersona().setId(idPers);
-				
-				alq.setVehiculo(vehic);
-				alq.getVehiculo().setIdVehiculo(idVehiculo);
-				
-			}
-//aca podes hacer el else para que se ejecute lo de abajo solo en ese caso			
-//			vehic.setEstado(false);
-//			vl.update(vehic);
-			
-			String importe = request.getParameter("importe");
-			
-			//vehic.getKilometraje();
 			String kminic = request.getParameter("kminic");
-			
-			String kmfin = request.getParameter("kmfin");
 			String recyobs = request.getParameter("recyobs");
-			String estado = request.getParameter("txtestado");
-//			alq.setPersona(pers);
-//			alq.getPersona().setId(idPers);
-//			
-//			alq.setVehiculo(vehic);
-//			alq.getVehiculo().setIdVehiculo(idVehiculo);
+			
+			if (pers == null || vehic == null || fecInic == "" || fecFin == "" || senia == "" || importe == "") {
+				acceso=faltandatos;
+			} else {
+				if (recyobs == "" && Valida.isRealPositivo(senia) && Valida.isRealPositivo(importe) && Valida.isRealPositivo(kminic)) {
+//					alta
+					vehic.setEstado(false);
+					vl.update(vehic);
+					alq.setPersona(pers);
+					alq.getPersona().setId(idPers);				
+					alq.setVehiculo(vehic);
+					alq.getVehiculo().setIdVehiculo(idVehiculo);
+					alq.setSenia(Double.parseDouble(senia));
+					alq.setFechaInic(LocalDate.parse(fecInic));
+					alq.setFechaFin(LocalDate.parse(fecFin));
+//					System.out.println(Double.parseDouble(importe));
+//					System.out.println();
+					alq.setImporte(Double.parseDouble(importe));
+					alq.setKmInic(Double.parseDouble(kminic)); 
+//					alta exitosa
+					alqLog.add(alq);
+					idAlq = alq.getId();
+					if (idAlq!=0) {
+						miSesion.removeAttribute("idPerqAlquila");
+						miSesion.removeAttribute("idTVSesion");
+						miSesion.removeAttribute("idVehic");							
+						acceso=altaexitosa;
+					}					
+					
+				} 
+				else if (Valida.isMarcaModelo(recyobs) && Valida.isRealPositivo(senia) && Valida.isRealPositivo(importe) && Valida.isRealPositivo(kminic)){
+//					alta
+					vehic.setEstado(false);
+					vl.update(vehic);
+					
+					alq.setPersona(pers);
+					alq.getPersona().setId(idPers);				
+					alq.setVehiculo(vehic);
+					alq.getVehiculo().setIdVehiculo(idVehiculo);
+					alq.setSenia(Double.parseDouble(senia));
+					alq.setFechaInic(LocalDate.parse(fecInic));
+					alq.setFechaFin(LocalDate.parse(fecFin));
+					alq.setImporte(Double.parseDouble(importe));
+					alq.setKmInic(Double.parseDouble(kminic));
+					alq.setReclamoyObs(recyobs);
+//					alta exitosa
+					alqLog.add(alq);
+					idAlq = alq.getId();					
+					if (idAlq!=0) {
+						miSesion.removeAttribute("idPerqAlquila");
+						miSesion.removeAttribute("idTVSesion");
+						miSesion.removeAttribute("idVehic");						
+						acceso=altaexitosa;
+					}					
+				}
+				else {
+					acceso=formatoInvalidoAlqAdmin;
+				}
+				
+			}
 
-			if (fecInic=="") {
-				alq.setFechaFin(LocalDate.now());
-			} else {
-				alq.setFechaInic(LocalDate.parse(fecInic));
-			}
-			
-			if (fecFin=="") {
-				alq.setFechaFin(LocalDate.now().plusDays(1));
-			}
-			else {
-				alq.setFechaFin(LocalDate.parse(fecFin));
-			}
-			
-			if (senia=="") {				
-				alq.setSenia(0.0);
-			}
-			else {
-				alq.setSenia(Double.parseDouble(senia));
-			}
-			
-			if (importe=="") {
-				alq.setImporte(0.0);
-			} else {
-				alq.setImporte(Double.parseDouble(importe));
-			}
-			
-			if (kminic=="") {
-				alq.setKmInic(0.0);
-			} else {
-				alq.setKmInic(Double.parseDouble(kminic));
-			}
-			
-			if (kmfin=="") {
-				alq.setKmFin(0.0);
-			} else {
-				alq.setKmFin(Double.parseDouble(kmfin));
-			}			
-			
-			if (recyobs=="") {
-				alq.setReclamoyObs("");
-			} else {
-				alq.setReclamoyObs(recyobs);
-			}
-			
-			if (estado=="") {
-				alq.setEstado("");
-			} else {
-				alq.setEstado(estado);
-			}
-			if (pers != null && vehic != null && fecInic != null && fecFin != null) {
-				alqLog.add(alq);
-			}	
-			//alqLog.add(alq);
-			int idAlq = 0;
-			if (pers != null && vehic != null && fecInic != null && fecFin != null) {
-				idAlq = alq.getId();
-			}			
-			//idAlq = alq.getId();
-			if (idAlq!=0) {
-				miSesion.removeAttribute("idPerqAlquila");
-				miSesion.removeAttribute("idTVSesion");
-				miSesion.removeAttribute("idVehic");
-				acceso=altaexitosa;
-			} //else {
-				//miSesion.removeAttribute("idPerqAlquila");
-				//miSesion.removeAttribute("idTVSesion");
-				//miSesion.removeAttribute("idVehic");
-				//acceso=alquileradmin;
-			//}
-			
-			
-//			miSesion.removeAttribute("idPerqAlquila");
-//			miSesion.removeAttribute("idTVSesion");
-//			miSesion.removeAttribute("idVehic");
-//			
-//			acceso=alquileradmin;
+
 		}
+		
+		
 		else if (action.equalsIgnoreCase("alquilerelegido")) {
 			int idAlq = Integer.parseInt(request.getParameter("id"));
 			request.setAttribute("idAlq", idAlq);
@@ -364,13 +309,14 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			acceso=principalalquileresxclte;
 		}
 		
-		if (verificador != 1) {
-			RequestDispatcher vista=request.getRequestDispatcher(acceso);
-			vista.forward(request, response);			
-		}
-//		RequestDispatcher vista=request.getRequestDispatcher(acceso);
-//		//request.getRequestDispatcher(acceso).forward(request, response);
-//		vista.forward(request, response);
+//		if (verificador != 1) {
+//			RequestDispatcher vista=request.getRequestDispatcher(acceso);
+//			vista.forward(request, response);			
+//		}
+		
+		RequestDispatcher vista=request.getRequestDispatcher(acceso);
+		//request.getRequestDispatcher(acceso).forward(request, response);
+		vista.forward(request, response);
 		
 	}
 

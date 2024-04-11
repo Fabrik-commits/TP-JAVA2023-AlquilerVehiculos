@@ -18,7 +18,7 @@
      
          
          <div class="input-contenedor">
-            <p style="color:red">CLIENTE | VEHICULO | FECHA INICIO | FECHA FIN</p>
+            <p style="color:red">CLIENTE | VEHICULO | FECHA INICIO | FECHA FIN | IMPORTE | SENIA</p>
          </div>
          
          <div class="input-contenedor">

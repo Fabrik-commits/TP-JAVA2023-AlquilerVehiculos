@@ -150,7 +150,7 @@
 						//request.getSession().getAttribute("clienteBuscado");
 					}
 					%>
-					<input type="text" placeholder="Cliente" name="cliente" value="<%=idPersona==null?"":per.getApellido() %> <%=idPersona==null?"":per.getNombre()%> <%=idPersona==null?"":per.getDni()%>">
+					<input type="text" disabled placeholder="Cliente" name="cliente" value="<%=idPersona==null?"":per.getApellido() %> <%=idPersona==null?"":per.getNombre()%> <%=idPersona==null?"":per.getDni()%>">
 					<div><input type="hidden" name="idPers" value="<%=per.getId()%>"></div>
 					<%-- <input type="text" placeholder="Cliente" value="<%=idPersona==null?"":((Persona) request.getSession().getAttribute("clienteBuscado")).getApellido()%>"> --%>
 				</div>
@@ -205,7 +205,10 @@
 						Vehiculo vehic = new Vehiculo();
 						if(idVehiculo!=null)
 							{
+//							System.out.println(vehic);
 							vehic = vl.getById(idVehiculo);  
+//							System.out.println(vehic.getIdVehiculo());
+//							System.out.println();
 							}						
 						//vehic = vl.getById(Integer.parseInt(idVehiculo));
 					%>
@@ -264,14 +267,14 @@
 
 			<div class="input-contenedor">
 			
-				<div class="titulo">Km_Fin: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" name="kmfin" placeholder="Km_Fin" ></div>
+				<div class="titulo">Km_Fin: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" disabled name="kmfin" placeholder="Km_Fin" ></div>
 				
 			</div>
 	
 	
 			<div class="input-contenedor">
 				
-				<div class="titulo">Fecha entrega: </div> <div class="date"><input type="date" name="fecentrega" disabled></div>
+				<div class="titulo">Fecha entrega: </div> <div class="date"><input type="date" disabled name="fecentrega" disabled></div>
 				
 			</div>
 	
@@ -283,7 +286,7 @@
 
 			<div class="input-contenedor">
             
-				<div class="titulo">Fecha cancel: </div> <div class="date"><input type="date" name="feccancel" disabled></div>
+				<div class="titulo">Fecha cancel: </div> <div class="date"><input type="date" disabled name="feccancel" disabled></div>
 				
 			</div>
 

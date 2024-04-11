@@ -18,6 +18,10 @@ public class Valida {
 		return marcaModelo.matches("^[A-Za-z0-9\\s]+$");
 	}
 	
+//	public static boolean isComentario(String comentario) {
+//		return comentario.matches("^[A-Za-z\\s]+$");
+//	}
+	
 	public static boolean isMatricula(String matricula) {
 		return matricula.matches("^[A-Z0-9]*$");
 	}

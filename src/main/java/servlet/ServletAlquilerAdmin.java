@@ -142,7 +142,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
 				request.setAttribute("fecInit", fecInit);
 				request.setAttribute("fecFin", fecFin);
 				
-				LocalDate fechaInic = LocalDate.parse(fecInit);//aca tira error en calcula
+				LocalDate fechaInic = LocalDate.parse(fecInit);
 				LocalDate fechaFin = LocalDate.parse(fecFin);
 				
 				long cantDias = ChronoUnit.DAYS.between(fechaInic, fechaFin);

@@ -18,6 +18,7 @@ import entities.Vehiculo;
 import logic.AlquilerLogic;
 import logic.PersonaLogic;
 import logic.VehiculoLogic;
+import util.Valida;
 
 /**
  * Servlet implementation class ServletAlquilerUsuario
@@ -81,25 +82,32 @@ public class ServletAlquilerUsuario extends HttpServlet {
 		else if (action.equalsIgnoreCase("CalculaImporte")) {
 			Integer idVehiculo = (Integer)miSesion.getAttribute("idVehic");
 			VehiculoLogic vlogic = new VehiculoLogic();
-			Vehiculo vehic = vlogic.getById(idVehiculo);
-			double precio = vehic.getPrecio();
-					
-			String fecInit = request.getParameter("fecInic");
+			
+			String fecInic = request.getParameter("fecInic");
 			String fecFin = request.getParameter("fecFin");
 			
-			request.setAttribute("fecInit", fecInit);
-			request.setAttribute("fecFin", fecFin);
-			
-			LocalDate fechaInic = LocalDate.parse(fecInit);
-			LocalDate fechaFin = LocalDate.parse(fecFin);
-			
-			long cantDias = ChronoUnit.DAYS.between(fechaInic, fechaFin);
+			if (idVehiculo != null && fecInic != "" && fecFin != "" ) {
 
-			Double importeTotal = cantDias*precio/730;
-			
-			request.setAttribute("importeTotal", importeTotal);
+				Vehiculo vehic = vlogic.getById(idVehiculo);
+				double precio = vehic.getPrecio();
+				
+				request.setAttribute("fecInic", fecInic);
+				request.setAttribute("fecFin", fecFin);
+				
+				LocalDate fechaInic = LocalDate.parse(fecInic);
+				LocalDate fechaFin = LocalDate.parse(fecFin);
+				
+				long cantDias = ChronoUnit.DAYS.between(fechaInic, fechaFin);
+
+				Double importeTotal = cantDias*precio/730;
+				
+				request.setAttribute("importeTotal", importeTotal);				
+			}
+						
 			acceso=alquilerusuario;
 		}
+		
+		
 		else if (action.equalsIgnoreCase("Aceptado")) {
 			acceso=principalalquileresxclteUsur;
 		}		

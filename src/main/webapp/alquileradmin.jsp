@@ -274,7 +274,7 @@
 	
 			<div class="input-contenedor">
 				
-				<div class="titulo">Fecha entrega: </div> <div class="date"><input type="date" disabled name="fecentrega" disabled></div>
+				<div class="titulo">Fecha entrega: </div> <div class="date"><input type="date" disabled name="fecentrega"></div>
 				
 			</div>
 	

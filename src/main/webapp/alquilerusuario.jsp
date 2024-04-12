@@ -210,14 +210,14 @@
 
 			<div class="input-contenedor">
 			
-				<div class="titulo">Km_Fin: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" name="kmfin" placeholder="Km_Fin"></div>
+				<div class="titulo">Km_Fin: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" name="kmfin" disabled placeholder="Km_Fin"></div>
 				
 			</div>
 	
 	
 			<div class="input-contenedor">
 				
-				<div class="titulo">Fecha entrega: </div> <div class="date"><input type="date" name="fecentrega" disabled></div>
+				<div class="titulo">Fecha entrega: </div> <div class="date"><input type="date" disabled name="fecentrega" disabled></div>
 				
 			</div>
 	
@@ -229,7 +229,7 @@
 
 			<div class="input-contenedor">
             
-				<div class="titulo">Fecha cancel: </div> <div class="date"><input type="date" name="feccancel" disabled></div>
+				<div class="titulo">Fecha cancel: </div> <div class="date"><input type="date" disabled name="feccancel" disabled></div>
 				
 			</div>
 

@@ -110,7 +110,17 @@ public class ServletAlquilerUsuario extends HttpServlet {
 		
 		else if (action.equalsIgnoreCase("Aceptado")) {
 			acceso=principalalquileresxclteUsur;
-		}		
+		}	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		else if (action.equalsIgnoreCase("Aceptar")) {
 			Alquiler alq = new Alquiler();
 			AlquilerLogic alqLog = new AlquilerLogic();
@@ -132,13 +142,14 @@ public class ServletAlquilerUsuario extends HttpServlet {
 			String senia = request.getParameter("senia");
 			String fecInic = request.getParameter("fecInic");
 			String fecFin = request.getParameter("fecFin");
+			String importe = request.getParameter("importe");
 			
-			if (vehic == null || fecInic == null || fecFin == null) {
+			if (vehic == null || fecInic == "" || fecFin == "" || importe == "" || senia == "") {
 				acceso=faltandatosusr;
-				verificador = 1;
-				RequestDispatcher vista=request.getRequestDispatcher(acceso);
-				//request.getRequestDispatcher(acceso).forward(request, response);
-				vista.forward(request, response);				
+//				verificador = 1;
+//				RequestDispatcher vista=request.getRequestDispatcher(acceso);
+//				//request.getRequestDispatcher(acceso).forward(request, response);
+//				vista.forward(request, response);				
 			} else {
 				vehic.setEstado(false);
 				vl.update(vehic);
@@ -146,15 +157,13 @@ public class ServletAlquilerUsuario extends HttpServlet {
 				alq.setVehiculo(vehic);
 				alq.getVehiculo().setIdVehiculo(idVehiculo);
 			}	
-			
-			String importe = request.getParameter("importe");
-			
+						
 			//vehic.getKilometraje();
 			String kminic = request.getParameter("kminic");
 			
 			String kmfin = request.getParameter("kmfin");
-			String fecentrega = request.getParameter("fecentrega");
-			String feccancel = request.getParameter("feccancel");
+//			String fecentrega = request.getParameter("fecentrega");
+//			String feccancel = request.getParameter("feccancel");
 			String recyobs = request.getParameter("recyobs");
 			String estado = request.getParameter("txtestado");
 			alq.setPersona(pers);
@@ -200,36 +209,7 @@ public class ServletAlquilerUsuario extends HttpServlet {
 			} else {
 				alq.setKmFin(Double.parseDouble(kmfin));
 			}
-			
-			/*
-			 * if(fecentrega!=null || fecentrega!="") {
-			 * alq.setFechaEntrega(LocalDate.parse(fecentrega));
-			 * } 
-			 */
-			
-			//a modificar para probar en caso de null
-//			if (fecentrega=="") {
-//				alq.setFechaEntrega(LocalDate.now());//alq.setFechaFin(LocalDate.now());
-//				
-//			} else {
-//				alq.setFechaEntrega(LocalDate.parse(fecentrega));
-//			}
-			
-			if (!(fecentrega=="")) {
-				//alq.setFechaEntrega(LocalDate.parse(fecentrega));	no corresponde por ser alta alquiler
-				//System.out.println();
-			}
-			
-//			if (feccancel=="") {
-//				alq.setFechaCancel(LocalDate.now());
-//			} else {
-//				alq.setFechaCancel(LocalDate.parse(feccancel));
-//			}
-			
-			if (!(feccancel=="")) {
-				//alq.setFechaCancel(LocalDate.parse(feccancel)); no corresponde por ser alta alquiler 
-				//System.out.println();
-			}
+
 			
 			if (recyobs=="") {
 				alq.setReclamoyObs("");
@@ -242,11 +222,9 @@ public class ServletAlquilerUsuario extends HttpServlet {
 			} else {
 				alq.setEstado(estado);
 			}
-			if (vehic != null && fecInic != null && fecFin != null) {
-			alqLog.add(alq);
-			}
 			int idAlq = 0;
 			if (vehic != null && fecInic != null && fecFin != null) {
+				alqLog.add(alq);
 				idAlq = alq.getId();
 			}
 			if (idAlq != 0) {
@@ -254,21 +232,36 @@ public class ServletAlquilerUsuario extends HttpServlet {
 				miSesion.removeAttribute("idVehic");
 				acceso=altaexitosausr;
 			}
-			
-			
+						
 //			miSesion.removeAttribute("idTVSesion");
 //			miSesion.removeAttribute("idVehic");
 //			acceso=alquilerusuario;
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		else if (action.equalsIgnoreCase("Cancelar")) {
 			miSesion.removeAttribute("idTVSesion");
 			miSesion.removeAttribute("idVehic");
 			acceso=alquilerusuario;
 		}
-		if (verificador != 1) {
+//		if (verificador != 1) {
+//		RequestDispatcher vista=request.getRequestDispatcher(acceso);
+//		vista.forward(request, response);
+//		}
+		
 		RequestDispatcher vista=request.getRequestDispatcher(acceso);
-		vista.forward(request, response);
-		}
+		vista.forward(request, response);		
+		
 	}
 
 	/**

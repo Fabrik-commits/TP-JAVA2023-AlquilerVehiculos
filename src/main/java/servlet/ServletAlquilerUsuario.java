@@ -46,7 +46,7 @@ public class ServletAlquilerUsuario extends HttpServlet {
     //Aca busca vehiculos disponibles
     String principalvehicxtipo="principalvehicxtipo.jsp";
     
-    int verificador = 0; //para que no se ejecute el ultimo dispatcher
+//    int verificador = 0; //para que no se ejecute el ultimo dispatcher
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -143,6 +143,8 @@ public class ServletAlquilerUsuario extends HttpServlet {
 			String fecInic = request.getParameter("fecInic");
 			String fecFin = request.getParameter("fecFin");
 			String importe = request.getParameter("importe");
+			String kminic = request.getParameter("kminic");
+			String recyobs = request.getParameter("recyobs");			
 			
 			if (vehic == null || fecInic == "" || fecFin == "" || importe == "" || senia == "") {
 				acceso=faltandatosusr;
@@ -151,6 +153,10 @@ public class ServletAlquilerUsuario extends HttpServlet {
 //				//request.getRequestDispatcher(acceso).forward(request, response);
 //				vista.forward(request, response);				
 			} else {
+				
+				if (recyobs == "" && Valida.isRealPositivo(senia) && Valida.isRealPositivo(importe) && Valida.isRealPositivo(kminic)) {
+//					alta (aca seguir trabajando o sea metiendo el codigo de abajo segun convenga)
+				}
 				vehic.setEstado(false);
 				vl.update(vehic);
 				
@@ -159,12 +165,12 @@ public class ServletAlquilerUsuario extends HttpServlet {
 			}	
 						
 			//vehic.getKilometraje();
-			String kminic = request.getParameter("kminic");
+//			String kminic = request.getParameter("kminic");
 			
-			String kmfin = request.getParameter("kmfin");
+//			String kmfin = request.getParameter("kmfin");
 //			String fecentrega = request.getParameter("fecentrega");
 //			String feccancel = request.getParameter("feccancel");
-			String recyobs = request.getParameter("recyobs");
+//			String recyobs = request.getParameter("recyobs");
 			String estado = request.getParameter("txtestado");
 			alq.setPersona(pers);
 			alq.getPersona().setId(idPers);
@@ -204,11 +210,11 @@ public class ServletAlquilerUsuario extends HttpServlet {
 				alq.setKmInic(Double.parseDouble(kminic));
 			}
 			
-			if (kmfin=="") {
-				alq.setKmFin(0.0);
-			} else {
-				alq.setKmFin(Double.parseDouble(kmfin));
-			}
+//			if (kmfin=="") {
+//				alq.setKmFin(0.0);
+//			} else {
+//				alq.setKmFin(Double.parseDouble(kmfin));
+//			}
 
 			
 			if (recyobs=="") {

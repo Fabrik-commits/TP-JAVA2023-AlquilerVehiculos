@@ -47,6 +47,7 @@ public class ServletAlquilerUsuario extends HttpServlet {
     String principalvehicxtipo="principalvehicxtipo.jsp";
     
 //    int verificador = 0; //para que no se ejecute el ultimo dispatcher
+    int idAlq = 0;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -156,12 +157,34 @@ public class ServletAlquilerUsuario extends HttpServlet {
 				
 				if (recyobs == "" && Valida.isRealPositivo(senia) && Valida.isRealPositivo(importe) && Valida.isRealPositivo(kminic)) {
 //					alta (aca seguir trabajando o sea metiendo el codigo de abajo segun convenga)
+					vehic.setEstado(false);
+					vl.update(vehic);
+					
+					alq.setPersona(pers);
+					alq.getPersona().setId(idPers);
+					
+					alq.setVehiculo(vehic);
+					alq.getVehiculo().setIdVehiculo(idVehiculo);
+					
+					alq.setSenia(Double.parseDouble(senia));
+					alq.setFechaInic(LocalDate.parse(fecInic));
+					alq.setFechaFin(LocalDate.parse(fecFin));
+					alq.setImporte(Double.parseDouble(importe));
+					alq.setKmInic(Double.parseDouble(kminic)); 
+//					alta exitosa
+					alqLog.add(alq);
+					idAlq = alq.getId();
+					if (idAlq!=0) {
+						miSesion.removeAttribute("idTVSesion");
+						miSesion.removeAttribute("idVehic");							
+						acceso=altaexitosausr;
+					}					
 				}
-				vehic.setEstado(false);
-				vl.update(vehic);
-				
-				alq.setVehiculo(vehic);
-				alq.getVehiculo().setIdVehiculo(idVehiculo);
+//				vehic.setEstado(false);
+//				vl.update(vehic);
+//				
+//				alq.setVehiculo(vehic);
+//				alq.getVehiculo().setIdVehiculo(idVehiculo);
 			}	
 						
 			//vehic.getKilometraje();
@@ -171,44 +194,44 @@ public class ServletAlquilerUsuario extends HttpServlet {
 //			String fecentrega = request.getParameter("fecentrega");
 //			String feccancel = request.getParameter("feccancel");
 //			String recyobs = request.getParameter("recyobs");
-			String estado = request.getParameter("txtestado");
-			alq.setPersona(pers);
-			alq.getPersona().setId(idPers);
+//			String estado = request.getParameter("txtestado");
+//			alq.setPersona(pers);
+//			alq.getPersona().setId(idPers);
 			
 //			alq.setVehiculo(vehic);
 //			alq.getVehiculo().setIdVehiculo(idVehiculo);
 
-			if (fecInic=="") {
-				alq.setFechaFin(LocalDate.now());
-			} else {
-				alq.setFechaInic(LocalDate.parse(fecInic));
-			}
-			
-			if (fecFin=="") {
-				alq.setFechaFin(LocalDate.now().plusDays(1));
-			}
-			else {
-				alq.setFechaFin(LocalDate.parse(fecFin));
-			}
-			
-			if (senia=="") {				
-				alq.setSenia(0.0);
-			}
-			else {
-				alq.setSenia(Double.parseDouble(senia));
-			}
-			
-			if (importe=="") {
-				alq.setImporte(0.0);
-			} else {
-				alq.setImporte(Double.parseDouble(importe));
-			}
-			
-			if (kminic=="") {
-				alq.setKmInic(0.0);
-			} else {
-				alq.setKmInic(Double.parseDouble(kminic));
-			}
+//			if (fecInic=="") {
+//				alq.setFechaFin(LocalDate.now());
+//			} else {
+//				alq.setFechaInic(LocalDate.parse(fecInic));
+//			}
+//			
+//			if (fecFin=="") {
+//				alq.setFechaFin(LocalDate.now().plusDays(1));
+//			}
+//			else {
+//				alq.setFechaFin(LocalDate.parse(fecFin));
+//			}
+//			
+//			if (senia=="") {				
+//				alq.setSenia(0.0);
+//			}
+//			else {
+//				alq.setSenia(Double.parseDouble(senia));
+//			}
+//			
+//			if (importe=="") {
+//				alq.setImporte(0.0);
+//			} else {
+//				alq.setImporte(Double.parseDouble(importe));
+//			}
+//			
+//			if (kminic=="") {
+//				alq.setKmInic(0.0);
+//			} else {
+//				alq.setKmInic(Double.parseDouble(kminic));
+//			}
 			
 //			if (kmfin=="") {
 //				alq.setKmFin(0.0);
@@ -217,27 +240,27 @@ public class ServletAlquilerUsuario extends HttpServlet {
 //			}
 
 			
-			if (recyobs=="") {
-				alq.setReclamoyObs("");
-			} else {
-				alq.setReclamoyObs(recyobs);
-			}
+//			if (recyobs=="") {
+//				alq.setReclamoyObs("");
+//			} else {
+//				alq.setReclamoyObs(recyobs);
+//			}
 			
-			if (estado=="") {
-				alq.setEstado("");
-			} else {
-				alq.setEstado(estado);
-			}
-			int idAlq = 0;
-			if (vehic != null && fecInic != null && fecFin != null) {
-				alqLog.add(alq);
-				idAlq = alq.getId();
-			}
-			if (idAlq != 0) {
-				miSesion.removeAttribute("idTVSesion");
-				miSesion.removeAttribute("idVehic");
-				acceso=altaexitosausr;
-			}
+//			if (estado=="") {
+//				alq.setEstado("");
+//			} else {
+//				alq.setEstado(estado);
+//			}
+//			int idAlq = 0;
+//			if (vehic != null && fecInic != null && fecFin != null) {
+//				alqLog.add(alq);
+//				idAlq = alq.getId();
+//			}
+//			if (idAlq != 0) {
+//				miSesion.removeAttribute("idTVSesion");
+//				miSesion.removeAttribute("idVehic");
+//				acceso=altaexitosausr;
+//			}
 						
 //			miSesion.removeAttribute("idTVSesion");
 //			miSesion.removeAttribute("idVehic");

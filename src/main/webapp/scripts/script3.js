@@ -19,3 +19,6 @@ function mostrarAltaVehiculo(){
 function mostrarAltaPersona(){
 	window.location="altapersona.jsp";
 }
+function mostrarAlqUsr(){
+    window.location="alquilerusuario.jsp";
+}

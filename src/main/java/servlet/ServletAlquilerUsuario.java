@@ -46,6 +46,8 @@ public class ServletAlquilerUsuario extends HttpServlet {
     //Aca busca vehiculos disponibles
     String principalvehicxtipo="principalvehicxtipo.jsp";
     
+    String formatoInvalidoAlqUsr="formatoInvalidoAlqUsr.jsp";
+    
 //    int verificador = 0; //para que no se ejecute el ultimo dispatcher
     int idAlq = 0;
 
@@ -180,6 +182,39 @@ public class ServletAlquilerUsuario extends HttpServlet {
 						acceso=altaexitosausr;
 					}					
 				}
+				
+				if (Valida.isMarcaModelo(recyobs) && Valida.isRealPositivo(senia) && Valida.isRealPositivo(importe) && Valida.isRealPositivo(kminic)) {
+//					alta (aca seguir trabajando o sea metiendo el codigo de abajo segun convenga)
+					vehic.setEstado(false);
+					vl.update(vehic);
+					
+					alq.setPersona(pers);
+					alq.getPersona().setId(idPers);
+					
+					alq.setVehiculo(vehic);
+					alq.getVehiculo().setIdVehiculo(idVehiculo);
+					
+					alq.setSenia(Double.parseDouble(senia));
+					alq.setFechaInic(LocalDate.parse(fecInic));
+					alq.setFechaFin(LocalDate.parse(fecFin));
+					alq.setImporte(Double.parseDouble(importe));
+					alq.setKmInic(Double.parseDouble(kminic)); 
+//					alta exitosa
+					alqLog.add(alq);
+					idAlq = alq.getId();
+					if (idAlq!=0) {
+						miSesion.removeAttribute("idTVSesion");
+						miSesion.removeAttribute("idVehic");							
+						acceso=altaexitosausr;
+					}					
+				}
+				else {
+					acceso=formatoInvalidoAlqUsr;
+				}
+				
+				
+
+				
 //				vehic.setEstado(false);
 //				vl.update(vehic);
 //				

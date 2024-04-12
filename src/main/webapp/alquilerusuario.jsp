@@ -271,7 +271,7 @@
      </div>
     </form>
 	</div>	
-	<script src="scripts/script4.js"></script>
+	<script src="scripts/script3.js"></script>
 	<!-- <script src="scripts/btn.js"></script> --> 
 </body>
 </html>

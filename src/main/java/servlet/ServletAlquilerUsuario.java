@@ -147,7 +147,8 @@ public class ServletAlquilerUsuario extends HttpServlet {
 			String fecFin = request.getParameter("fecFin");
 			String importe = request.getParameter("importe");
 			String kminic = request.getParameter("kminic");
-			String recyobs = request.getParameter("recyobs");			
+			String recyobs = request.getParameter("recyobs");	
+			String estado = request.getParameter("txtestado");			
 			
 			if (vehic == null || fecInic == "" || fecFin == "" || importe == "" || senia == "") {
 				acceso=faltandatosusr;
@@ -172,7 +173,10 @@ public class ServletAlquilerUsuario extends HttpServlet {
 					alq.setFechaInic(LocalDate.parse(fecInic));
 					alq.setFechaFin(LocalDate.parse(fecFin));
 					alq.setImporte(Double.parseDouble(importe));
-					alq.setKmInic(Double.parseDouble(kminic)); 
+					alq.setKmInic(Double.parseDouble(kminic));
+					alq.setReclamoyObs(recyobs);
+					alq.setEstado(estado);					
+					
 //					alta exitosa
 					alqLog.add(alq);
 					idAlq = alq.getId();
@@ -183,7 +187,7 @@ public class ServletAlquilerUsuario extends HttpServlet {
 					}					
 				}
 				
-				if (Valida.isMarcaModelo(recyobs) && Valida.isRealPositivo(senia) && Valida.isRealPositivo(importe) && Valida.isRealPositivo(kminic)) {
+				else if (Valida.isMarcaModelo(recyobs) && Valida.isRealPositivo(senia) && Valida.isRealPositivo(importe) && Valida.isRealPositivo(kminic)) {
 //					alta (aca seguir trabajando o sea metiendo el codigo de abajo segun convenga)
 					vehic.setEstado(false);
 					vl.update(vehic);
@@ -199,6 +203,8 @@ public class ServletAlquilerUsuario extends HttpServlet {
 					alq.setFechaFin(LocalDate.parse(fecFin));
 					alq.setImporte(Double.parseDouble(importe));
 					alq.setKmInic(Double.parseDouble(kminic)); 
+					alq.setReclamoyObs(recyobs);
+					alq.setEstado(estado);					
 //					alta exitosa
 					alqLog.add(alq);
 					idAlq = alq.getId();

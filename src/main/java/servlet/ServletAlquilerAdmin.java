@@ -199,6 +199,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
 //					System.out.println();
 					alq.setImporte(Double.parseDouble(importe));
 					alq.setKmInic(Double.parseDouble(kminic));
+					alq.setReclamoyObs(recyobs);
 					alq.setEstado(estado);
 //					alta exitosa
 					alqLog.add(alq);
@@ -226,6 +227,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
 					alq.setImporte(Double.parseDouble(importe));
 					alq.setKmInic(Double.parseDouble(kminic));
 					alq.setReclamoyObs(recyobs);
+					alq.setEstado(estado);
 //					alta exitosa
 					alqLog.add(alq);
 					idAlq = alq.getId();					

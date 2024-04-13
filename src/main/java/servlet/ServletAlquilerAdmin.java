@@ -179,6 +179,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			String fecFin = request.getParameter("fecFin");
 			String kminic = request.getParameter("kminic");
 			String recyobs = request.getParameter("recyobs");
+			String estado = request.getParameter("txtestado");
 			
 			if (pers == null || vehic == null || fecInic == "" || fecFin == "" || senia == "" || importe == "") {
 				acceso=faltandatos;
@@ -197,7 +198,8 @@ public class ServletAlquilerAdmin extends HttpServlet {
 //					System.out.println(Double.parseDouble(importe));
 //					System.out.println();
 					alq.setImporte(Double.parseDouble(importe));
-					alq.setKmInic(Double.parseDouble(kminic)); 
+					alq.setKmInic(Double.parseDouble(kminic));
+					alq.setEstado(estado);
 //					alta exitosa
 					alqLog.add(alq);
 					idAlq = alq.getId();

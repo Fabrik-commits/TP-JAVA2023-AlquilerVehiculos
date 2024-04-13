@@ -141,7 +141,7 @@ if(request.getAttribute("idAlq")==null){
 							pers = perLog.getById(idPer);
 							}
 					%>
-					<input type="text" placeholder="Cliente" name="cliente" value="<%=idAlquiler==null?"":pers.getApellido() %> <%=idAlquiler==null?"":pers.getNombre()%> <%=idAlquiler==null?"":pers.getDni()%>">
+					<input type="text" disabled placeholder="Cliente" name="cliente" value="<%=idAlquiler==null?"":pers.getApellido() %> <%=idAlquiler==null?"":pers.getNombre()%> <%=idAlquiler==null?"":pers.getDni()%>">
 					<div><input type="hidden" name="idPers" value="<%=pers.getId()%>"></div>
 					<div><input type="hidden" name="idAlq" value="<%=idAlquiler%>"></div>
 				</div>
@@ -164,7 +164,7 @@ if(request.getAttribute("idAlq")==null){
 						TipoVehiculo tVehic = new TipoVehiculo();
 						tVehic = tVehicLog.getById(idTipoVehic);
 					%>
-					<input type="text" placeholder="Tipo Vehiculo" value="<%=tVehic.getDescripcion()%>">
+					<input type="text" disabled placeholder="Tipo Vehiculo" value="<%=tVehic.getDescripcion()%>">
 					
 				</div>
 			</div>
@@ -181,14 +181,14 @@ if(request.getAttribute("idAlq")==null){
 					<div class="agrupabotonesBusc">
 						
 					</div>
-					<input type="text" placeholder="Vehiculo" value="<%=vehic.getMarcayModelo()%> <%=vehic.getColor()%>">
+					<input type="text" disabled placeholder="Vehiculo" value="<%=vehic.getMarcayModelo()%> <%=vehic.getColor()%>">
 					<div><input type="hidden" name="idVehiculo" value="<%=vehic.getIdVehiculo()%>"></div>
 				</div>
 			</div>
 
 			<div class="input-contenedor">	
 				<div class="agrupainputtipov">
-					<div class="titulo">Senia: </div><div style="margin: -1px -54px 0px 54px;"><input type="text" placeholder="Senia" value="<%=idAlquiler==null?"":alq.getSenia()%>"></div>
+					<div class="titulo">Senia: </div><div style="margin: -1px -54px 0px 54px;"><input type="text" disabled placeholder="Senia" value="<%=idAlquiler==null?"":alq.getSenia()%>"></div>
 					
 				</div>
 			</div>
@@ -201,19 +201,19 @@ if(request.getAttribute("idAlq")==null){
 
 			<div class="input-contenedor">
 			 
-				<div class="titulo">Fecha inic:</div> <div class="date"><input type="date" value=<%=alq.getFechaInic()%>></div>
+				<div class="titulo">Fecha inic:</div> <div class="date"><input type="date" disabled name="fecInic" value=<%=alq.getFechaInic()%>></div>
 				
 			</div>
 
 			<div class="input-contenedor">
 				
-				<div class="titulo">Fecha fin: </div> <div class="date"><input type="date" name="fecFin" value=<%=alq.getFechaFin()%>></div>
+				<div class="titulo">Fecha fin: </div> <div class="date"><input type="date" disabled name="fecFin" value=<%=alq.getFechaFin()%>></div>
 				
 			</div>
 
 			<div class="input-contenedor">
 				
-				<div style="margin: 0px -46px 0px 1px;"><input type="text" placeholder="Importe" value="<%=idAlquiler==null?"":alq.getImporte()%>"></div>
+				<div style="margin: 0px -46px 0px 1px;"><input type="text" placeholder="Importe" disabled value="<%=idAlquiler==null?"":alq.getImporte()%>"></div>
 			
 			</div>
 
@@ -225,7 +225,7 @@ if(request.getAttribute("idAlq")==null){
 
 			<div class="input-contenedor">
 				
-				<div class="titulo">Km_Inic: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" placeholder="Km_Inic" value="<%=idAlquiler==null?"":alq.getKmInic()%>"></div>
+				<div class="titulo">Km_Inic: </div><div style="margin: 0px -46px 0px 1px;"><input type="text" disabled placeholder="Km_Inic" value="<%=idAlquiler==null?"":alq.getKmInic()%>"></div>
 				
 			</div>	
 

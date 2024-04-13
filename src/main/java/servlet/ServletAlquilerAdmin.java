@@ -263,16 +263,17 @@ public class ServletAlquilerAdmin extends HttpServlet {
 				alq.setKmFin(Double.parseDouble(Kmfin)); 
 			}
 
-			if (fecentrega!="") {
-				alq.setFechaEntrega(LocalDate.parse(fecentrega));
-				estado="Finalizado";
-				alq.setEstado(estado);
-			}
+//			if (fecentrega!="") {
+//				alq.setFechaEntrega(LocalDate.parse(fecentrega));
+//				estado="Finalizado";
+//				alq.setEstado(estado);
+//			}
 
 			if (feccancel!="") {
 				alq.setFechaCancel(LocalDate.parse(feccancel));
 				estado="Cancelado";
 				alq.setEstado(estado);
+				alq.setKmFin(0.0);//si esta cancelado no corresponde setear con valor != 0
 				VehiculoLogic vl = new VehiculoLogic();
 				Vehiculo vehic = new Vehiculo();				
 				int idVehiculo = Integer.parseInt(request.getParameter("idVehiculo"));

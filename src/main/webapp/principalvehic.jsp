@@ -45,13 +45,13 @@
 				<li><a href="principal.jsp">Inicio</a></li>
 				<li><a href="#">Alquiler</a>
 					<ul>
-						<li><a href="#">A B M C</a>
+<!-- 						<li><a href="#">A B M C</a>
 							<ul>
 								<li><a href="#">Alta</a></li>
 								<li><a href="#">Reserva</a></li>
 								
 							</ul>
-						</li>
+						</li> -->
 						
 					</ul>
 				</li>

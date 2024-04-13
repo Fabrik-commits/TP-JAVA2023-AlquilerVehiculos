@@ -46,7 +46,7 @@
 			<ul>
 				<li><a href="principal.jsp">Inicio</a></li>
 				<li><a href="#">Reserva</a>
-					<ul>
+<!-- 					<ul>
 						<li><a href="#">A B M C</a>
 							<ul>
 								<li><a href="#">Alta</a></li>
@@ -55,14 +55,21 @@
 							</ul>
 						</li>
 						
-					</ul>
+					</ul> -->
 				</li>
 				<li><a href="#">A B M Cs</a>
 					<ul>
+						<li><a href="#">Alquiler</a>
+							<ul>
+								<li><a href="alquileradmin.jsp">Alta</a></li>
+								<li><a href="principalbuscaralquileresxclte.jsp">Alquileres y Clientes</a></li>
+								
+							</ul>
+						</li>					
 						<li><a href="#">Persona</a>
 							<ul>
-								<li><a href="#">Alta</a></li>
-								<li><a href="#">Personas</a></li>
+								<li><a href="altapersona.jsp">Alta</a></li>
+								<li><a href="ServletPersonas?accion=principalpersonas">Personas</a></li>
 								
 							</ul>
 						</li>

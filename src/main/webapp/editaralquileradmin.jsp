@@ -289,7 +289,7 @@ if(request.getAttribute("idAlq")==null){
 	
 
 		<div class="agrupabotones">
-			<input type="submit" name="accion" value="Actualizar" class="button" id="btn_actualizar">
+			<input type="submit" name="accion" value="Actualizar" class="button">
 			<input type="submit" name="accion" value="Cancelar" class="button">
 		</div>
 		

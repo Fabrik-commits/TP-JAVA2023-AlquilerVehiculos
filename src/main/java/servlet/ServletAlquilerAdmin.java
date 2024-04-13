@@ -250,7 +250,9 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			String fecentrega = request.getParameter("fecentrega");
 			String feccancel = request.getParameter("feccancel");
 			String recyobs = request.getParameter("recyobs");
-			String estado;
+			String estado = request.getParameter("txtestado");
+			
+			alq.setEstado(estado);
 
 			if (id=="") {
 				alq.setId(0);

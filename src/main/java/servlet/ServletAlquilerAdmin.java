@@ -60,7 +60,6 @@ public class ServletAlquilerAdmin extends HttpServlet {
     
     String formatoInvalidoAlqAdmin="formatoInvalidoAlqAdmin.jsp";
     
-//    int verificador = 0; //para que no se ejecute el ultimo dispatcher
     int idAlq = 0; 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -74,16 +73,10 @@ public class ServletAlquilerAdmin extends HttpServlet {
 		
 		if (action==null) {
 			acceso=login;
-//			RequestDispatcher vista=request.getRequestDispatcher(acceso);
-//			vista.forward(request, response);
 		}
-//		else if (action.equalsIgnoreCase("principalvehsxtipo")) {
-//		acceso=principalvehsxtipo;
-//		}
+
 		else if (action.equalsIgnoreCase("BuscarVehi")) {
 			if (request.getParameter("txtidtipovehiculo")=="") {
-				//acceso=alquileradmin;
-				//response.sendRedirect("alquileradmin.jsp");
 				acceso=alquileradmin;
 				RequestDispatcher vista=request.getRequestDispatcher(acceso);
 				vista.forward(request, response);
@@ -100,10 +93,6 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			VehiculoLogic vlogic = new VehiculoLogic();
 			Vehiculo vehic = vlogic.getById(id);
 			int idVehic = vehic.getIdVehiculo();
-			//ahora tendria que enviar idVehic del vehic a alquileradmin no lo de abajo
-			//indicado porque tira error nullexception haciendo la busqueda
-			//en alquileradmin porque le falta el id
-			//request.setAttribute("idVehic", idVehic);
 			
 			miSesion.setAttribute("idVehic", idVehic);		
 			//esa variable es enviada al input de vehiculo en alquileradmin o alquilerusuario
@@ -116,7 +105,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
 			else if (rol2) {
 				acceso=alquilerusuario;
 			}
-			//acceso=alquileradmin;
+
 		}
 		else if (action.equalsIgnoreCase("personaelegida")) {
 			int idPer = Integer.parseInt(request.getParameter("id"));//viene de la tabla principalclientes
@@ -137,7 +126,6 @@ public class ServletAlquilerAdmin extends HttpServlet {
 
 			Vehiculo vehic = vlogic.getById(idVehicElegido);
 			if ((vehic != null) && (fecInit != "") && (fecFin != "")) {
-				//System.out.println("esto es: " + fecInit);
 				double precio = vehic.getPrecio();
 				request.setAttribute("fecInit", fecInit);
 				request.setAttribute("fecFin", fecFin);
@@ -157,7 +145,7 @@ public class ServletAlquilerAdmin extends HttpServlet {
 		}
 		else if (action.equalsIgnoreCase("Cancelar")) {
 			miSesion.removeAttribute("idPerqAlquila");
-			//miSesion.removeAttribute("idTVSesion");
+			miSesion.removeAttribute("idTVSesion");
 			miSesion.removeAttribute("idVehic");
 			acceso=alquileradmin;
 		}
@@ -195,8 +183,6 @@ public class ServletAlquilerAdmin extends HttpServlet {
 					alq.setSenia(Double.parseDouble(senia));
 					alq.setFechaInic(LocalDate.parse(fecInic));
 					alq.setFechaFin(LocalDate.parse(fecFin));
-//					System.out.println(Double.parseDouble(importe));
-//					System.out.println();
 					alq.setImporte(Double.parseDouble(importe));
 					alq.setKmInic(Double.parseDouble(kminic));
 					alq.setReclamoyObs(recyobs);
